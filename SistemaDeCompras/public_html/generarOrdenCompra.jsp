@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=windows-1252"%>
 <html lang="es">
 <head>
-    <title>Requisiciones Art&iacute;los</title>
+    <title>Orden de Compra</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
@@ -97,18 +97,16 @@
         <!-- Content page -->
         <div class="container-fluid">
             <div class="page-header">
-              <h1 class="text-titles"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> <strong>Requisici&oacute;n de Art&iacute;culos.</strong></h1>
+              <h1 class="text-titles"><i class="zmdi zmdi-card zmdi-hc-fw"></i> <strong>Generar Orden de Compra.</strong></h1>
             </div>
         </div>
-        
 <!-- *********************************************************************************************************************************************************** -->
 
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
                     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                        <li class="active"><a href="#new" data-toggle="tab">Nueva Requisici&oacute;n</a></li>
-                        <li><a href="#list" data-toggle="tab">Consultar Requisiciones</a></li>
+                        <li class="active"><a href="#new" data-toggle="tab">Orden de Compra</a></li>
                     </ul>
                     
                     <div id="myTabContent" class="tab-content">
@@ -121,10 +119,6 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-md-10 col-md-offset-1">
                                                 <form action="">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Carnet</label>
-                                                        <input class="form-control" type="text">
-                                                    </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Fecha de Filtro</label>
                                                         <input class="form-control" type="date">
@@ -141,9 +135,19 @@
                                                 <form action="">
                                                     <div class="form-group">
                                                         <div class="form-group label-floating">
-                                                            <label class="control-label">Departamento</label>
-                                                            <input class="form-control control-label" type="text" value="Departamento de Ventas" disabled>
+                                                            <label class="control-label">Termino de Entrega</label>
+                                                            <input class="form-control control-label" type="text">
                                                         </div>
+                                                    </div>
+
+                                                     <div class="form-group">
+                                                        <label class="control-label">Fecha de Pedido</label>
+                                                        <input class="form-control" type="date">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-label">Fecha de Pago</label>
+                                                        <input class="form-control" type="date">
                                                     </div>
                                                     
                                                     </br></br>
@@ -151,68 +155,73 @@
                                                     <table class="table table-hover text-center">
                                                         <thead>
                                                             <tr>
-                                                                <th class="text-center">Carnet</th>
-                                                                <th class="text-center">Nombre</th>
+                                                                <th class="text-center">C&oacute;digo Proveedor</th>
+                                                                <th class="text-center">Nombre Proveedor</th>
                                                                 <th class="text-center">C&oacute;digo Art&iacute;culo</th>
-                                                                <th class="text-center">Art&iacute;culo</th>
+                                                                <th class="text-center">Nombre Art&iacute;culo</th>
                                                                 <th class="text-center">Cantidad</th>
-                                                                <th class="text-center">Fecha Solicitud</th>
+                                                                <th class="text-center">Descuento</th>
+                                                                <th class="text-center">Precio</th>
+                                                                <th class="text-center">Per&iacute;odo Gracia</th>
+                                                                <th class="text-center">Entrega Inmediata</th>
+                                                                <th class="text-center">Promedio</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>PR17017</td>
-                                                                <td>Roberto Carlos Paz Ramirez</td>
+                                                                <td>CM17048</td>
+                                                                <td>Victor Javier Chavez Melara</td>
                                                                 <td>SAC0001</td>
-                                                                <td>Sacapunta Facela</td>
-                                                                <td>5</td>
-                                                                <td>10/12/2020</td>
+                                                                <td>Sacapunta</td>
+                                                                <td>25</td>
+                                                                <td>30 %</td>
+                                                                <td>$ 17.50</td>
+                                                                <td>SI</td>
+                                                                <td>SI</td>
+                                                                <td>25.25</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>PR17017</td>
-                                                                <td>Roberto Carlos Paz Ramirez</td>
+                                                                <td>VF17005</td>
+                                                                <td>Jacqueline Alejandra Vasquez Flores</td>
                                                                 <td>BOR0001</td>
-                                                                <td>Borrador Scribe</td>
-                                                                <td>15</td>
-                                                                <td>10/12/2020</td>
+                                                                <td>Borrador</td>
+                                                                <td>10</td>
+                                                                <td>8 %</td>
+                                                                <td>$ 8.18</td>
+                                                                <td>NO</td>
+                                                                <td>SI</td>
+                                                                <td>8.57</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>PR17017</td>
-                                                                <td>Roberto Carlos Paz Ramirez</td>
+                                                                <td>AS17028</td>
+                                                                <td>Juan Antonio Aguilar Sanchez</td>
                                                                 <td>REP0001</td>
                                                                 <td>Resma de Papel</td>
-                                                                <td>1</td>
-                                                                <td>10/12/2020</td>
+                                                                <td>3</td>
+                                                                <td>0 %</td>
+                                                                <td>$ 12.00</td>
+                                                                <td>SI</td>
+                                                                <td>NO</td>
+                                                                <td>36.28</td>
                                                             </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <table class="table table-hover text-center">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center">Total</th>
+                                                                <th class="text-center">$ 82.98</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
                                                         </tbody>
                                                     </table>
 
                                                 </br>
 
-                                                    <div class="form-group">
-                                                        <label class="control-label">Fecha de Pedido</label>
-                                                        <input class="form-control" type="date">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Fecha de Entrega</label>
-                                                        <input class="form-control" type="date">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Articulo</label>
-                                                        <select class="form-control">
-                                                            <option>Seleccione el Articulo a Solicitar...</option>
-                                                            <option>Sacapunta Facela</option>
-                                                            <option>Borrador Scribe</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Cantidad</label>
-                                                        <input class="form-control" type="number">
-                                                    </div>
-
                                                     <p class="text-center">
-                                                        <button href="#!" class="btn btn-info btn-raised btn-lg">Registrar</button>
+                                                        <button href="#!" class="btn btn-info btn-raised btn-lg">Enviar Orden</button>
                                                     </p>
                                                 </form>
                                             </div>
@@ -220,74 +229,6 @@
                                         
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-
-
-
-
-                        <div class="tab-pane fade" id="list">
-                            <div class="table-responsive">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                        <div class="form-group">
-                                            <label class="control-label"><strong>Departamento</strong></label>
-                                            <select class="form-control">
-                                                <option>Seleccione el Departamento a Consultar...</option>
-                                                <option>Departamento de Ventas</option>
-                                                <option>Departamento de Produccion</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-center">
-                                    <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
-                                </p>
-                                
-                                </br></br>
-                                <table class="table table-hover text-center">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Departamento</th>    
-                                            <th class="text-center">C&oacute;digo Art&iacute;culo</th>
-                                            <th class="text-center">Art&iacute;culo</th>
-                                            <th class="text-center">Descripci&oacute;n</th>
-                                            <th class="text-center">Cantidad</th>
-                                            <th class="text-center">Update</th>
-                                            <th class="text-center">Delete</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Finanzas</td>
-                                            <td>SAC0001</td>
-                                            <td>Sacapunta Facela</td>
-                                            <td>Caja de Sacapuntas Facela</td>
-                                            <td>5</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finanzas</td>
-                                            <td>BOR0001</td>
-                                            <td>Borrador Scribe</td>
-                                            <td>Borradores en Unidades</td>
-                                            <td>15</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finanzas</td>
-                                            <td>RESP0001</td>
-                                            <td>Resma de Papel</td>
-                                            <td>Resma de Papel Bond tamaño Carta</td>
-                                            <td>1</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
 

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=windows-1252"%>
 <html lang="es">
 <head>
-    <title>Requisiciones Art&iacute;los</title>
+    <title>Requisiciones Art&iacute;culos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
@@ -97,7 +97,7 @@
         <!-- Content page -->
         <div class="container-fluid">
             <div class="page-header">
-              <h1 class="text-titles"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> <strong>Requisici&oacute;n de Art&iacute;culos.</strong></h1>
+              <h1 class="text-titles"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> <strong>Autorizar Requisici&oacute;n de Art&iacute;culos.</strong></h1>
             </div>
         </div>
         
@@ -107,8 +107,8 @@
             <div class="row">
                 <div class="col-xs-12">
                     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                        <li class="active"><a href="#new" data-toggle="tab">Nueva Requisici&oacute;n</a></li>
-                        <li><a href="#list" data-toggle="tab">Consultar Requisiciones</a></li>
+                        <li class="active"><a href="#new" data-toggle="tab">Autorizar Requisici&oacute;n</a></li>
+                        <li><a href="#list" data-toggle="tab">Requisiciones Autorizadas</a></li>
                     </ul>
                     
                     <div id="myTabContent" class="tab-content">
@@ -136,85 +136,50 @@
                                             </div>
                                         </div>
 
+                                        </br>
+
                                         <div class="row">
                                             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                                <form action="">
-                                                    <div class="form-group">
-                                                        <div class="form-group label-floating">
-                                                            <label class="control-label">Departamento</label>
-                                                            <input class="form-control control-label" type="text" value="Departamento de Ventas" disabled>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    </br></br>
-
+                                                <div class="form-group">
                                                     <table class="table table-hover text-center">
                                                         <thead>
                                                             <tr>
                                                                 <th class="text-center">Carnet</th>
                                                                 <th class="text-center">Nombre</th>
-                                                                <th class="text-center">C&oacute;digo Art&iacute;culo</th>
-                                                                <th class="text-center">Art&iacute;culo</th>
-                                                                <th class="text-center">Cantidad</th>
-                                                                <th class="text-center">Fecha Solicitud</th>
+                                                                <th class="text-center">Departamento</th>
+                                                                <th class="text-center">Fecha Pedido</th>
+                                                                <th class="text-center">Fecha Entrega</th>
+                                                                <th class="text-center">Opci&oacute;n</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>PR17017</td>
-                                                                <td>Roberto Carlos Paz Ramirez</td>
-                                                                <td>SAC0001</td>
-                                                                <td>Sacapunta Facela</td>
-                                                                <td>5</td>
+                                                                <td>AG17023</td>
+                                                                <td>Jose Daniel Amaya Guzman</td>
+                                                                <td>Departamento de Ventas</td>
                                                                 <td>10/12/2020</td>
+                                                                <td>10/01/2021</td>
+                                                                <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>PR17017</td>
-                                                                <td>Roberto Carlos Paz Ramirez</td>
-                                                                <td>BOR0001</td>
-                                                                <td>Borrador Scribe</td>
-                                                                <td>15</td>
-                                                                <td>10/12/2020</td>
+                                                                <td>MM14030</td>
+                                                                <td>Crsitian Vladimir Melendez Melendez</td>
+                                                                <td>Departamento de Finanzas</td>
+                                                                <td>15/12/2020</td>
+                                                                <td>10/01/2021</td>
+                                                                <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>PR17017</td>
-                                                                <td>Roberto Carlos Paz Ramirez</td>
-                                                                <td>REP0001</td>
-                                                                <td>Resma de Papel</td>
-                                                                <td>1</td>
-                                                                <td>10/12/2020</td>
+                                                                <td>RM17039</td>
+                                                                <td>Noel Alexander Renderos Martinez</td>
+                                                                <td>Departamento de Informatica</td>
+                                                                <td>12/12/2020</td>
+                                                                <td>10/01/2021</td>
+                                                                <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
-
-                                                </br>
-
-                                                    <div class="form-group">
-                                                        <label class="control-label">Fecha de Pedido</label>
-                                                        <input class="form-control" type="date">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Fecha de Entrega</label>
-                                                        <input class="form-control" type="date">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Articulo</label>
-                                                        <select class="form-control">
-                                                            <option>Seleccione el Articulo a Solicitar...</option>
-                                                            <option>Sacapunta Facela</option>
-                                                            <option>Borrador Scribe</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Cantidad</label>
-                                                        <input class="form-control" type="number">
-                                                    </div>
-
-                                                    <p class="text-center">
-                                                        <button href="#!" class="btn btn-info btn-raised btn-lg">Registrar</button>
-                                                    </p>
-                                                </form>
+                                                </div>
                                             </div>
                                         </div>
                                         
@@ -249,42 +214,38 @@
                                 <table class="table table-hover text-center">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Departamento</th>    
-                                            <th class="text-center">C&oacute;digo Art&iacute;culo</th>
-                                            <th class="text-center">Art&iacute;culo</th>
-                                            <th class="text-center">Descripci&oacute;n</th>
-                                            <th class="text-center">Cantidad</th>
-                                            <th class="text-center">Update</th>
-                                            <th class="text-center">Delete</th>
+                                            <th class="text-center">Carnet</th>
+                                            <th class="text-center">Nombre</th>
+                                            <th class="text-center">Departamento</th>
+                                            <th class="text-center">Fecha Pedido</th>
+                                            <th class="text-center">Fecha Entrega</th>
+                                            <th class="text-center">Estado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Finanzas</td>
-                                            <td>SAC0001</td>
-                                            <td>Sacapunta Facela</td>
-                                            <td>Caja de Sacapuntas Facela</td>
-                                            <td>5</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+                                            <td>AG17023</td>
+                                            <td>Jose Daniel Amaya Guzman</td>
+                                            <td>Departamento de Ventas</td>
+                                            <td>10/12/2020</td>
+                                            <td>10/01/2021</td>
+                                            <td>Autorizado</td>
                                         </tr>
                                         <tr>
-                                            <td>Finanzas</td>
-                                            <td>BOR0001</td>
-                                            <td>Borrador Scribe</td>
-                                            <td>Borradores en Unidades</td>
-                                            <td>15</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+                                            <td>MM14030</td>
+                                            <td>Crsitian Vladimir Melendez Melendez</td>
+                                            <td>Departamento de Finanzas</td>
+                                            <td>15/12/2020</td>
+                                            <td>10/01/2021</td>
+                                            <td>Autorizado</td>
                                         </tr>
                                         <tr>
-                                            <td>Finanzas</td>
-                                            <td>RESP0001</td>
-                                            <td>Resma de Papel</td>
-                                            <td>Resma de Papel Bond tamaño Carta</td>
-                                            <td>1</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+                                            <td>RM17039</td>
+                                            <td>Noel Alexander Renderos Martinez</td>
+                                            <td>Departamento de Informatica</td>
+                                            <td>12/12/2020</td>
+                                            <td>10/01/2021</td>
+                                            <td>Autorizado</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -295,7 +256,6 @@
                 </div>
             </div>
         </div>
-
 <!-- *********************************************************************************************************************************************************** -->
             
         </section>

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=windows-1252"%>
 <html lang="es">
 <head>
-    <title>Solicitudes Art&iacute;los</title>
+    <title>Requisiciones Art&iacute;culos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
@@ -97,7 +97,7 @@
         <!-- Content page -->
         <div class="container-fluid">
             <div class="page-header">
-              <h1 class="text-titles"><i class="zmdi zmdi-shopping-cart-add zmdi-hc-fw"></i> <strong>Solicitudes de Articulos.</strong></h1>
+              <h1 class="text-titles"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> <strong>Autorizar Requisici&oacute;n de Art&iacute;culos.</strong></h1>
             </div>
         </div>
         
@@ -107,8 +107,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                        <li class="active"><a href="#new" data-toggle="tab">Nueva Solicitud</a></li>
-                        <li><a href="#list" data-toggle="tab">Art&iacute;culos Solicitados</a></li>
+                        <li class="active"><a href="#new" data-toggle="tab">Autorizar Requisici&oacute;n</a></li>
                     </ul>
                     
                     <div id="myTabContent" class="tab-content">
@@ -117,93 +116,76 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
+
                                         <form action="">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Carnet</label>
-                                                <input class="form-control" type="text">
-                                            </div>
                                             <div class="form-group">
-                                                <label class="control-label">Articulo</label>
-                                                <select class="form-control">
-                                                    <option>Seleccione el Articulo a Solicitar...</option>
-                                                    <option>Sacapunta Facela</option>
-                                                    <option>Borrador Scribe</option>
-                                                </select>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Carnet</label>
+                                                    <input class="form-control control-label" type="text" value="RM17039" disabled>
+                                                </div>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Departamento</label>
+                                                    <input class="form-control control-label" type="text" value="Finanzas" disabled>
+                                                </div>
                                             </div>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Cantidad</label>
-                                                <input class="form-control" type="number">
+
+                                            </br>
+                                        
+                                            <div class="form-group">
+                                                <table class="table table-hover text-center">
+                                                    <thead>
+                                                        <tr>   
+                                                            <th class="text-center">C&oacute;digo Art&iacute;culo</th>
+                                                            <th class="text-center">Art&iacute;culo</th>
+                                                            <th class="text-center">Descripci&oacute;n</th>
+                                                            <th class="text-center">Cantidad</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>SAC0001</td>
+                                                            <td>Sacapunta Facela</td>
+                                                            <td>Caja de Sacapuntas Facela</td>
+                                                            <td>5</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>BOR0001</td>
+                                                            <td>Borrador Scribe</td>
+                                                            <td>Borradores en Unidades</td>
+                                                            <td>15</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>RESP0001</td>
+                                                            <td>Resma de Papel</td>
+                                                            <td>Resma de Papel Bond tamaño Carta</td>
+                                                            <td>1</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                </br>
+
+                                                <div class="form-group">
+                                                    <label class="control-label"><strong>Estado</strong></label>
+                                                    <select class="form-control">
+                                                        <option>Denegado</option>
+                                                        <option>Aceptado</option>
+                                                    </select>
+                                                </div>
                                             </div>
+
                                             <p class="text-center">
                                                 <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Guardar</button>
                                             </p>
+                                        
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="tab-pane fade" id="list">
-                            <div class="table-responsive">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                        <div class="form-group">
-                                            <label class="control-label"><strong>Empleado</strong></label>
-                                            <select class="form-control">
-                                                <option>Seleccione el Empleado a Consultar...</option>
-                                                <option>PR17017 - Roberto Carlos Paz Ramirez</option>
-                                                <option>AG17023 - Jose Daniel Amaya Guzman</option>
-                                            </select>
-                                        </div>
+                                        <p class="text-center">
+                                            <button onclick="window.location.href='autorizarRequisicion.jsp'" class="btn btn-info btn-raised btn-lg">Volver</button>
+                                        </p>
+                                        
                                     </div>
                                 </div>
-                                <p class="text-center">
-                                    <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
-                                </p>
-                                
-                                </br></br>
-                                <table class="table table-hover text-center">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Carnet</th>
-                                            <th class="text-center">C&oacute;digo Art&iacute;culo</th>
-                                            <th class="text-center">Art&iacute;culo</th>
-                                            <th class="text-center">Descripci&oacute;n</th>
-                                            <th class="text-center">Cantidad</th>
-                                            <th class="text-center">Update</th>
-                                            <th class="text-center">Delete</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>PR17017</td>
-                                            <td>SAC0001</td>
-                                            <td>Sacapunta Facela</td>
-                                            <td>Caja de Sacapuntas Facela</td>
-                                            <td>5</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>PR17017</td>
-                                            <td>BOR0001</td>
-                                            <td>Borrador Scribe</td>
-                                            <td>Borradores en Unidades</td>
-                                            <td>15</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>PR17017</td>
-                                            <td>RESP0001</td>
-                                            <td>Resma de Papel</td>
-                                            <td>Resma de Papel Bond tamaño Carta</td>
-                                            <td>1</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
 
