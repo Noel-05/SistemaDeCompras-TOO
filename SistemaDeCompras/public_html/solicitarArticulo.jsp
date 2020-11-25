@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=windows-1252"%>
-<%@ page import="java.util.*, JavaBeans.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html lang="es">
 <head>
@@ -10,11 +10,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="./static/css/main.css">
-    
-    <%
-            List<Articulos> articulos = (List<Articulos>) request.getAttribute("LISTAARTICULOS");
-    %>
-    
 </head>
 <body>
     <!-- SideBar -->
@@ -136,11 +131,9 @@
                                                 
                                                     <option>Seleccione el Articulo a Solicitar...</option>
                                                     
-                                                    <% for(Articulos art: articulos) { %>
-                                                    
-                                                        <option><%= art.getNombreArticulo() %></option>
-                                                    
-                                                    <% } %>
+                                                    <c:forEach var="art" items="${LISTAARTICULOS}">
+                                                        <option>${art.nombreArticulo}</option>
+                                                    </c:forEach>
                                                     
                                                 </select>
                                             </div>
