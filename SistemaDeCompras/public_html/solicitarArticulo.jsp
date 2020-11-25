@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=windows-1252"%>
+<%@ page import="java.util.*, JavaBeans.*" %>
+
 <html lang="es">
 <head>
     <title>Solicitudes Art&iacute;los</title>
@@ -8,6 +10,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="./static/css/main.css">
+    
+    <%
+            List<Articulos> articulos = (List<Articulos>) request.getAttribute("LISTAARTICULOS");
+    %>
+    
 </head>
 <body>
     <!-- SideBar -->
@@ -122,14 +129,22 @@
                                                 <label class="control-label">Carnet</label>
                                                 <input class="form-control" type="text">
                                             </div>
+                                            
                                             <div class="form-group">
                                                 <label class="control-label">Articulo</label>
                                                 <select class="form-control">
+                                                
                                                     <option>Seleccione el Articulo a Solicitar...</option>
-                                                    <option>Sacapunta Facela</option>
-                                                    <option>Borrador Scribe</option>
+                                                    
+                                                    <% for(Articulos art: articulos) { %>
+                                                    
+                                                        <option><%= art.getNombreArticulo() %></option>
+                                                    
+                                                    <% } %>
+                                                    
                                                 </select>
                                             </div>
+                                            
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Cantidad</label>
                                                 <input class="form-control" type="number">
