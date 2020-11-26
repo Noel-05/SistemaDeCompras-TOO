@@ -108,31 +108,42 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
+                
                     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
                         <li class="active"><a href="#new" data-toggle="tab">Nueva Solicitud</a></li>
                         <li><a href="#list" data-toggle="tab">Art&iacute;culos Solicitados</a></li>
                     </ul>
+            
+                    <div id="myTabContent" class="tab-content">
                     
                     <div id="myTabContent" class="tab-content">
-
+                    
                         <div class="tab-pane fade active in" id="new">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                        <form action="">
+                                    
+                                        <form method="get" action="controladorsolicitudarticulo" >
+                                            <input type="hidden" name="instruccion" value="insertarBD">
+                                            
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Carnet</label>
-                                                <input class="form-control" type="text">
+                                                <input class="form-control" type="text" name="carnet" required="required">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="control-label">Fecha de Solicitud</label>
+                                                <input class="form-control" type="date" name="fecha">
                                             </div>
                                             
                                             <div class="form-group">
                                                 <label class="control-label">Articulo</label>
-                                                <select class="form-control">
+                                                <select class="form-control" name="articulo" required="required">
                                                 
                                                     <option>Seleccione el Articulo a Solicitar...</option>
                                                     
                                                     <c:forEach var="art" items="${LISTAARTICULOS}">
-                                                        <option>${art.nombreArticulo}</option>
+                                                        <option value="${art.codArticulo}">${art.nombreArticulo}</option>
                                                     </c:forEach>
                                                     
                                                 </select>
@@ -140,12 +151,15 @@
                                             
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Cantidad</label>
-                                                <input class="form-control" type="number">
+                                                <input class="form-control" type="number" name="cantidad" required="required">
                                             </div>
+                                            
                                             <p class="text-center">
-                                                <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Guardar</button>
+                                                <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Insertar</button>
                                             </p>
+                                            
                                         </form>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -176,40 +190,26 @@
                                             <th class="text-center">Carnet</th>
                                             <th class="text-center">C&oacute;digo Art&iacute;culo</th>
                                             <th class="text-center">Art&iacute;culo</th>
-                                            <th class="text-center">Descripci&oacute;n</th>
                                             <th class="text-center">Cantidad</th>
+                                            <th class="text-center">Fecha Pedido</th>
                                             <th class="text-center">Update</th>
                                             <th class="text-center">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    
+                                        <c:forEach var="sol" items="${LISTASOLICITUDESARTICULO}">
                                         <tr>
-                                            <td>PR17017</td>
-                                            <td>SAC0001</td>
-                                            <td>Sacapunta Facela</td>
-                                            <td>Caja de Sacapuntas Facela</td>
-                                            <td>5</td>
+                                            <td>${sol.carnetEmpleado}</td>
+                                            <td>${sol.codArticulo}</td>
+                                            <td>${sol.nombreArticulo}</td>
+                                            <td>${sol.cantArticulo}</td>
+                                            <td>${sol.fechaSol}</td>
                                             <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
                                             <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
                                         </tr>
-                                        <tr>
-                                            <td>PR17017</td>
-                                            <td>BOR0001</td>
-                                            <td>Borrador Scribe</td>
-                                            <td>Borradores en Unidades</td>
-                                            <td>15</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>PR17017</td>
-                                            <td>RESP0001</td>
-                                            <td>Resma de Papel</td>
-                                            <td>Resma de Papel Bond tamaño Carta</td>
-                                            <td>1</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
+                                        </c:forEach>
+                                        
                                     </tbody>
                                 </table>
                             </div>
