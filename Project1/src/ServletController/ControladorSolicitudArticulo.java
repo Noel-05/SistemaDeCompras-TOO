@@ -84,7 +84,6 @@ public class ControladorSolicitudArticulo extends HttpServlet {
             RequestDispatcher miDispatcher = request.getRequestDispatcher("/solicitarArticulo.jsp");
             
             miDispatcher.forward(request, response);
-            
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -64,7 +64,7 @@ public class ModeloSolicitudArticulo {
         miConexion = origenDatos.getConexion();
         
         //Crear sentencia SQL y Statement
-        String miSql = "SELECT * FROM SOLICITUDART";
+        String miSql = "SELECT * FROM SOLICITUDART  ORDER BY FECSOL";
         miStatement = miConexion.createStatement();
         
         //Ejecutar SQL

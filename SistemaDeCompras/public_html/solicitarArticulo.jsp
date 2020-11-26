@@ -51,7 +51,7 @@
                     </a>
                     <ul class="list-unstyled full-box">
                         <li>
-                            <a href="solicitarArticulo.jsp"><i class="zmdi zmdi-shopping-cart-add zmdi-hc-fw"></i>Solicitar Articulo</a>
+                            <a href="controladorsolicitudarticulo"><i class="zmdi zmdi-shopping-cart-add zmdi-hc-fw"></i>Solicitar Articulo</a>
                         </li>
                     </ul>
                 </li>
