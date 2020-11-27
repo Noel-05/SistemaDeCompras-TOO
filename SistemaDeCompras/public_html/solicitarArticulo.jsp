@@ -4,7 +4,7 @@
 
 <html lang="es">
 <head>
-    <title>Solicitudes Art&iacute;los</title>
+    <title>Solicitudes Art&iacute;culos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
@@ -74,7 +74,7 @@
                     </a>
                     <ul class="list-unstyled full-box">
                         <li>
-                            <a href="cotizarArticulo.jsp"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
+                            <a href="controladorcotizararticulo"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
                         </li>
                         <li>
                             <a href="generarOrdenCompra.jsp"><i class="zmdi zmdi-file-plus zmdi-hc-fw"></i> Comprar</a>
@@ -143,7 +143,7 @@
                                                     <option>Seleccione el Articulo a Solicitar...</option>
                                                     
                                                     <c:forEach var="art" items="${LISTAARTICULOS}">
-                                                        <option value="${art.codArticulo}">${art.nombreArticulo}</option>
+                                                        <option value="${art.codArticulo}">${art.codArticulo} - ${art.nombreArticulo}</option>
                                                     </c:forEach>
                                                     
                                                 </select>
@@ -171,21 +171,30 @@
 
                         <div class="tab-pane fade" id="list">
                             <div class="table-responsive">
+                            
+                            <form method="get" action="controladorsolicitudarticulo" >
+                                <input type="hidden" name="instruccion" value="consultarEmpeado">
+                                
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <label class="control-label"><strong>Empleado</strong></label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="empleado" required="required">
+                                            
                                                 <option>Seleccione el Empleado a Consultar...</option>
-                                                <option>PR17017 - Roberto Carlos Paz Ramirez</option>
-                                                <option>AG17023 - Jose Daniel Amaya Guzman</option>
+                                                
+                                                <c:forEach var="emp" items="${LISTAEMPLEADOS}">
+                                                    <option value="${emp.carnetEmpleado}">${emp.carnetEmpleado} - ${emp.apellidoEmpleado}, ${emp.nombreEmpleado}</option>
+                                                </c:forEach>
+                                                
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <p class="text-center">
-                                    <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
+                                    <button href="#list" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
                                 </p>
+                            </form>
                                 
                                 </br></br>
                                 <table class="table table-hover text-center">

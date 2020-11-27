@@ -72,7 +72,7 @@
                     </a>
                     <ul class="list-unstyled full-box">
                         <li>
-                            <a href="cotizarArticulo.jsp"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
+                            <a href="controladorcotizararticulo"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
                         </li>
                         <li>
                             <a href="generarOrdenCompra.jsp"><i class="zmdi zmdi-file-plus zmdi-hc-fw"></i> Comprar</a>

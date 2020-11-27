@@ -1,6 +1,7 @@
 package ServletController;
 
 import JavaBeans.Articulos;
+import JavaBeans.Empleado;
 import JavaBeans.ModeloSolicitudArticulo;
 import JavaBeans.SolicitudArt;
 
@@ -57,8 +58,9 @@ public class ControladorSolicitudArticulo extends HttpServlet {
             insertarSolicitud(request, response);
             break;
         
-        default:
-            obtenerArticulos(request, response);
+        case "consultarEmpeado":
+            consultarSolicitudesEmpleado(request, response);
+            
         }
             
     }
@@ -68,22 +70,26 @@ public class ControladorSolicitudArticulo extends HttpServlet {
         
         List<Articulos> articulos;
         List<SolicitudArt> solicitudes;
+        List<Empleado> empleados;
         
         try{
             
             articulos = modeloSolicitudArticulo.getArticulos();
             solicitudes = modeloSolicitudArticulo.getSolicitudesArt();
+            empleados = modeloSolicitudArticulo.getEmpleados();
             
             //Agregar la lista de Articulos al Request
             
             request.setAttribute("LISTAARTICULOS", articulos);
             request.setAttribute("LISTASOLICITUDESARTICULO", solicitudes);
+            request.setAttribute("LISTAEMPLEADOS", empleados);
             
             //Enviar el Request al JSP
             
             RequestDispatcher miDispatcher = request.getRequestDispatcher("/solicitarArticulo.jsp");
             
             miDispatcher.forward(request, response);
+            
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -114,5 +120,37 @@ public class ControladorSolicitudArticulo extends HttpServlet {
         obtenerArticulos(request, response);
         
     }
-    
+
+    private void consultarSolicitudesEmpleado(HttpServletRequest request, HttpServletResponse response) {
+        String carnet = request.getParameter("empleado");
+        
+        //Crear un objeto de tipo Empleado
+        Empleado consultaEmpleado = new Empleado(carnet);
+        
+        List<Articulos> articulos;
+        List<SolicitudArt> solicitudesEmpleados;
+        List<Empleado> empleados;
+        
+        try{
+            
+            solicitudesEmpleados = modeloSolicitudArticulo.obtenerSolicitudEmpleado(consultaEmpleado);
+            articulos = modeloSolicitudArticulo.getArticulos();
+            empleados = modeloSolicitudArticulo.getEmpleados();
+            
+            //Agregar la lista de Articulos al Request
+            
+            request.setAttribute("LISTAARTICULOS", articulos);
+            request.setAttribute("LISTASOLICITUDESARTICULO", solicitudesEmpleados);
+            request.setAttribute("LISTAEMPLEADOS", empleados);
+            
+            //Enviar el Request al JSP
+            
+            RequestDispatcher miDispatcher = request.getRequestDispatcher("/solicitarArticulo.jsp");
+            
+            miDispatcher.forward(request, response);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
