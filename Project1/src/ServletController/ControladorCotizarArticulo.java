@@ -95,7 +95,6 @@ public class ControladorCotizarArticulo extends HttpServlet {
         String departamento = request.getParameter("departamento");
         
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        //SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
         Date fecha = null;
         
         try {
@@ -105,7 +104,7 @@ public class ControladorCotizarArticulo extends HttpServlet {
         }
         
         //Crear un objeto de tipo Empleado
-        Requisicion requisicion = new Requisicion(fecha);
+        Requisicion requisicion = new Requisicion(fecha, departamento);
         
         List<Requisicion> requisiciones;
         List<Departamento> departamentos;

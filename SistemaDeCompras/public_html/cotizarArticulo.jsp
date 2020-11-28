@@ -130,7 +130,7 @@
                                                         <label class="control-label">Departamento</label>
                                                         <select class="form-control" name="departamento" required="required">
                                                         
-                                                            <option>Seleccione el Departamento a Consultar...</option>
+                                                            <option value=" ">Seleccione el Departamento a Consultar...</option>
                                                             
                                                             <c:forEach var="dep" items="${LISTADEPARTAMENTOS}">
                                                                 <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
@@ -160,24 +160,24 @@
                                                     <table class="table table-hover text-center">
                                                         <thead>
                                                             <tr>
+                                                                <th class="text-center">Departamento</th>
                                                                 <th class="text-center">C&oacute;digo Art&iacute;culo</th>
                                                                 <th class="text-center">Nombre Art&iacute;culo</th>
-                                                                <th class="text-center">Descripci&oacute;n</th>
                                                                 <th class="text-center">Cantidad</th>
                                                                 <th class="text-center">Fecha Pedido</th>
-                                                                <th class="text-center">Opci&oacute;n</th>
+                                                                <th class="text-center">Cotizar</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             
                                                             <c:forEach var="req" items="${LISTAREQUISICIONES}">
                                                             <tr>
+                                                                <td>${req.nombreDepartamento}</td>
+                                                                <td>${req.codArticulo}</td>
+                                                                <td>${req.nombreArticulo}</td>
+                                                                <td>${req.cantArt}</td>
                                                                 <td>${req.fechaPedidoReq}</td>
-                                                                <td>${req.fechaEntregaReq}</td>
-                                                                <td>${req.autorizado}</td>
-                                                                <td>${req.entregado}</td>
-                                                                <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                                                <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+                                                                <td><a href="cotizarProveedorArticulo.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-assignment-o"></i></a></td>
                                                             </tr>
                                                             </c:forEach>
                                     

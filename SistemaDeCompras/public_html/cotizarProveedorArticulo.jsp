@@ -180,7 +180,7 @@
                                         </form>
 
                                         <p class="text-center">
-                                            <button onclick="window.location.href='cotizarArticulo.jsp'" class="btn btn-info btn-raised btn-lg">Volver</button>
+                                            <button onclick="window.location.href='controladorcotizararticulo'" class="btn btn-info btn-raised btn-lg">Volver</button>
                                         </p>
                                         
                                     </div>
