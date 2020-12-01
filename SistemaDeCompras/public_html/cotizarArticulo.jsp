@@ -158,6 +158,8 @@
                                             <div class="col-xs-12 col-md-10 col-md-offset-1">
                                                 <div class="form-group">
                                                     <table class="table table-hover text-center">
+                                                        
+                                                    
                                                         <thead>
                                                             <tr>
                                                                 <th class="text-center">Departamento</th>
@@ -177,10 +179,20 @@
                                                                 <td>${req.nombreArticulo}</td>
                                                                 <td>${req.cantArt}</td>
                                                                 <td>${req.fechaPedidoReq}</td>
-                                                                <td><a href="cotizarProveedorArticulo.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-assignment-o"></i></a></td>
+                                                    
+                                                                <td>
+                                                                    <form method="get" action="controladorproveedorarticulo" >
+                                                                    <input type="hidden" name="instruccion" value="cotizar">
+                                                                        <p class="text-center">
+                                                                            <input type="hidden" name="articulo" value="${req.codArticulo}">
+                                                                            <button href="controladorproveedorarticulo" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-assignment-o" ></i></button>
+                                                                        </p>
+                                                                    </form>
+                                                                </td>
+                                                            
                                                             </tr>
                                                             </c:forEach>
-                                    
+                                                            
                                                         </tbody>
                                                     </table>
                                                 </div>

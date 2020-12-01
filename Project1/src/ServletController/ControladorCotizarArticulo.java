@@ -62,7 +62,7 @@ public class ControladorCotizarArticulo extends HttpServlet {
         case "filtrar":
             filtrarRequisiciones(request, response);
             break;
-            
+        
         }
     }
     
@@ -129,4 +129,5 @@ public class ControladorCotizarArticulo extends HttpServlet {
             e.printStackTrace();
         }
     }
+
 }

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=windows-1252"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html lang="es">
 <head>
     <title>Cotizaci&oacute;n Art&iacute;culos</title>
@@ -129,48 +131,37 @@
                                                             <th class="text-center">Cantidad</th>
                                                             <th class="text-center">Descuento</th>
                                                             <th class="text-center">Precio</th>
+                                                            <th class="text-center">Tiempo Entrega</th>
                                                             <th class="text-center">Per&iacute;odo Gracia</th>
-                                                            <th class="text-center">Entrega Inmediata</th>
                                                             <th class="text-center">Seleccionar</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>CM17048</td>
-                                                            <td>Victor Javier Chavez Melara</td>
-                                                            <td>SAC0001</td>
-                                                            <td>Sacapunta</td>
-                                                            <td>25</td>
-                                                            <td>30 %</td>
-                                                            <td>$ 17.50</td>
-                                                            <td>SI</td>
-                                                            <td>SI</td>
-                                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>VF17005</td>
-                                                            <td>Jacqueline Alejandra Vasquez Flores</td>
-                                                            <td>BOR0001</td>
-                                                            <td>Borrador</td>
-                                                            <td>10</td>
-                                                            <td>8 %</td>
-                                                            <td>$ 8.18</td>
-                                                            <td>NO</td>
-                                                            <td>SI</td>
-                                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>AS17028</td>
-                                                            <td>Juan Antonio Aguilar Sanchez</td>
-                                                            <td>REP0001</td>
-                                                            <td>Resma de Papel</td>
-                                                            <td>3</td>
-                                                            <td>0 %</td>
-                                                            <td>$ 12.00</td>
-                                                            <td>SI</td>
-                                                            <td>NO</td>
-                                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
-                                                        </tr>
+                                                        <c:forEach var="vig" items="${LISTAVIGENCIAS}">
+                                                            <tr>
+                                                                <td>${vig.codProveedor}</td>
+                                                                <td>${vig.nombreEmpresa}</td>
+                                                                <td>${vig.codArticulo}</td>
+                                                                <td>${vig.nombreArticulo}</td>
+                                                                <td></td>
+                                                                <td>${vig.descuento}</td>
+                                                                <td>${vig.precio}</td>
+                                                                <td>${vig.tiempoEspera}</td>
+                                                                <td>${vig.perGracia}</td>
+                                                    
+                                                                <td>
+                                                                    <form method="get" action="controladorproveedorarticulo" >
+                                                                    <input type="hidden" name="instruccion" value="seleccionar">
+                                                                        <p class="text-center">
+                                                                            <input type="hidden" name="articulo" value="${vig.codArticulo}">
+                                                                            <input type="hidden" name="articulo" value="${vig.codProveedor}">
+                                                                            <button href="controladorproveedorarticulo" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></button>
+                                                                        </p>
+                                                                    </form>
+                                                                </td>
+                                                            
+                                                            </tr>
+                                                        </c:forEach>
                                                     </tbody>
                                                 </table>
 
