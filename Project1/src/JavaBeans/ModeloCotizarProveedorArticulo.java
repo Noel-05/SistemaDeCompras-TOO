@@ -32,11 +32,17 @@ public class ModeloCotizarProveedorArticulo {
         try{
             
             String articulo = vigencia.getCodArticulo();
+            int cantidad = vigencia.getCantidad();
+            String departamento = vigencia.getCodDepartamento();
+            
+            //Le doy formato a la Fecha
+            java.util.Date utilDate = vigencia.getFechaDesde();
+            java.sql.Date fechaConvertida = new java.sql.Date(utilDate.getTime());
             
             // SELECT * FROM VIGENCIA V INNER JOIN ARTICULO A ON V.CODARTICULO = A.CODARTICULO INNER JOIN PROVEEDOR P ON P.CODIGOPROV = V.CODIGOPROV WHERE V.CODARTICULO = 'BOR0001';
             
             //Crear sentencia SQL y Statement
-            String miSql = "SELECT * FROM VIGENCIA V INNER JOIN ARTICULO A ON V.CODARTICULO = A.CODARTICULO INNER JOIN PROVEEDOR P ON P.CODIGOPROV = V.CODIGOPROV WHERE V.CODARTICULO = '" +articulo+ "'";
+            String miSql = "SELECT * FROM VIGENCIA V INNER JOIN ARTICULO A ON V.CODARTICULO = A.CODARTICULO INNER JOIN PROVEEDOR P ON P.CODIGOPROV = V.CODIGOPROV WHERE V.CODARTICULO = '" +articulo+ "' AND (FECHADESDE >= TO_DATE('"+fechaConvertida+"', 'YYYY/MM/DD HH:MI:SS') OR FECHAHASTA >= TO_DATE('"+fechaConvertida+"', 'YYYY/MM/DD HH:MI:SS'))";
             miStatement = miConexion.createStatement();
             
             //Ejecutar SQL
@@ -71,7 +77,7 @@ public class ModeloCotizarProveedorArticulo {
                     perGracia = "NO";
                 }
                 
-                Vigencia temporal = new Vigencia(codArticulo, codProveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEspera, periodoGracia, nombreArticulo, unidadMedida, nombreEmpresa, depto, municipio, telefono, correo, responsble, perGracia);
+                Vigencia temporal = new Vigencia(codArticulo, codProveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEspera, periodoGracia, nombreArticulo, unidadMedida, nombreEmpresa, depto, municipio, telefono, correo, responsble, perGracia, cantidad, departamento);
                 vigencias.add(temporal);
             }
             

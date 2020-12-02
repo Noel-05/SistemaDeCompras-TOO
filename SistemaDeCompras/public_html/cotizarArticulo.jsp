@@ -185,6 +185,9 @@
                                                                     <input type="hidden" name="instruccion" value="cotizar">
                                                                         <p class="text-center">
                                                                             <input type="hidden" name="articulo" value="${req.codArticulo}">
+                                                                            <input type="hidden" name="fecha" value="${req.fechaPedidoReq}">
+                                                                            <input type="hidden" name="cantidad" value="${req.cantArt}">
+                                                                            <input type="hidden" name="departamento" value="${req.codigoDepartamento}">
                                                                             <button href="controladorproveedorarticulo" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-assignment-o" ></i></button>
                                                                         </p>
                                                                     </form>

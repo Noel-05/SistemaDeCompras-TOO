@@ -117,10 +117,10 @@
                         <div class="tab-pane fade active in" id="new">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-xs-12 col-md-10 col-md-offset-1">
-
+                                    <div >
+                
                                         <form action="">
-                                            <div class="form-group">
+                                            <div class="table-responsive">
                                                 <table class="table table-hover text-center">
                                                     <thead>
                                                         <tr>
@@ -128,11 +128,12 @@
                                                             <th class="text-center">Nombre Proveedor</th>
                                                             <th class="text-center">C&oacute;digo Art&iacute;culo</th>
                                                             <th class="text-center">Nombre Art&iacute;culo</th>
-                                                            <th class="text-center">Cantidad</th>
                                                             <th class="text-center">Descuento</th>
                                                             <th class="text-center">Precio</th>
                                                             <th class="text-center">Tiempo Entrega</th>
                                                             <th class="text-center">Per&iacute;odo Gracia</th>
+                                                            <th class="text-center">Fecha Desde</th>
+                                                            <th class="text-center">Fecha Hasta</th>
                                                             <th class="text-center">Seleccionar</th>
                                                         </tr>
                                                     </thead>
@@ -143,18 +144,21 @@
                                                                 <td>${vig.nombreEmpresa}</td>
                                                                 <td>${vig.codArticulo}</td>
                                                                 <td>${vig.nombreArticulo}</td>
-                                                                <td></td>
-                                                                <td>${vig.descuento}</td>
-                                                                <td>${vig.precio}</td>
-                                                                <td>${vig.tiempoEspera}</td>
+                                                                <td>${vig.descuento} %</td>
+                                                                <td>$ ${vig.precio}</td>
+                                                                <td>${vig.tiempoEspera} d&iacute;as</td>
                                                                 <td>${vig.perGracia}</td>
+                                                                <td>${vig.fechaDesde}</td>
+                                                                <td>${vig.fechaHasta}</td>
                                                     
                                                                 <td>
                                                                     <form method="get" action="controladorproveedorarticulo" >
-                                                                    <input type="hidden" name="instruccion" value="seleccionar">
+                                                                        <input type="hidden" name="instruccion" value="seleccionar">
                                                                         <p class="text-center">
                                                                             <input type="hidden" name="articulo" value="${vig.codArticulo}">
-                                                                            <input type="hidden" name="articulo" value="${vig.codProveedor}">
+                                                                            <input type="hidden" name="proveedor" value="${vig.codProveedor}">
+                                                                            <input type="hidden" name="departamento" value="${vig.codDepartamento}">
+                                                                            <input type="hidden" name="cantidad" value="${vig.cantidad}">
                                                                             <button href="controladorproveedorarticulo" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></button>
                                                                         </p>
                                                                     </form>
@@ -170,9 +174,11 @@
                                             </div>
                                         </form>
 
+                                        <form method="get" action="controladorcotizararticulo" >
                                         <p class="text-center">
-                                            <button onclick="window.location.href='controladorcotizararticulo'" class="btn btn-info btn-raised btn-lg">Volver</button>
+                                            <button href="controladorcotizararticulo" class="btn btn-info btn-raised btn-lg">Volver</button>
                                         </p>
+                                        </form>
                                         
                                     </div>
                                 </div>

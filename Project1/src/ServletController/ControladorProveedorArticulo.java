@@ -65,9 +65,20 @@ public class ControladorProveedorArticulo extends HttpServlet {
     private void obtenerProveedoresArticulo(HttpServletRequest request, HttpServletResponse response) {
         //Obtener la lista de Vigencias desde el modelo
         String articulo = request.getParameter("articulo");
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        String departamento = request.getParameter("departamento");
+        
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = null;
+        
+        try {
+            fecha = formatoFecha.parse(request.getParameter("fecha"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         
         //Crear un objeto de tipo Vigencia
-        Vigencia vigencias = new Vigencia(articulo);
+        Vigencia vigencias = new Vigencia(articulo, fecha, cantidad, departamento);
         
         List<Vigencia> vigenciasArticulo;
         

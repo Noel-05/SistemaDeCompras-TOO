@@ -23,12 +23,15 @@ public class Vigencia {
     private String responsble;
     
     private String perGracia;
+    
+    private int cantidad;
+    private String codDepartamento;
 
 
     public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
                     float precio, int tiempoEspera, int periodoGracia, String nombreArticulo, String unidadMedida,
                     String nombreEmpresa, String depto, String municipio, String telefono, String correo,
-                    String responsble, String perGracia) {
+                    String responsble, String perGracia, int cantidad, String codDepartamento) {
         this.codArticulo = codArticulo;
         this.codProveedor = codProveedor;
         this.fechaDesde = fechaDesde;
@@ -46,11 +49,16 @@ public class Vigencia {
         this.correo = correo;
         this.responsble = responsble;
         this.perGracia = perGracia;
+        this.cantidad = cantidad;
+        this.codDepartamento = codDepartamento;
     }
 
 
-    public Vigencia(String codArticulo) {
+    public Vigencia(String codArticulo, Date fechaDesde, int cantidad, String codDepartamento) {
         this.codArticulo = codArticulo;
+        this.fechaDesde = fechaDesde;
+        this.cantidad = cantidad;
+        this.codDepartamento = codDepartamento;
     }
 
 
@@ -188,6 +196,22 @@ public class Vigencia {
 
     public String getPerGracia() {
         return perGracia;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCodDepartamento(String codDepartamento) {
+        this.codDepartamento = codDepartamento;
+    }
+
+    public String getCodDepartamento() {
+        return codDepartamento;
     }
 
 }
