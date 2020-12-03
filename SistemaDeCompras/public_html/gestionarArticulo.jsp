@@ -4,7 +4,7 @@
 
 <html lang="es">
 <head>
-    <title>Solicitudes Art&iacute;culos</title>
+    <title>Gestionar Art&iacute;culos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
@@ -109,7 +109,7 @@
         <!-- Content page -->
         <div class="container-fluid">
             <div class="page-header">
-              <h1 class="text-titles"><i class="zmdi zmdi-shopping-cart-add zmdi-hc-fw"></i> <strong>Solicitudes de Art&iacute;culos.</strong></h1>
+              <h1 class="text-titles"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> <strong>Gestionar Informaci&oacute;n de Art&iacute;culos.</strong></h1>
             </div>
         </div>
         
@@ -120,8 +120,8 @@
                 <div class="col-xs-12">
                 
                     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                        <li class="active"><a href="#new" data-toggle="tab">Nueva Solicitud</a></li>
-                        <li><a href="#list" data-toggle="tab">Art&iacute;culos Solicitados</a></li>
+                        <li class="active"><a href="#new" data-toggle="tab">Gestionar Art&iacute;culo</a></li>
+                        <li><a href="#list" data-toggle="tab">Art&iacute;culos Ingresados</a></li>
                     </ul>
             
                     <div id="myTabContent" class="tab-content">
@@ -137,35 +137,60 @@
                                             <input type="hidden" name="instruccion" value="insertarBD">
                                             
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Carnet</label>
-                                                <input class="form-control" type="text" name="carnet" required="required">
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <label class="control-label">Fecha de Solicitud</label>
-                                                <input class="form-control" type="date" name="fecha">
+                                                <label class="control-label">Codigo Proveedor</label>
+                                                <input class="form-control" type="text" name="proveedor" required="required">
                                             </div>
                                             
                                             <div class="form-group">
                                                 <label class="control-label">Articulo</label>
                                                 <select class="form-control" name="articulo" required="required">
                                                 
-                                                    <option>Seleccione el Articulo a Solicitar...</option>
-                                                    
-                                                    <c:forEach var="art" items="${LISTAARTICULOS}">
-                                                        <option value="${art.codArticulo}">${art.codArticulo} - ${art.nombreArticulo}</option>
-                                                    </c:forEach>
+                                                    <option>Seleccione el Articulo a Ingresar...</option>
+                                                    <option>BOR0001 - Borrador de Goma</option>
+                                                    <option>SAC0001 - Sacapunta de Metal</option>
                                                     
                                                 </select>
                                             </div>
                                             
+                                            
+                                            <div class="form-group">
+                                                <label class="control-label">Fecha Desde</label>
+                                                <input class="form-control" type="date" name="fechaDesde">
+                                            </div>
+                                            
+                                            
+                                            <div class="form-group">
+                                                <label class="control-label">Fecha Hasta</label>
+                                                <input class="form-control" type="date" name="fechaHasta">
+                                            </div>
+                                            
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Cantidad</label>
-                                                <input class="form-control" type="number" name="cantidad" required="required">
+                                                <label class="control-label">Precio</label>
+                                                <input class="form-control" type="number" name="precio" required="required">
+                                            </div>
+                                            
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descuento</label>
+                                                <input class="form-control" type="number" name="descuento" required="required">
+                                            </div>
+                                            
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tiempo de Entrega</label>
+                                                <input class="form-control" type="number" name="tiempoEntrega" required="required">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="control-label">Per&iacute;odo de Gracia</label>
+                                                <select class="form-control" name="periodoGracia" required="required">
+                                                
+                                                    <option value="1">NO</option>
+                                                    <option value="0">SI</option>
+                                                    
+                                                </select>
                                             </div>
                                             
                                             <p class="text-center">
-                                                <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Insertar</button>
+                                                <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Guardar</button>
                                             </p>
                                             
                                         </form>
@@ -188,16 +213,10 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
                                         <div class="form-group">
-                                            <label class="control-label"><strong>Empleado</strong></label>
-                                            <select class="form-control" name="empleado" required="required">
-                                            
-                                                <option>Seleccione el Empleado a Consultar...</option>
-                                                
-                                                <c:forEach var="emp" items="${LISTAEMPLEADOS}">
-                                                    <option value="${emp.carnetEmpleado}">${emp.carnetEmpleado} - ${emp.apellidoEmpleado}, ${emp.nombreEmpleado}</option>
-                                                </c:forEach>
-                                                
-                                            </select>
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Codigo Proveedor</label>
+                                                <input class="form-control" type="text" name="proveedor" required="required">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -210,29 +229,35 @@
                                 <table class="table table-hover text-center">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Carnet</th>
+                                            <th class="text-center">C&oacute;digo Proveedor</th>
+                                            <th class="text-center">Nombre Proveedor</th>
                                             <th class="text-center">C&oacute;digo Art&iacute;culo</th>
-                                            <th class="text-center">Art&iacute;culo</th>
-                                            <th class="text-center">Cantidad</th>
-                                            <th class="text-center">Fecha Pedido</th>
-                                            <th class="text-center">Update</th>
-                                            <th class="text-center">Delete</th>
+                                            <th class="text-center">Nombre Art&iacute;culo</th>
+                                            <th class="text-center">Descuento</th>
+                                            <th class="text-center">Precio</th>
+                                            <th class="text-center">Tiempo Entrega</th>
+                                            <th class="text-center">Per&iacute;odo Gracia</th>
+                                            <th class="text-center">Fecha Desde</th>
+                                            <th class="text-center">Fecha Hasta</th>
+                                            <th class="text-center">Actualizar</th>
+                                            <th class="text-center">Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
-                                        <c:forEach var="sol" items="${LISTASOLICITUDESARTICULO}">
-                                        <tr>
-                                            <td>${sol.carnetEmpleado}</td>
-                                            <td>${sol.codArticulo}</td>
-                                            <td>${sol.nombreArticulo}</td>
-                                            <td>${sol.cantArticulo}</td>
-                                            <td>${sol.fechaSol}</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        </c:forEach>
-                                        
+                                            <tr>
+                                                <td>SCRIBE</td>
+                                                <td>SCRIBE EL Salvador S.A. de C.V.</td>
+                                                <td>BOR0001</td>
+                                                <td>Borrador de Goma</td>
+                                                <td>15 %</td>
+                                                <td>$ 5,50</td>
+                                                <td>15 d&iacute;as</td>
+                                                <td>SI</td>
+                                                <td>11/11/20</td>
+                                                <td>01/12/20</td>
+                                                <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+                                                <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+                                            </tr>
                                     </tbody>
                                 </table>
                             </div>
