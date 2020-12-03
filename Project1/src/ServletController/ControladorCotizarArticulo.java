@@ -7,7 +7,10 @@ import JavaBeans.ModeloCotizarArticulo;
 import JavaBeans.ModeloSolicitudArticulo;
 
 import JavaBeans.Requisicion;
+import JavaBeans.RequisicionVigenciaCompra;
 import JavaBeans.SolicitudArt;
+
+import JavaBeans.Vigencia;
 
 import Utils.ConexionBaseDatos;
 
@@ -61,6 +64,10 @@ public class ControladorCotizarArticulo extends HttpServlet {
         
         case "filtrar":
             filtrarRequisiciones(request, response);
+            break;
+        
+        case "detalle":
+            obtenerOrdenes(request, response);
             break;
         
         }
@@ -129,5 +136,35 @@ public class ControladorCotizarArticulo extends HttpServlet {
             e.printStackTrace();
         }
     }
+    
 
+    private void obtenerOrdenes(HttpServletRequest request, HttpServletResponse response) {
+        String departamento = request.getParameter("departamento");
+        
+        //Crear un objeto de tipo RequisicionVigenciaCompra
+        RequisicionVigenciaCompra consultaOrdenes = new RequisicionVigenciaCompra(departamento);
+        
+        List<RequisicionVigenciaCompra> ordenes;
+        List<Departamento> departamentos;
+        
+        try{
+            
+            ordenes = modeloCotizarArticulo.obtenerOrdenes(consultaOrdenes);            
+            departamentos = modeloCotizarArticulo.getDepartamentos();
+            
+            //Agregar la lista de Articulos al Request
+            
+            request.setAttribute("LISTAORDENES", ordenes);
+            request.setAttribute("LISTADEPARTAMENTOS", departamentos);
+            
+            //Enviar el Request al JSP
+            
+            RequestDispatcher miDispatcher = request.getRequestDispatcher("/cotizarArticulo.jsp");
+            
+            miDispatcher.forward(request, response);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

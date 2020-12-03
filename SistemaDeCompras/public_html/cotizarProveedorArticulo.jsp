@@ -159,6 +159,7 @@
                                                                             <input type="hidden" name="proveedor" value="${vig.codProveedor}">
                                                                             <input type="hidden" name="departamento" value="${vig.codDepartamento}">
                                                                             <input type="hidden" name="cantidad" value="${vig.cantidad}">
+                                                                            <input type="hidden" name="precioTotal" value="${vig.precioTotal}">
                                                                             <button href="controladorproveedorarticulo" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></button>
                                                                         </p>
                                                                     </form>

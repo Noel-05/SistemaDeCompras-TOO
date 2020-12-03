@@ -26,12 +26,14 @@ public class Vigencia {
     
     private int cantidad;
     private String codDepartamento;
+    
+    private float precioTotal;
 
 
     public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
                     float precio, int tiempoEspera, int periodoGracia, String nombreArticulo, String unidadMedida,
                     String nombreEmpresa, String depto, String municipio, String telefono, String correo,
-                    String responsble, String perGracia, int cantidad, String codDepartamento) {
+                    String responsble, String perGracia, int cantidad, String codDepartamento, float precioTotal) {
         this.codArticulo = codArticulo;
         this.codProveedor = codProveedor;
         this.fechaDesde = fechaDesde;
@@ -51,6 +53,31 @@ public class Vigencia {
         this.perGracia = perGracia;
         this.cantidad = cantidad;
         this.codDepartamento = codDepartamento;
+        this.precioTotal = precioTotal;
+    }
+    
+    
+    public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
+                    float precio, int tiempoEspera, int periodoGracia, String nombreArticulo, String unidadMedida,
+                    String nombreEmpresa, String depto, String municipio, String telefono, String correo,
+                    String responsble, String perGracia) {
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
+        this.descuento = descuento;
+        this.precio = precio;
+        this.tiempoEspera = tiempoEspera;
+        this.periodoGracia = periodoGracia;
+        this.nombreArticulo = nombreArticulo;
+        this.unidadMedida = unidadMedida;
+        this.nombreEmpresa = nombreEmpresa;
+        this.depto = depto;
+        this.municipio = municipio;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.responsble = responsble;
+        this.perGracia = perGracia;
     }
 
 
@@ -212,6 +239,14 @@ public class Vigencia {
 
     public String getCodDepartamento() {
         return codDepartamento;
+    }
+
+    public void setPrecioTotal(float precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+
+    public float getPrecioTotal() {
+        return precioTotal;
     }
 
 }

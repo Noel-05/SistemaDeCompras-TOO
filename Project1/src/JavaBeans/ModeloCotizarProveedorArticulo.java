@@ -3,7 +3,9 @@ package JavaBeans;
 import Utils.ConexionBaseDatos;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.ArrayList;
@@ -77,7 +79,10 @@ public class ModeloCotizarProveedorArticulo {
                     perGracia = "NO";
                 }
                 
-                Vigencia temporal = new Vigencia(codArticulo, codProveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEspera, periodoGracia, nombreArticulo, unidadMedida, nombreEmpresa, depto, municipio, telefono, correo, responsble, perGracia, cantidad, departamento);
+                float precioSinDesc = (cantidad * precio);
+                float precioTotal = (precioSinDesc) - (precioSinDesc * (descuento / 100));
+                
+                Vigencia temporal = new Vigencia(codArticulo, codProveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEspera, periodoGracia, nombreArticulo, unidadMedida, nombreEmpresa, depto, municipio, telefono, correo, responsble, perGracia, cantidad, departamento, precioTotal);
                 vigencias.add(temporal);
             }
             
@@ -89,5 +94,77 @@ public class ModeloCotizarProveedorArticulo {
         
         return vigencias;
     }
+    
+    
+    
+    public List<Departamento> getVigenciasSinParametro(){
+        List<Departamento> departamentos = new ArrayList<>();
+        
+        Connection miConexion = null;
+        Statement miStatement = null;
+        ResultSet miResultset = null;
+        
+        //Establecer la conexion
+        miConexion = origenDatos.getConexion();
+        
+        
+        try {        
+            //Crear sentencia SQL y Statement
+            String miSql = "SELECT * FROM DEPARTAMENTO";
+            
+            miStatement = miConexion.createStatement();
+            
+            //Ejecutar SQL
+            miResultset = miStatement.executeQuery(miSql);
+            
+            while(miResultset.next()){
+                String codDepto = miResultset.getString("CODIGODEPARTAMENTO");
+                String nombreDepto = miResultset.getString("NOMBREDEPARTAMENTO");
+                String descDepto = miResultset.getString("DESCRIPCIONDEPARTAMENTO");
+                
+                Departamento temporal = new Departamento(codDepto, nombreDepto, descDepto);
+                
+                departamentos.add(temporal);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
    
+        return departamentos;
+    }
+    
+
+
+    public void agregarNuevaCompra(RequisicionVigenciaCompra nuevaCompra) {
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        //Obtener la conexion
+        try{
+            
+            miConexion = origenDatos.getConexion();
+        
+            //Crear sentencia sql que inserte
+            String misql = "INSERT INTO REQUISICION_VIGENCIA_COMPRA(CODIGODEPARTAMENTO, CODARTICULO, CODIGOPROV, CANTART, PRECIOTOTAL) VALUES (?, ?, ?, ?, ?)";
+            miStatement = miConexion.prepareStatement(misql);
+            
+            //Establecer los parametros para insertar el producto
+            miStatement.setString(1,nuevaCompra.getCodigoDepartamento());
+            
+            miStatement.setString(2, nuevaCompra.getCodArticulo());
+            
+            miStatement.setString(3, nuevaCompra.getCodProveedor());
+            
+            miStatement.setInt(4, nuevaCompra.getCantArt());
+            
+            miStatement.setFloat(5, nuevaCompra.getPrecioTotal());
+            
+            //Ejecutar la instruccion sql
+            miStatement.execute();
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

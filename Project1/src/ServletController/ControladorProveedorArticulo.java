@@ -7,6 +7,8 @@ import JavaBeans.ModeloCotizarProveedorArticulo;
 
 import JavaBeans.Requisicion;
 
+import JavaBeans.RequisicionVigenciaCompra;
+import JavaBeans.SolicitudArt;
 import JavaBeans.Vigencia;
 
 import Utils.ConexionBaseDatos;
@@ -29,6 +31,7 @@ public class ControladorProveedorArticulo extends HttpServlet {
     private static final String CONTENT_TYPE = "text/html; charset=windows-1252";
     
     private ModeloCotizarProveedorArticulo modeloCotizarProveedorArticulo;
+    private ModeloCotizarArticulo modeloCotizarArticulo;
     
     private ConexionBaseDatos origenDatos;
 
@@ -39,6 +42,7 @@ public class ControladorProveedorArticulo extends HttpServlet {
         try{
             
             modeloCotizarProveedorArticulo = new ModeloCotizarProveedorArticulo(origenDatos);
+            modeloCotizarArticulo = new ModeloCotizarArticulo(origenDatos);
             
         }catch(Exception e){
             
@@ -57,6 +61,10 @@ public class ControladorProveedorArticulo extends HttpServlet {
         
         case "cotizar":
             obtenerProveedoresArticulo(request, response);
+            break;
+        
+        case "seleccionar":
+            seleccionarProveedorOrden(request, response);
             break;
         
         }
@@ -100,5 +108,48 @@ public class ControladorProveedorArticulo extends HttpServlet {
             e.printStackTrace();
         }
     }
+    
+    
+    private void obtenerProveedoresArticuloSinParametros(HttpServletRequest request, HttpServletResponse response) {
+        //Obtener la lista de Departamentos desde el modelo
+        
+        List<Departamento> departamentos;
+        
+        try{
+            
+            departamentos = modeloCotizarArticulo.getDepartamentos();
+            
+            //Agregar la lista de Articulos al Request
+            
+            request.setAttribute("LISTADEPARTAMENTOS", departamentos);
+            
+            //Enviar el Request al JSP
+            
+            RequestDispatcher miDispatcher = request.getRequestDispatcher("/cotizarArticulo.jsp");
+            
+            miDispatcher.forward(request, response);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
 
+    private void seleccionarProveedorOrden(HttpServletRequest request, HttpServletResponse response) {
+        //Obtener la lista de Vigencias desde el modelo
+        String articulo = request.getParameter("articulo");
+        String proveedor = request.getParameter("proveedor");
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        String departamento = request.getParameter("departamento");
+        float precioTotal = Float.parseFloat(request.getParameter("precioTotal"));
+        
+        //Crear un objeto de tipo REQUISICION_VIGENCIA_COMPRA
+        RequisicionVigenciaCompra nuevaCompra = new RequisicionVigenciaCompra(departamento, articulo, proveedor, cantidad, precioTotal);
+            
+        //Enviar el objeto al Modelo y despues insertar el objeto en la BD
+        modeloCotizarProveedorArticulo.agregarNuevaCompra(nuevaCompra);
+        
+        //Listar las Solicitudes
+        obtenerProveedoresArticuloSinParametros(request, response);
+        
+    }
 }

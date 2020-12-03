@@ -213,30 +213,40 @@
 
                         <div class="tab-pane fade" id="list">
                             <div class="table-responsive">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                        <div class="form-group">
-                                            <label class="control-label">Departamento</label>
-                                            <select class="form-control" name="departamento" required="required">
+                                
+                                <form method="get" action="controladorcotizararticulo" >
+                                    <input type="hidden" name="instruccion" value="detalle">
+                                
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-10 col-md-offset-1">
+                                            <div class="form-group">
                                             
-                                                <option>Seleccione el Departamento a Consultar...</option>
+                                            
+                                                <label class="control-label">Departamento</label>
+                                                <select class="form-control" name="departamento" required="required">
                                                 
-                                                <c:forEach var="dep" items="${LISTADEPARTAMENTOS}">
-                                                    <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
-                                                </c:forEach>
-                                                
-                                            </select>
+                                                    <option>Seleccione el Departamento a Consultar...</option>
+                                                    
+                                                    <c:forEach var="dep" items="${LISTADEPARTAMENTOS}">
+                                                        <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
+                                                    </c:forEach>
+                                                    
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <p class="text-center">
-                                    <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
-                                </p>
+                                
+                                    <p class="text-center">
+                                        <button href="controladorcotizararticulo" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
+                                    </p>
+                                    
+                                </form>
                                 
                                 </br></br>
                                 <table class="table table-hover text-center">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">Departamento</th>
                                             <th class="text-center">C&oacute;digo Proveedor</th>
                                             <th class="text-center">Nombre Proveedor</th>
                                             <th class="text-center">C&oacute;digo Art&iacute;culo</th>
@@ -249,39 +259,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>CM17048</td>
-                                            <td>Victor Javier Chavez Melara</td>
-                                            <td>SAC0001</td>
-                                            <td>Sacapunta</td>
-                                            <td>25</td>
-                                            <td>30 %</td>
-                                            <td>$ 17.50</td>
-                                            <td>SI</td>
-                                            <td>SI</td>
-                                        </tr>
-                                        <tr>
-                                            <td>VF17005</td>
-                                            <td>Jacqueline Alejandra Vasquez Flores</td>
-                                            <td>BOR0001</td>
-                                            <td>Borrador</td>
-                                            <td>10</td>
-                                            <td>8 %</td>
-                                            <td>$ 8.18</td>
-                                            <td>NO</td>
-                                            <td>SI</td>
-                                        </tr>
-                                        <tr>
-                                            <td>AS17028</td>
-                                            <td>Juan Antonio Aguilar Sanchez</td>
-                                            <td>REP0001</td>
-                                            <td>Resma de Papel</td>
-                                            <td>3</td>
-                                            <td>0 %</td>
-                                            <td>$ 12.00</td>
-                                            <td>SI</td>
-                                            <td>NO</td>
-                                        </tr>
+                                        <c:forEach var="ord" items="${LISTAORDENES}">
+                                            <tr>
+                                                <td>${ord.codProveedor}</td>
+                                                <td>${ord.nombreProv}</td>
+                                                <td>${ord.codArticulo}</td>
+                                                <td>${ord.nombreArt}</td>
+                                                <td>${ord.cantArt}</td>
+                                                <td>${ord.descuento} %</td>
+                                                <td>$ ${ord.precio}</td>
+                                                <td>${ord.periodoGracia}</td>
+                                                <td>${ord. entregaInmediata}</td>
+                                            </tr>
+                                            </c:forEach>
+                            
                                     </tbody>
                                 </table>
                             </div>
