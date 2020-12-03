@@ -15,9 +15,9 @@ import java.sql.DriverManager;
 
 public class ConexionBaseDatos {  
     
-  final static String DB_URL="jdbc:oracle:thin:@dbsiscompras_high?TNS_ADMIN=/Users/noelr/Desktop/WalletPrueba";
-  final static String DB_USER = "ADMIN";
-  final static String DB_PASSWORD = "Proyecto_TOO115";
+    final static String DB_URL="jdbc:oracle:thin:@dbsiscompras_high?TNS_ADMIN=/Users/Dell/Desktop/WalletPrueba";
+    final static String DB_USER = "ADMIN";
+    final static String DB_PASSWORD = "Proyecto_TOO115";
   
     public static Connection getConexion(){
             Connection con=null;
