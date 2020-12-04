@@ -256,16 +256,16 @@
                                 <table class="table table-hover text-center">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Departamento</th>
                                             <th class="text-center">C&oacute;digo Proveedor</th>
                                             <th class="text-center">Nombre Proveedor</th>
                                             <th class="text-center">C&oacute;digo Art&iacute;culo</th>
                                             <th class="text-center">Nombre Art&iacute;culo</th>
                                             <th class="text-center">Cantidad</th>
                                             <th class="text-center">Descuento</th>
-                                            <th class="text-center">Precio</th>
+                                            <th class="text-center">Precio Unitario</th>
                                             <th class="text-center">Per&iacute;odo Gracia</th>
-                                            <th class="text-center">Entrega Inmediata</th>
+                                            <th class="text-center">Tiempo de Entrega</th>
+                                            <th class="text-center">Precio Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -278,8 +278,9 @@
                                                 <td>${ord.cantArt}</td>
                                                 <td>${ord.descuento} %</td>
                                                 <td>$ ${ord.precio}</td>
-                                                <td>${ord.periodoGracia}</td>
-                                                <td>${ord. entregaInmediata}</td>
+                                                <td>${ord.perGra}</td>
+                                                <td>${ord. entregaInmediata} d&iacute;as</td>
+                                                <td>$ ${ord.precioTotal}</td>
                                             </tr>
                                             </c:forEach>
                             

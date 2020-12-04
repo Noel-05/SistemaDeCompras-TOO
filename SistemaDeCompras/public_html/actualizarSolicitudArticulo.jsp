@@ -109,7 +109,7 @@
         <!-- Content page -->
         <div class="container-fluid">
             <div class="page-header">
-              <h1 class="text-titles"><i class="zmdi zmdi-shopping-cart-add zmdi-hc-fw"></i> <strong>Solicitudes de Art&iacute;culos.</strong></h1>
+              <h1 class="text-titles"><i class="zmdi zmdi-shopping-cart-add zmdi-hc-fw"></i> <strong>Actualizar Solicitud de Art&iacute;culos.</strong></h1>
             </div>
         </div>
         
@@ -120,8 +120,7 @@
                 <div class="col-xs-12">
                 
                     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                        <li class="active"><a href="#new" data-toggle="tab">Nueva Solicitud</a></li>
-                        <li><a href="#list" data-toggle="tab">Art&iacute;culos Solicitados</a></li>
+                        <li class="active"><a href="#new" data-toggle="tab">Actualizar Solicitud</a></li>
                     </ul>
             
                     <div id="myTabContent" class="tab-content">
@@ -134,38 +133,34 @@
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
                                     
                                         <form method="get" action="controladorsolicitudarticulo" >
-                                            <input type="hidden" name="instruccion" value="insertarBD">
+                                            <input type="hidden" name="instruccion" value="actualizarBD">
+                                            
+                                            <input type="hidden" name="idSol" value="${SOLICITUDACTUALIZAR.idSol}">
                                             
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Carnet</label>
-                                                <input class="form-control" type="text" name="carnet" required="required">
+                                                <input class="form-control" type="text" value="${SOLICITUDACTUALIZAR.carnetEmpleado}" disabled="disabled">
+                                                <input class="form-control" type="hidden" name="carnet" required="required" value="${SOLICITUDACTUALIZAR.carnetEmpleado}">
+                                            </div>
+                                            
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Art&iacute;culo</label>
+                                                <input class="form-control" type="text" value="${SOLICITUDACTUALIZAR.nombreArticulo}" disabled="disabled">
+                                                <input class="form-control" type="hidden" name="articulo" required="required" value="${SOLICITUDACTUALIZAR.codArticulo}" >
                                             </div>
                                             
                                             <div class="form-group">
                                                 <label class="control-label">Fecha de Solicitud</label>
-                                                <input class="form-control" type="date" name="fecha">
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <label class="control-label">Art&iacute;culo</label>
-                                                <select class="form-control" name="articulo" required="required">
-                                                
-                                                    <option>Seleccione el Artículo a Solicitar...</option>
-                                                    
-                                                    <c:forEach var="art" items="${LISTAARTICULOS}">
-                                                        <option value="${art.codArticulo}">${art.codArticulo} - ${art.nombreArticulo}</option>
-                                                    </c:forEach>
-                                                    
-                                                </select>
+                                                <input class="form-control" type="date" name="fecha" value="${SOLICITUDACTUALIZAR.fechaSol}">
                                             </div>
                                             
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Cantidad</label>
-                                                <input class="form-control" type="number" name="cantidad" required="required">
+                                                <input class="form-control" type="number" name="cantidad" required="required" value="${SOLICITUDACTUALIZAR.cantArticulo}">
                                             </div>
                                             
                                             <p class="text-center">
-                                                <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Insertar</button>
+                                                <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Actualizar</button>
                                             </p>
                                             
                                         </form>
@@ -176,81 +171,6 @@
                         </div>
                         
                         
-                        
-                        
-
-                        <div class="tab-pane fade" id="list">
-                            <div class="table-responsive">
-                            
-                            <form method="get" action="controladorsolicitudarticulo" >
-                                <input type="hidden" name="instruccion" value="consultarEmpeado">
-                                
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                        <div class="form-group">
-                                            <label class="control-label"><strong>Empleado</strong></label>
-                                            <select class="form-control" name="empleado" required="required">
-                                            
-                                                <option>Seleccione el Empleado a Consultar...</option>
-                                                
-                                                <c:forEach var="emp" items="${LISTAEMPLEADOS}">
-                                                    <option value="${emp.carnetEmpleado}">${emp.carnetEmpleado} - ${emp.apellidoEmpleado}, ${emp.nombreEmpleado}</option>
-                                                </c:forEach>
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-center">
-                                    <button href="#list" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
-                                </p>
-                            </form>
-                                
-                                </br></br>
-                                <table class="table table-hover text-center">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Carnet</th>
-                                            <th class="text-center">C&oacute;digo Art&iacute;culo</th>
-                                            <th class="text-center">Art&iacute;culo</th>
-                                            <th class="text-center">Cantidad</th>
-                                            <th class="text-center">Fecha Pedido</th>
-                                            <th class="text-center">Actualizar</th>
-                                            <th class="text-center">Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    
-                                        <c:forEach var="sol" items="${LISTASOLICITUDESARTICULO}">
-                                        
-                                        <!-- Link para Actualizar Solicitud -->
-                                        <c:url var="linkActualizar" value="controladorsolicitudarticulo">
-                                            <c:param name="instruccion" value="recuperar"></c:param>
-                                            <c:param name="idSol" value="${sol.idSol}"></c:param>
-                                        </c:url>
-                                        
-                                        <!-- Link para Eliminar Solicitud -->
-                                        <c:url var="linkEliminar" value="controladorsolicitudarticulo">
-                                            <c:param name="instruccion" value="eliminar"></c:param>
-                                            <c:param name="idSol" value="${sol.idSol}"></c:param>
-                                        </c:url>
-                                        
-                                        <tr>
-                                            <td>${sol.carnetEmpleado}</td>
-                                            <td>${sol.codArticulo}</td>
-                                            <td>${sol.nombreArticulo}</td>
-                                            <td>${sol.cantArticulo}</td>
-                                            <td>${sol.fechaSol}</td>
-                                            <td><a href="${linkActualizar}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="${linkEliminar}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        </c:forEach>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>

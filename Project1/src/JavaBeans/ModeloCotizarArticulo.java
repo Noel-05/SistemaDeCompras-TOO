@@ -182,8 +182,16 @@ public class ModeloCotizarArticulo {
                 float precio = miResultset.getFloat("PRECIO");
                 int periodoGracia = miResultset.getInt("PERIODOGRACIA");
                 int entregaInmediata = miResultset.getInt("TIEMPOENTREGA");
+                float precioTotal = miResultset.getFloat("PRECIOTOTAL");
                 
-                RequisicionVigenciaCompra temporal = new RequisicionVigenciaCompra(departamentoBusq, codArticulo, codigoProv, cantidad, nombreProv, nombreArt, descuento, precio, periodoGracia, entregaInmediata);
+                String perGracia = "";
+                if(periodoGracia == 0){
+                    perGracia = "SI";
+                }else{
+                    perGracia = "NO";
+                }
+                
+                RequisicionVigenciaCompra temporal = new RequisicionVigenciaCompra(departamentoBusq, codArticulo, codigoProv, cantidad, nombreProv, nombreArt, descuento, precio, periodoGracia, entregaInmediata, perGracia, precioTotal);
                 
                 ordenesCompraProveedor.add(temporal);
             }

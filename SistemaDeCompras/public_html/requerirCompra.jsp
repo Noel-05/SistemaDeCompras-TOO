@@ -274,8 +274,8 @@
                                             <th class="text-center">Articulo</th>    
                                             <th class="text-center">Descripcion</th>                                                
                                             <th class="text-center">Cantidad</th>    
-                                            <th class="text-center">Update</th>
-                                            <th class="text-center">Delete</th>
+                                            <th class="text-center">Actualizar</th>
+                                            <th class="text-center">Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody>

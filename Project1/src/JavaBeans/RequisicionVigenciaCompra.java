@@ -14,6 +14,8 @@ public class RequisicionVigenciaCompra {
     int periodoGracia;
     int entregaInmediata;
     
+    String perGra;
+    
 
     public RequisicionVigenciaCompra(String codigoDepartamento, String codArticulo, String codProveedor, int cantArt,
                                      float precioTotal) {
@@ -46,6 +48,24 @@ public class RequisicionVigenciaCompra {
         this.precio = precio;
         this.periodoGracia = periodoGracia;
         this.entregaInmediata = entregaInmediata;
+    }
+
+
+    public RequisicionVigenciaCompra(String codigoDepartamento, String codArticulo, String codProveedor, int cantArt,
+                                     String nombreProv, String nombreArt, float descuento,
+                                     float precio, int periodoGracia, int entregaInmediata, String perGra, float precioTotal) {
+        this.codigoDepartamento = codigoDepartamento;
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.cantArt = cantArt;
+        this.nombreProv = nombreProv;
+        this.nombreArt = nombreArt;
+        this.descuento = descuento;
+        this.precio = precio;
+        this.periodoGracia = periodoGracia;
+        this.entregaInmediata = entregaInmediata;
+        this.perGra = perGra;
+        this.precioTotal = precioTotal;
     }
 
     public RequisicionVigenciaCompra(String codigoDepartamento) {
@@ -139,6 +159,14 @@ public class RequisicionVigenciaCompra {
 
     public int getEntregaInmediata() {
         return entregaInmediata;
+    }
+
+    public void setPerGra(String perGra) {
+        this.perGra = perGra;
+    }
+
+    public String getPerGra() {
+        return perGra;
     }
 
 }

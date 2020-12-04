@@ -9,6 +9,8 @@ public class SolicitudArt {
     private Date fechaSol;
     
     private String nombreArticulo;
+    
+    private int idSol;
 
 
     public SolicitudArt(String carnetEmpleado, String codArticulo, int cantArticulo, Date fechaSol) {
@@ -18,12 +20,21 @@ public class SolicitudArt {
         this.fechaSol = fechaSol;
     }
     
-    public SolicitudArt(String carnetEmpleado, String codArticulo, int cantArticulo, Date fechaSol, String nombreArticulo) {
+    public SolicitudArt(String carnetEmpleado, String codArticulo, int cantArticulo, Date fechaSol, String nombreArticulo, int idSol) {
         this.carnetEmpleado = carnetEmpleado;
         this.codArticulo = codArticulo;
         this.cantArticulo = cantArticulo;
         this.fechaSol = fechaSol;
         this.nombreArticulo = nombreArticulo;
+        this.idSol = idSol;
+    }
+    
+    public SolicitudArt(String carnetEmpleado, String codArticulo, int cantArticulo, Date fechaSol, int idSol) {
+        this.carnetEmpleado = carnetEmpleado;
+        this.codArticulo = codArticulo;
+        this.cantArticulo = cantArticulo;
+        this.fechaSol = fechaSol;
+        this.idSol = idSol;
     }
 
     public void setNombreArticulo(String nombreArticulo) {
@@ -65,7 +76,15 @@ public class SolicitudArt {
     public Date getFechaSol() {
         return fechaSol;
     }
-    
+
+    public void setIdSol(int idSol) {
+        this.idSol = idSol;
+    }
+
+    public int getIdSol() {
+        return idSol;
+    }
+
     public String toString(){
         return "Solicitudes(carnetEmpleado=" + carnetEmpleado + ", codArticulo=" + codArticulo + ", cantArticulo=" + cantArticulo + ", fechaSol=" + fechaSol + ")" ;
     }

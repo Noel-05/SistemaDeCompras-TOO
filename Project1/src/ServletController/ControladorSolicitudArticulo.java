@@ -42,6 +42,7 @@ public class ControladorSolicitudArticulo extends HttpServlet {
         }
     }
 
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Leer el parametro enviado
         String inst = request.getParameter("instruccion");
@@ -60,10 +61,36 @@ public class ControladorSolicitudArticulo extends HttpServlet {
         
         case "consultarEmpeado":
             consultarSolicitudesEmpleado(request, response);
+            break;
+            
+        case "recuperar":
+            try {
+                cargarSolicitud(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            break;
+        
+        case "actualizarBD":
+            try {
+                actualizarSolicitud(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            break;
+        
+        case "eliminar":
+            try {
+                eliminarSolicitud(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            break;
             
         }
             
     }
+    
 
     private void obtenerArticulos(HttpServletRequest request, HttpServletResponse response) {
         //Obtener la lista de Articulos desde el modelo
@@ -95,6 +122,7 @@ public class ControladorSolicitudArticulo extends HttpServlet {
         }
     }
     
+    
     private void insertarSolicitud(HttpServletRequest request, HttpServletResponse response){
         
         String carnet = request.getParameter("carnet");
@@ -120,6 +148,7 @@ public class ControladorSolicitudArticulo extends HttpServlet {
         obtenerArticulos(request, response);
         
     }
+
 
     private void consultarSolicitudesEmpleado(HttpServletRequest request, HttpServletResponse response) {
         String carnet = request.getParameter("empleado");
@@ -152,5 +181,63 @@ public class ControladorSolicitudArticulo extends HttpServlet {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+
+    private void cargarSolicitud(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        
+        // Leer el IDSOL que se envia desde el jsp
+        int idSol = Integer.parseInt(request.getParameter("idSol"));
+        
+        // Enviar el IDSOL al modelo
+        SolicitudArt solicitud = modeloSolicitudArticulo.obtenerSolicitud(idSol);
+        
+        // Enviar producto al JSp de Actualizar
+        request.setAttribute("SOLICITUDACTUALIZAR", solicitud);
+        
+        RequestDispatcher miDispatcher = request.getRequestDispatcher("/actualizarSolicitudArticulo.jsp");
+        
+        miDispatcher.forward(request, response);
+    }
+    
+
+    private void actualizarSolicitud(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        
+        // Leer los datos que vienen del formulario actualizar
+        String carnet = request.getParameter("carnet");
+        String articulo = request.getParameter("articulo");
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        int idSolicitud = Integer.parseInt(request.getParameter("idSol"));
+        
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = null;
+        
+        try {
+            fecha = formatoFecha.parse(request.getParameter("fecha"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        // Crear un objeto de tipo Solicitud con la informacion recuperada
+        SolicitudArt solicitudActualizada = new SolicitudArt(carnet, articulo, cantidad, fecha, idSolicitud);
+        
+        // Actualizar la BD con la informacion del objeto Solciitud
+        modeloSolicitudArticulo.actualizarSolicitud(solicitudActualizada);
+        
+        //Listar las Solicitudes
+        obtenerArticulos(request, response);
+    }
+    
+
+    private void eliminarSolicitud(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        
+        // Capturar el idSol
+        int idSoli = Integer.parseInt(request.getParameter("idSol"));
+        
+        //Borrar de la BD
+        modeloSolicitudArticulo.borrarSolicitud(idSoli);
+        
+        // Volver a la pantalla de consulta
+        obtenerArticulos(request, response);
     }
 }

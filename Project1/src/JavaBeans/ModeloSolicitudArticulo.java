@@ -66,7 +66,7 @@ public class ModeloSolicitudArticulo {
         miConexion = origenDatos.getConexion();
         
         //Crear sentencia SQL y Statement
-        String miSql = "SELECT * FROM SOLICITUDART ORDER BY FECSOL";
+        String miSql = "SELECT * FROM SOLICITUDART ORDER BY FECSOL DESC";
         miStatement = miConexion.createStatement();
         
         //Ejecutar SQL
@@ -77,6 +77,8 @@ public class ModeloSolicitudArticulo {
             String codigoArticulo = miResultset.getString("CODARTICULO");
             int cantidadArticulo = miResultset.getInt("CANTARTSOL");
             Date fechaSol = miResultset.getDate("FECSOL");
+
+            int idSol = miResultset.getInt("IDSOL");
             
             
             //Recupero el nombre del articulo segun el codigo de articulo que se esta recuperando
@@ -89,7 +91,7 @@ public class ModeloSolicitudArticulo {
             }
             
             
-            SolicitudArt temporal = new SolicitudArt(carnetEmpleado, codigoArticulo, cantidadArticulo, fechaSol, nombreArticulo);
+            SolicitudArt temporal = new SolicitudArt(carnetEmpleado, codigoArticulo, cantidadArticulo, fechaSol, nombreArticulo, idSol);
             
             solicitudes.add(temporal);
         }
@@ -196,6 +198,7 @@ public class ModeloSolicitudArticulo {
                 String codigoArticulo = miResultset.getString("CODARTICULO");
                 int cantidadArticulo = miResultset.getInt("CANTARTSOL");
                 Date fechaSol = miResultset.getDate("FECSOL");
+                int idSol = miResultset.getInt("IDSOL");
                 
                 //Recupero el nombre del articulo segun el codigo de articulo que se esta recuperando
                 String buscar = "SELECT * FROM ARTICULO WHERE CODARTICULO = '"+codigoArticulo+"'";
@@ -206,7 +209,7 @@ public class ModeloSolicitudArticulo {
                     nombreArticulo = miResultsetBusc.getString("NOMBREART");
                 }
                 
-                SolicitudArt temporal = new SolicitudArt(carnetEmpleado, codigoArticulo, cantidadArticulo, fechaSol, nombreArticulo);
+                SolicitudArt temporal = new SolicitudArt(carnetEmpleado, codigoArticulo, cantidadArticulo, fechaSol, nombreArticulo, idSol);
                 
                 solicitudesEmpleado.add(temporal);
             }
@@ -217,5 +220,115 @@ public class ModeloSolicitudArticulo {
         
         return  solicitudesEmpleado;
     }
-    
+
+
+    public SolicitudArt obtenerSolicitud(int idSol) {
+        SolicitudArt temporal =  null;
+        
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        ResultSet miResultset = null;
+        
+        Statement miStatementBusc = null;
+        ResultSet miResultsetBusc = null;
+        
+        int idSolicitud = idSol;
+        
+        try{
+            
+            // Establecer la conexion
+            miConexion = origenDatos.getConexion();
+            
+            // Crear y ejecutar la consulta
+            String miSql = "SELECT * FROM SOLICITUDART WHERE IDSOL = ? ";
+            
+            miStatement = miConexion.prepareStatement(miSql);
+            
+            miStatement.setInt(1, idSolicitud);
+            
+            miResultset = miStatement.executeQuery();
+            
+            // Recuperar los datos   
+            if(miResultset.next()){
+                
+                String carnetEmpleado = miResultset.getString("CARNETEMPLEADO");
+                String codigoArticulo = miResultset.getString("CODARTICULO");
+                int cantidadArticulo = miResultset.getInt("CANTARTSOL");
+                Date fechaSol = miResultset.getDate("FECSOL");
+                int idSolici = miResultset.getInt("IDSOL");
+                
+                
+                //Recupero el nombre del articulo segun el codigo de articulo que se esta recuperando
+                String buscar = "SELECT * FROM ARTICULO WHERE CODARTICULO = '"+codigoArticulo+"'";
+                miStatementBusc = miConexion.createStatement();
+                miResultsetBusc = miStatementBusc.executeQuery(buscar);
+                String nombreArticulo = null;
+                while(miResultsetBusc.next()){
+                    nombreArticulo = miResultsetBusc.getString("NOMBREART");
+                }
+                
+                temporal = new SolicitudArt(carnetEmpleado, codigoArticulo, cantidadArticulo, fechaSol, nombreArticulo, idSolici);
+                
+                //temporal = new SolicitudArt(carnetEmpleado, codigoArticulo, cantidadArticulo, fechaSol, idSolici);
+                
+            }else{
+                throw new Exception("No encontramos la solicitud codigo = "+idSolicitud);
+            }
+            
+        }catch(Exception e){
+            
+            e.printStackTrace();
+            
+        }
+        
+        return temporal;
+        
+    }
+
+    public void actualizarSolicitud(SolicitudArt solicitudActualizada) throws Exception{
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        //Establecer la conexion
+        miConexion = origenDatos.getConexion();
+        
+        //Crear setencia sql
+        String miSql = "UPDATE SOLICITUDART SET CARNETEMPLEADO = ?, CODARTICULO = ?, CANTARTSOL = ?, FECSOL = ? WHERE IDSOL = ?";
+        
+        miStatement = miConexion.prepareStatement(miSql);
+        
+        miStatement.setString(1, solicitudActualizada.getCarnetEmpleado());
+        
+        miStatement.setString(2, solicitudActualizada.getCodArticulo());
+        
+        miStatement.setInt(3, solicitudActualizada.getCantArticulo());
+        
+        java.util.Date utilDate = solicitudActualizada.getFechaSol();
+        java.sql.Date fechaConvertida = new java.sql.Date(utilDate.getTime());
+        miStatement.setDate(4, fechaConvertida);
+        
+        miStatement.setInt(5, solicitudActualizada.getIdSol());   
+        
+        // Ejecutar la instruccion sql
+        miStatement.execute();
+    }
+
+
+    public void borrarSolicitud(int idSoli)throws Exception{
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        //Establecer la conexion
+        miConexion = origenDatos.getConexion();
+        
+        //Crear sentencia sql
+        String miSql = "DELETE FROM SOLICITUDART WHERE IDSOL = ?";
+        
+        miStatement = miConexion.prepareStatement(miSql);
+        
+        miStatement.setInt(1, idSoli);   
+        
+        // Ejecutar la instruccion sql
+        miStatement.execute();
+    }
 }
