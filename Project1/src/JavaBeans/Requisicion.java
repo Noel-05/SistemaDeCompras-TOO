@@ -13,6 +13,7 @@ public class Requisicion {
     
     private String nombreArticulo;
     private String codigoDepartamento;
+    private String unidadMedida;
     private String nombreDepartamento;
 
 
@@ -42,13 +43,35 @@ public class Requisicion {
         this.codigoDepartamento = codigoDepartamento;
         this.nombreDepartamento = nombreDepartamento;
     }
-
+    //Contructor nombre de articulo, departamento y unidad de medida
+    public Requisicion(Date fechaPedidoReq, Date fechaEntregaReq, int autorizado, int entregado, int cantArt,
+                       String codArticulo, String CarnetEmpleado, String nombreArticulo, String unidadMedida, 
+                       String codigoDepartamento, String nombreDepartamento) {
+        this.fechaPedidoReq = fechaPedidoReq;
+        this.fechaEntregaReq = fechaEntregaReq;
+        this.autorizado = autorizado;
+        this.entregado = entregado;
+        this.cantArt = cantArt;
+        this.codArticulo = codArticulo;
+        this.CarnetEmpleado = CarnetEmpleado;
+        this.nombreArticulo = nombreArticulo;
+        this.unidadMedida = unidadMedida;
+        this.codigoDepartamento = codigoDepartamento;
+        this.nombreDepartamento = nombreDepartamento;
+    }
 
     public Requisicion(Date fechaPedidoReq, String codigoDepartamento) {
         this.fechaPedidoReq = fechaPedidoReq;
         this.codigoDepartamento = codigoDepartamento;
     }
 
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
+    }
+
+    public String getUnidadMedida() {
+        return unidadMedida;
+    }
 
     public void setCodigoDepartamento(String codigoDepartamento) {
         this.codigoDepartamento = codigoDepartamento;

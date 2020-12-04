@@ -5,7 +5,10 @@ public class Departamento {
     private String nombreDepartamento;
     private String descripcionDepartamento;
 
-
+    public Departamento(String codigoDepartamento) {
+        this.codigoDepartamento = codigoDepartamento;
+    }
+    
     public Departamento(String codigoDepartamento, String nombreDepartamento, String descripcionDepartamento) {
         this.codigoDepartamento = codigoDepartamento;
         this.nombreDepartamento = nombreDepartamento;

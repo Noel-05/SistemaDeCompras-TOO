@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=windows-1252"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html lang="es">
 <head>
     <title>Requisiciones Art&iacute;los</title>
@@ -59,7 +61,7 @@
                     </a>
                     <ul class="list-unstyled full-box">
                         <li>
-                            <a href="requerirCompra.jsp"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
+                            <a href="controladorrequisicion"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
                         </li>
                         <li>
                             <a href="autorizarRequisicion.jsp"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
@@ -239,63 +241,57 @@
 
                         <div class="tab-pane fade" id="list">
                             <div class="table-responsive">
+
+                            <form method="get" action="controladorrequisicion" >
+                                <input type="hidden" name="instruccion" value="consultarDepto">
+
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <label class="control-label"><strong>Departamento</strong></label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="departamento" required="required">
                                                 <option>Seleccione el Departamento a Consultar...</option>
-                                                <option>Departamento de Ventas</option>
-                                                <option>Departamento de Produccion</option>
+
+                                                <c:forEach var="dep" items="${LISTADEPARTAMENTOS}">
+                                                    <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
+                                                </c:forEach>
+                                                
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <p class="text-center">
-                                    <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
+                                    <button href="#list" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
                                 </p>
-                                
+                            </form>
+                               
                                 </br></br>
                                 <table class="table table-hover text-center">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Departamento</th>    
-                                            <th class="text-center">C&oacute;digo Art&iacute;culo</th>
-                                            <th class="text-center">Art&iacute;culo</th>
-                                            <th class="text-center">Descripci&oacute;n</th>
-                                            <th class="text-center">Cantidad</th>
+                                            <th class="text-center">Departamento</th>
+                                            <th class="text-center">Codigo Articulo</th>                                            
+                                            <th class="text-center">Articulo</th>    
+                                            <th class="text-center">Descripcion</th>                                                
+                                            <th class="text-center">Cantidad</th>    
                                             <th class="text-center">Update</th>
                                             <th class="text-center">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    
+                                        <c:forEach var="req" items="${LISTAREQUISICION}">
                                         <tr>
-                                            <td>Finanzas</td>
-                                            <td>SAC0001</td>
-                                            <td>Sacapunta Facela</td>
-                                            <td>Caja de Sacapuntas Facela</td>
-                                            <td>5</td>
+                                            <td>${req.nombreDepartamento}</td>                                   
+                                            <td>${req.codArticulo}</td>
+                                            <td>${req.nombreArticulo}</td>
+                                            <td>${req.unidadMedida}</td>                                            
+                                            <td>${req.cantArt}</td>                                            
                                             <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
                                             <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
                                         </tr>
-                                        <tr>
-                                            <td>Finanzas</td>
-                                            <td>BOR0001</td>
-                                            <td>Borrador Scribe</td>
-                                            <td>Borradores en Unidades</td>
-                                            <td>15</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finanzas</td>
-                                            <td>RESP0001</td>
-                                            <td>Resma de Papel</td>
-                                            <td>Resma de Papel Bond tamaño Carta</td>
-                                            <td>1</td>
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
+                                        </c:forEach>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -309,17 +305,17 @@
 <!-- *********************************************************************************************************************************************************** -->
             
         </section>
-		
-	<!--====== Scripts -->
-	<script src="./static/js/jquery-3.1.1.min.js"></script>
-	<script src="./static/js/sweetalert2.min.js"></script>
-	<script src="./static/js/bootstrap.min.js"></script>
-	<script src="./static/js/material.min.js"></script>
-	<script src="./static/js/ripples.min.js"></script>
-	<script src="./static/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="./static/js/main.js"></script>
-	<script>
-		$.material.init();
-	</script>
+        
+    <!--====== Scripts -->
+    <script src="./static/js/jquery-3.1.1.min.js"></script>
+    <script src="./static/js/sweetalert2.min.js"></script>
+    <script src="./static/js/bootstrap.min.js"></script>
+    <script src="./static/js/material.min.js"></script>
+    <script src="./static/js/ripples.min.js"></script>
+    <script src="./static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./static/js/main.js"></script>
+    <script>
+        $.material.init();
+    </script>
 </body>
 </html>
