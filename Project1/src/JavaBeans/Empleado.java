@@ -13,7 +13,6 @@ public class Empleado {
     public Empleado(String carnetEmpleado) {
         this.carnetEmpleado = carnetEmpleado;
     }
-    
 
     public Empleado(String carnetEmpleado, String codigoPuesto, String nombreEmpleado, String apellidoEmpleado,
                     String genero, String depto, String municipio, String estadoCivil) {

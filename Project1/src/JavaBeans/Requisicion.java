@@ -3,6 +3,7 @@ package JavaBeans;
 import java.util.Date;
 
 public class Requisicion {
+    private int numReq;
     private Date fechaPedidoReq;
     private Date fechaEntregaReq;
     private int autorizado;
@@ -16,6 +17,9 @@ public class Requisicion {
     private String unidadMedida;
     private String nombreDepartamento;
 
+    public Requisicion(){
+        
+    }
 
     public Requisicion(Date fechaPedidoReq, Date fechaEntregaReq, int autorizado, int entregado, int cantArt,
                        String codArticulo, String CarnetEmpleado) {
@@ -27,7 +31,6 @@ public class Requisicion {
         this.codArticulo = codArticulo;
         this.CarnetEmpleado = CarnetEmpleado;
     }
-
 
     public Requisicion(Date fechaPedidoReq, Date fechaEntregaReq, int autorizado, int entregado, int cantArt,
                        String codArticulo, String CarnetEmpleado, String nombreArticulo, String codigoDepartamento,
@@ -63,6 +66,34 @@ public class Requisicion {
     public Requisicion(Date fechaPedidoReq, String codigoDepartamento) {
         this.fechaPedidoReq = fechaPedidoReq;
         this.codigoDepartamento = codigoDepartamento;
+    }
+
+    public Requisicion(String CarnetEmpleado, Date fechaPedidoReq) {
+        this.fechaPedidoReq = fechaPedidoReq;
+        this.CarnetEmpleado = CarnetEmpleado;
+    }
+
+    public Requisicion(int numReq) {
+        this.numReq = numReq;
+    }
+
+//Constructor para crear la Requisicion sin autorizacion y entregado
+    public Requisicion(int numReq, Date fechaPedidoReq, Date fechaEntregaReq, int cantArt, String codArticulo,
+                       String CarnetEmpleado) {
+        this.numReq = numReq;
+        this.fechaPedidoReq = fechaPedidoReq;
+        this.fechaEntregaReq = fechaEntregaReq;
+        this.cantArt = cantArt;
+        this.codArticulo = codArticulo;
+        this.CarnetEmpleado = CarnetEmpleado;
+    }
+
+    public void setNumReq(int numReq) {
+        this.numReq = numReq;
+    }
+
+    public int getNumReq() {
+        return numReq;
     }
 
     public void setUnidadMedida(String unidadMedida) {

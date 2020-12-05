@@ -132,15 +132,21 @@
                                         
                                         <div class="row">
                                             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                                <form action="">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Carnet</label>
-                                                        <input class="form-control" type="text">
+                                                
+                                                <form method="get" action="controladorrequisicion">
+
+                                                    <input type="hidden" name="instruccion" value="filtrarSol">
+
+                                                    <div class="form-group">
+                                                        <label class="control-label">Carnet Jefe de Departamento</label>
+                                                        <input class="form-control" name="empleado" type="text" required="required" >
                                                     </div>
+                                                    
                                                     <div class="form-group">
                                                         <label class="control-label">Fecha de Filtro</label>
-                                                        <input class="form-control" type="date">
+                                                        <input class="form-control" name="fecha" type="date" required="required">
                                                     </div>
+                                                    
                                                     <p class="text-center">
                                                         <button href="#!" class="btn btn-info btn-raised btn-lg">Comenzar</button>
                                                     </p>
@@ -150,21 +156,57 @@
 
                                         <div class="row">
                                             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                                <form action="">
+                                                <form method="get" action="controladorrequisicion">
+
+                                                    <input type="hidden" name="instruccion" value="insertarBBDD">                
                                                     <div class="form-group">
                                                         <div class="form-group label-floating">
-                                                            <label class="control-label">Departamento</label>
-                                                            <input class="form-control control-label" type="text" value="Departamento de Ventas" disabled>
+                                                            <label class="control-label">Nombre del Departamento al que pertenece</label>
+                                               
+                                                            <select class="form-control" name="departamento" required="required" disabled>
+                                                                <c:forEach var="dep" items="${LISTADEPARTAMENTOS}">
+                                                                    <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
+                                                                </c:forEach>
+                                                                
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                    
-                                                    </br></br>
+
+                                                    <div class="form-group">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Carnet del Jefe de Departamento</label>
+                                               
+                                                            <select class="form-control" name="carnet" required="required">
+                                                                <c:forEach var="emp" items="${LISTAEMPLEADOS}">
+                                                                    <option value="${emp.carnetEmpleado}">${emp.carnetEmpleado}</option>
+                                                                </c:forEach>
+                                                                
+                                                            </select>
+                                                        </div>
+                                                    </div>  
+
+                                                    <div class="form-group">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Numero de Requisicion</label>
+                                               
+                                                            <select class="form-control" name="numero" required="required">
+                                                                <c:forEach var="num" items="${LISTAREQUISICIONES}">
+                                                                    <option value="${num.numReq}">${num.numReq}</option>
+                                                                </c:forEach>
+                                                                
+                                                            </select>
+                                                        </div>
+                                                    </div> 
+
+                                                    </br>
+                                                    <label class="control-label">Listado de Solicitudes de Articulos</label>
 
                                                     <table class="table table-hover text-center">
+
                                                         <thead>
                                                             <tr>
                                                                 <th class="text-center">Carnet</th>
-                                                                <th class="text-center">Nombre</th>
+                                                                <th class="text-center">Empleado</th>
                                                                 <th class="text-center">C&oacute;digo Art&iacute;culo</th>
                                                                 <th class="text-center">Art&iacute;culo</th>
                                                                 <th class="text-center">Cantidad</th>
@@ -172,59 +214,46 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            <c:forEach var="sol" items="${LISTASOLICITUDESART}">
                                                             <tr>
-                                                                <td>PR17017</td>
-                                                                <td>Roberto Carlos Paz Ramirez</td>
-                                                                <td>SAC0001</td>
-                                                                <td>Sacapunta Facela</td>
-                                                                <td>5</td>
-                                                                <td>10/12/2020</td>
+                                                                <td>${sol.carnetEmpleado}</td>
+                                                                <td>${sol.nombreEmpleado}</td>
+                                                                <td>${sol.codArticulo}</td>
+                                                                <td>${sol.nombreArticulo}</td>
+                                                                <td>${sol.cantArticulo}</td>
+                                                                <td>${sol.fechaSol}</td>
                                                             </tr>
-                                                            <tr>
-                                                                <td>PR17017</td>
-                                                                <td>Roberto Carlos Paz Ramirez</td>
-                                                                <td>BOR0001</td>
-                                                                <td>Borrador Scribe</td>
-                                                                <td>15</td>
-                                                                <td>10/12/2020</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>PR17017</td>
-                                                                <td>Roberto Carlos Paz Ramirez</td>
-                                                                <td>REP0001</td>
-                                                                <td>Resma de Papel</td>
-                                                                <td>1</td>
-                                                                <td>10/12/2020</td>
-                                                            </tr>
+                                                            </c:forEach>
                                                         </tbody>
                                                     </table>
 
-                                                </br>
-
                                                     <div class="form-group">
                                                         <label class="control-label">Fecha de Pedido</label>
-                                                        <input class="form-control" type="date">
+                                                        <input class="form-control" type="date" name="fechaPedido">
                                                     </div>
+
                                                     <div class="form-group">
                                                         <label class="control-label">Fecha de Entrega</label>
-                                                        <input class="form-control" type="date">
+                                                        <input class="form-control" type="date" name="fechaEntrega">
                                                     </div>
+
                                                     <div class="form-group">
                                                         <label class="control-label">Articulo</label>
-                                                        <select class="form-control">
-                                                            <option>Seleccione el Articulo a Solicitar...</option>
-                                                            <option>Sacapunta Facela</option>
-                                                            <option>Borrador Scribe</option>
+                                                        <select class="form-control" name="articulo" required="required">
+                                                            <option>Seleccione el Articulo para la Requisicion...</option>
+                                                            <c:forEach var="art" items="${LISTAARTICULOS}">
+                                                                <option value="${art.codArticulo}">${art.nombreArticulo}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
 
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Cantidad</label>
-                                                        <input class="form-control" type="number">
+                                                        <input class="form-control" type="number" name="cantidad">
                                                     </div>
 
                                                     <p class="text-center">
-                                                        <button href="#!" class="btn btn-info btn-raised btn-lg">Registrar</button>
+                                                        <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>Registrar</button>
                                                     </p>
                                                 </form>
                                             </div>
@@ -274,8 +303,8 @@
                                             <th class="text-center">Articulo</th>    
                                             <th class="text-center">Descripcion</th>                                                
                                             <th class="text-center">Cantidad</th>    
-                                            <th class="text-center">Actualizar</th>
-                                            <th class="text-center">Eliminar</th>
+                                            <th class="text-center">Update</th>
+                                            <th class="text-center">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>

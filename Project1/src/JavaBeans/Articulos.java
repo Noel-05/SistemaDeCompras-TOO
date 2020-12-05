@@ -5,12 +5,26 @@ public class Articulos {
     private String nombreArticulo;
     private String unidadMedida;
 
+    private String codCarnet;
+
     public Articulos(String codArticulo, String nombreArticulo, String unidadMedida) {
         this.codArticulo = codArticulo;
         this.nombreArticulo = nombreArticulo;
         this.unidadMedida = unidadMedida;
     }
 
+    public Articulos(String codCarnet) {
+        this.codCarnet = codCarnet;
+    }
+
+    public void setCodCarnet(String codCarnet) {
+        this.codCarnet = codCarnet;
+    }
+
+    public String getCodCarnet() {
+        return codCarnet;
+    }
+    
     public void setCodArticulo(String codArticulo) {
         this.codArticulo = codArticulo;
     }

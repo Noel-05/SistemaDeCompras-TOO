@@ -1,9 +1,14 @@
 package JavaBeans;
 
+import java.util.Date;
+
 public class Departamento {
     private String codigoDepartamento;
     private String nombreDepartamento;
     private String descripcionDepartamento;
+
+    private String carnetEmpleado;
+    private Date fecha;
 
     public Departamento(String codigoDepartamento) {
         this.codigoDepartamento = codigoDepartamento;
@@ -15,6 +20,26 @@ public class Departamento {
         this.descripcionDepartamento = descripcionDepartamento;
     }
 
+    public Departamento(String carnetEmpleado, Date fecha) {
+        this.carnetEmpleado = carnetEmpleado;
+        this.fecha = fecha;
+    }
+
+    public void setCarnetEmpleado(String carnetEmpleado) {
+        this.carnetEmpleado = carnetEmpleado;
+    }
+
+    public String getCarnetEmpleado() {
+        return carnetEmpleado;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
 
     public void setCodigoDepartamento(String codigoDepartamento) {
         this.codigoDepartamento = codigoDepartamento;
