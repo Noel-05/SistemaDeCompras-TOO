@@ -77,7 +77,7 @@ public List<Requisicion> getRequisicion() throws Exception{
                 nombreDepartamento = miResultsetBuscDepto.getString("NOMBREDEPARTAMENTO");
             }
        
-            Requisicion temporal = new Requisicion(fechaPedido, fechaEntrega, autorizado, entregado, cantidad, codArticulo, carnetEmpleado, nombreArticulo, unidadMedida, codDepto ,nombreDepartamento);
+            Requisicion temporal = new Requisicion(numReq, fechaPedido, fechaEntrega, autorizado, entregado, cantidad, codArticulo, carnetEmpleado, nombreArticulo, unidadMedida, codDepto ,nombreDepartamento);
             requisicion.add(temporal);
         }
         
@@ -174,7 +174,7 @@ public List<Departamento> getDepartamentos()  throws Exception{
                     nombreDepartamento = miResultsetBuscDepto.getString("NOMBREDEPARTAMENTO");
                 }
                 
-                Requisicion temporal = new Requisicion(fechaPedido, fechaEntrega, autorizado, entregado, cantidad, codArticulo, carnetEmpleado, nombreArticulo, unidadMedida, codDepto ,nombreDepartamento);
+                Requisicion temporal = new Requisicion(numReq, fechaPedido, fechaEntrega, autorizado, entregado, cantidad, codArticulo, carnetEmpleado, nombreArticulo, unidadMedida, codDepto ,nombreDepartamento);
                 requisicionesDepto.add(temporal);
 
             }
@@ -459,6 +459,7 @@ public List<Departamento> getDepartamentos()  throws Exception{
             //Crear sentencia sql que inserte la requisicion a la base
             // String misql = "INSERT INTO SOLICITUDART(CARNETEMPLEADO, CODARTICULO, CANTARTSOL, FECSOL) VALUES (?, ?, ?, ?)";
             String misql = "insert into requisicion (numreq, fecpedidoreq, fecentregareq, cantart, codarticulo, carnetempleado) VALUES (?, ?, ?, ?, ?, ?)";
+            
             miStatement = miConexion.prepareStatement(misql);
             
             //Establecer los parametros para insertar la requisicion
@@ -487,5 +488,100 @@ public List<Departamento> getDepartamentos()  throws Exception{
             e.printStackTrace();
         }    
 
+    }
+
+    public Requisicion obtenerRequisicion(int numReq) {
+        Requisicion temporal =  null;
+        
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        ResultSet miResultset = null;
+        
+        Statement miStatementBusc = null;
+        ResultSet miResultsetBusc = null;
+        
+        int numeroRequisicion = numReq;
+        
+        try{
+            
+            // Establecer la conexion
+            miConexion = origenDatos.getConexion();
+            
+            // Crear y ejecutar la consulta
+            String miSql = "SELECT * FROM REQUISICION WHERE NUMREQ = ? ";
+            
+            miStatement = miConexion.prepareStatement(miSql);
+            
+            miStatement.setInt(1, numeroRequisicion);
+            
+            miResultset = miStatement.executeQuery();
+            
+            // Recuperar los datos   
+            if(miResultset.next()){
+
+                int numRequi = miResultset.getInt("NUMREQ");
+                Date fechaPedido = miResultset.getDate("FECPEDIDOREQ");
+                Date fechaEntrega = miResultset.getDate("FECENTREGAREQ");
+                int autorizado = miResultset.getInt("AUTORIZADO");
+                int entregado = miResultset.getInt("ENTREGADO");
+                int cantidad = miResultset.getInt("CANTART");
+                String codArticulo = miResultset.getString("CODARTICULO");
+                String carnetEmpleado = miResultset.getString("CARNETEMPLEADO");                
+                
+                temporal = new Requisicion(numRequi, fechaPedido, fechaEntrega, cantidad, codArticulo, carnetEmpleado);
+                
+                //temporal = new SolicitudArt(carnetEmpleado, codigoArticulo, cantidadArticulo, fechaSol, idSolici);
+                
+            }else{
+                throw new Exception("No encontramos la requisicion que solicita = "+numeroRequisicion);
+            }
+            
+        }catch(Exception e){
+            
+            e.printStackTrace();
+            
+        }
+        
+        return temporal;
+
+    }
+
+    public void actualizarRequisicion(Requisicion nuevaRequisicion) throws Exception{
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        //Obtener la conexion
+            
+        miConexion = origenDatos.getConexion();
+   
+        //Crear sentencia sql que inserte la requisicion a la base
+        //String miSql = "UPDATE SOLICITUDART SET CARNETEMPLEADO = ?, CODARTICULO = ?, CANTARTSOL = ?, FECSOL = ? WHERE IDSOL = ?";
+
+        String misql = "UPDATE requisicion SET fecpedidoreq = ?, fecentregareq = ?, cantart = ?, codarticulo = ?, carnetempleado = ? WHERE numreq = ? ";
+        
+        miStatement = miConexion.prepareStatement(misql);
+        
+        //Establecer los parametros para insertar la requisicion
+
+        java.util.Date utilDate1 = nuevaRequisicion.getFechaPedidoReq();
+        java.sql.Date fechaConvertidaPed = new java.sql.Date(utilDate1.getTime());
+        miStatement.setDate(1, fechaConvertidaPed);
+
+        java.util.Date utilDate = nuevaRequisicion.getFechaEntregaReq();
+        java.sql.Date fechaConvertidaEn = new java.sql.Date(utilDate.getTime());
+        miStatement.setDate(2, fechaConvertidaEn);
+
+        miStatement.setInt(3, nuevaRequisicion.getCantArt());
+
+        miStatement.setString(4, nuevaRequisicion.getCodArticulo());            
+        
+        miStatement.setString(5, nuevaRequisicion.getCarnetEmpleado()); 
+
+        miStatement.setInt(6,nuevaRequisicion.getNumReq());                   
+
+        //Ejecutar la instruccion sql
+        miStatement.execute();
+        
+      
     }
 }

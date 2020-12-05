@@ -47,6 +47,23 @@ public class Requisicion {
         this.nombreDepartamento = nombreDepartamento;
     }
     //Contructor nombre de articulo, departamento y unidad de medida
+    public Requisicion(int numReq, Date fechaPedidoReq, Date fechaEntregaReq, int autorizado, int entregado, int cantArt,
+                       String codArticulo, String CarnetEmpleado, String nombreArticulo, String unidadMedida, 
+                       String codigoDepartamento, String nombreDepartamento) {
+        this.numReq = numReq;
+        this.fechaPedidoReq = fechaPedidoReq;
+        this.fechaEntregaReq = fechaEntregaReq;
+        this.autorizado = autorizado;
+        this.entregado = entregado;
+        this.cantArt = cantArt;
+        this.codArticulo = codArticulo;
+        this.CarnetEmpleado = CarnetEmpleado;
+        this.nombreArticulo = nombreArticulo;
+        this.unidadMedida = unidadMedida;
+        this.codigoDepartamento = codigoDepartamento;
+        this.nombreDepartamento = nombreDepartamento;
+    }
+
     public Requisicion(Date fechaPedidoReq, Date fechaEntregaReq, int autorizado, int entregado, int cantArt,
                        String codArticulo, String CarnetEmpleado, String nombreArticulo, String unidadMedida, 
                        String codigoDepartamento, String nombreDepartamento) {
@@ -62,7 +79,6 @@ public class Requisicion {
         this.codigoDepartamento = codigoDepartamento;
         this.nombreDepartamento = nombreDepartamento;
     }
-
     public Requisicion(Date fechaPedidoReq, String codigoDepartamento) {
         this.fechaPedidoReq = fechaPedidoReq;
         this.codigoDepartamento = codigoDepartamento;

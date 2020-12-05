@@ -303,20 +303,27 @@
                                             <th class="text-center">Articulo</th>    
                                             <th class="text-center">Descripcion</th>                                                
                                             <th class="text-center">Cantidad</th>    
-                                            <th class="text-center">Update</th>
+                                            <th class="text-center">Actualizar</th>
                                             <th class="text-center">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     
                                         <c:forEach var="req" items="${LISTAREQUISICION}">
-                                        <tr>
-                                            <td>${req.nombreDepartamento}</td>                                   
+
+                                        <!-- Link para Actualizar Solicitud -->
+                                        <c:url var="linkActualizar" value="controladorrequisicion">
+                                            <c:param name="instruccion" value="recuperar"></c:param>
+                                            <c:param name="numReq" value="${req.numReq}"></c:param>
+                                        </c:url>
+
+                                        <tr>                                        
+                                            <td>${req.nombreDepartamento}</td>                                 
                                             <td>${req.codArticulo}</td>
                                             <td>${req.nombreArticulo}</td>
                                             <td>${req.unidadMedida}</td>                                            
                                             <td>${req.cantArt}</td>                                            
-                                            <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+                                            <td><a href="${linkActualizar}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
                                             <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
                                         </tr>
                                         </c:forEach>

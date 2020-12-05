@@ -70,7 +70,22 @@ public class ControladorRequisicion extends HttpServlet {
         case "insertarBBDD":
             insertarRequisicion(request, response);
             break;
+        
+        case "recuperar":
+            try {
+                cargarRequisicion(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            break;
 
+        case "actualizarBD":
+            try {
+                actualizarRequisicion(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            break;            
         }
 
 
@@ -218,6 +233,56 @@ public class ControladorRequisicion extends HttpServlet {
     
         //Listar las Solicitudes
         obtenerRequisicion(request, response);
+
+    }
+
+    private void cargarRequisicion(HttpServletRequest request, HttpServletResponse response) throws Exception{
+   
+        // Leer el numReq que se envia desde el jsp
+        int numReq = Integer.parseInt(request.getParameter("numReq"));
+        
+        // Enviar el numReq al modelo
+        Requisicion requisicion = modeloRequisicion.obtenerRequisicion(numReq);
+        
+        // Enviar producto al JSp de Actualizar
+        request.setAttribute("REQUISICIONACTUALIZAR", requisicion);
+        
+        RequestDispatcher miDispatcher = request.getRequestDispatcher("/actualizarRequisicion.jsp");
+        
+        miDispatcher.forward(request, response);   
+
+
+    }
+
+    private void actualizarRequisicion(HttpServletRequest request, HttpServletResponse response) {
+
+        String carnet = request.getParameter("carnet");
+        String codArticulo = request.getParameter("articulo");
+        int numReq = Integer.parseInt(request.getParameter("numero"));
+        int cantArt = Integer.parseInt(request.getParameter("cantidad"));
+        
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecPedido = null;
+        Date fecEntrega = null;
+        
+        try {
+            fecPedido = formatoFecha.parse(request.getParameter("fechaPedido"));
+            fecEntrega = formatoFecha.parse(request.getParameter("fechaEntrega"));            
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        //Crear un objeto de tipo Solicitud Articulo
+        Requisicion nuevaRequisicion = new Requisicion(numReq, fecPedido, fecEntrega, cantArt, codArticulo, carnet);
+            
+        //Enviar el objeto al Modelo y despues insertar el objeto en la BD
+        try {
+            modeloRequisicion.actualizarRequisicion(nuevaRequisicion);
+        } catch (Exception e) {
+        }
+
+        //Listar las Solicitudes
+        obtenerRequisicion(request, response);  
 
     }
 }
