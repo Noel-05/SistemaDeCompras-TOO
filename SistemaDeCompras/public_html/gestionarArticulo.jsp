@@ -133,7 +133,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
                                     
-                                        <form method="get" action="controladorsolicitudarticulo" >
+                                        <form method="get" action="controladorvigencia" >
                                             <input type="hidden" name="instruccion" value="insertarBD">
                                             
                                             <div class="form-group label-floating">
@@ -145,12 +145,15 @@
                                                 <label class="control-label">Articulo</label>
                                                 <select class="form-control" name="articulo" required="required">
                                                 
-                                                    <option>Seleccione el Articulo a Ingresar...</option>
-                                                    <option>BOR0001 - Borrador de Goma</option>
-                                                    <option>SAC0001 - Sacapunta de Metal</option>
+                                                    <option>Seleccione el Articulo a Solicitar...</option>
+                                                    
+                                                    <c:forEach var="art" items="${LISTAARTICULOS}">
+                                                        <option value="${art.codArticulo}">${art.codArticulo} - ${art.nombreArticulo}</option>
+                                                    </c:forEach>
                                                     
                                                 </select>
                                             </div>
+                
                                             
                                             
                                             <div class="form-group">
@@ -207,7 +210,7 @@
                         <div class="tab-pane fade" id="list">
                             <div class="table-responsive">
                             
-                            <form method="get" action="controladorsolicitudarticulo" >
+                            <form method="get" action="controladorvigencia" >
                                 <input type="hidden" name="instruccion" value="consultarEmpeado">
                                 
                                 <div class="row">
