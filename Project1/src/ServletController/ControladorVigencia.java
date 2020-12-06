@@ -115,8 +115,7 @@ public class ControladorVigencia extends HttpServlet {
         
         //Crear un objeto de tipo Vigencia
         
-        Vigencia nuevaVigencia = new Vigencia(proveedor,articulo,fechaDesde,fechaHasta,precio,descuento,tiempoEntrega,periodoGracia );
-        
+        Vigencia nuevaVigencia = new Vigencia(articulo, proveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEntrega, periodoGracia);        
         //Enviar el objeto al Modelo y despues insertar el objeto en la BD
         
         modeloVigencia.agregarNuevaVigencia(nuevaVigencia);

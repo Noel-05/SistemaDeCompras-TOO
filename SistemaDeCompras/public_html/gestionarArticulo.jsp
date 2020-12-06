@@ -169,7 +169,7 @@
                                             
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Precio</label>
-                                                <input class="form-control" type="number" name="precio" required="required">
+                                                <input class="form-control"  type="number" step="0.01" name="precio" required="required">
                                             </div>
                                             
                                             <div class="form-group label-floating">
