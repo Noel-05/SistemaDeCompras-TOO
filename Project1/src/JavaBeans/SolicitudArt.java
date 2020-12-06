@@ -9,9 +9,9 @@ public class SolicitudArt {
     private Date fechaSol;
     
     private String nombreArticulo;
+    private String nombreEmpleado;
     
     private int idSol;
-
 
     public SolicitudArt(String carnetEmpleado, String codArticulo, int cantArticulo, Date fechaSol) {
         this.carnetEmpleado = carnetEmpleado;
@@ -28,7 +28,15 @@ public class SolicitudArt {
         this.nombreArticulo = nombreArticulo;
         this.idSol = idSol;
     }
-    
+
+    public SolicitudArt(String carnetEmpleado, String codArticulo, int cantArticulo, Date fechaSol, String nombreArticulo) {
+        this.carnetEmpleado = carnetEmpleado;
+        this.codArticulo = codArticulo;
+        this.cantArticulo = cantArticulo;
+        this.fechaSol = fechaSol;
+        this.nombreArticulo = nombreArticulo;
+    }
+
     public SolicitudArt(String carnetEmpleado, String codArticulo, int cantArticulo, Date fechaSol, int idSol) {
         this.carnetEmpleado = carnetEmpleado;
         this.codArticulo = codArticulo;
@@ -37,6 +45,29 @@ public class SolicitudArt {
         this.idSol = idSol;
     }
 
+    public SolicitudArt(String carnetEmpleado, String codArticulo, int cantArticulo, Date fechaSol,
+                        String nombreArticulo, String nombreEmpleado) {
+        this.carnetEmpleado = carnetEmpleado;
+        this.codArticulo = codArticulo;
+        this.cantArticulo = cantArticulo;
+        this.fechaSol = fechaSol;
+        this.nombreArticulo = nombreArticulo;
+        this.nombreEmpleado = nombreEmpleado;
+    }
+
+    public SolicitudArt(String carnetEmpleado, Date fechaSol) {
+        this.carnetEmpleado = carnetEmpleado;
+        this.fechaSol = fechaSol;
+    }
+
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+    }
+
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+    
     public void setNombreArticulo(String nombreArticulo) {
         this.nombreArticulo = nombreArticulo;
     }
