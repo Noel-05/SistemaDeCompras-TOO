@@ -85,7 +85,15 @@ public class ControladorRequisicion extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            break;            
+            break; 
+
+        case "eliminar":
+            try {
+                eliminarRequisicion(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            break;           
         }
 
 
@@ -284,5 +292,16 @@ public class ControladorRequisicion extends HttpServlet {
         //Listar las Solicitudes
         obtenerRequisicion(request, response);  
 
+    }
+
+    private void eliminarRequisicion(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        // Captura el numReq
+        int numReq = Integer.parseInt(request.getParameter("numReq"));
+        
+        //Borrar de la BD
+        modeloRequisicion.eliminarRequisicion(numReq);
+        
+        // Volver a la pantalla de consulta
+        obtenerRequisicion(request, response);    
     }
 }
