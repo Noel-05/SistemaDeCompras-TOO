@@ -4,7 +4,7 @@
 
 <html lang="es">
 <head>
-    <title>Requisiciones Art&iacute;los</title>
+    <title>Requisiciones Art&iacute;culos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>

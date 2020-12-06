@@ -3,6 +3,7 @@ package JavaBeans;
 import Utils.ConexionBaseDatos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -86,5 +87,60 @@ public class ModeloVigencia {
             e.printStackTrace();
         }
         
+    }
+
+    public List<Vigencia> obtenerVigencias(Vigencia consultaVigencias) {
+        //List<RequisicionVigenciaCompra> ordenesCompraProveedor = new ArrayList<>();
+        List<Vigencia> vigencias = new ArrayList<>();
+        
+        Connection miConexion = null;
+        Statement miStatement = null;
+        ResultSet miResultset = null;
+        
+        try{
+            //Establecer la conexion
+            miConexion = origenDatos.getConexion();
+            
+            //Recupero el departamento que voy a buscar
+            //String departamentoBusq = consultaOrdenes.getCodigoDepartamento();
+            
+            //Crear sentencia SQL y Statement
+            String miSql = "select * from vigencia v inner join proveedor p on v.codigoprov = p.codigoprov inner join articulo a on v.codarticulo = a.codarticulo";
+            miStatement = miConexion.createStatement();
+            
+            //Ejecutar SQL
+            miResultset = miStatement.executeQuery(miSql);
+            
+            while(miResultset.next()){
+                
+                String codigoProv = miResultset.getString("CODIGOPROV");
+                String nombreProv = miResultset.getString("NOMEMPRESA");
+                String codArticulo = miResultset.getString("CODARTICULO");
+                String nombreArt = miResultset.getString("NOMBREART");
+                float descuento = miResultset.getFloat("DESCUENTO");
+                float precio = miResultset.getFloat("PRECIO");
+                int periodoGracia = miResultset.getInt("PERIODOGRACIA");
+                int entregaInmediata = miResultset.getInt("TIEMPOENTREGA");
+                Date fechaDesde = miResultset.getDate("FECHADESDE");
+                Date fechaHasta = miResultset.getDate("FECHAHASTA");
+                
+                String perGracia = "";
+                if(periodoGracia == 0){
+                    perGracia = "SI";
+                }else{
+                    perGracia = "NO";
+                }
+                
+                //RequisicionVigenciaCompra temporal = new RequisicionVigenciaCompra(departamentoBusq, codArticulo, codigoProv, cantidad, nombreProv, nombreArt, descuento, precio, periodoGracia, entregaInmediata, perGracia, precioTotal);
+                Vigencia temporal = new Vigencia(codArticulo, codigoProv, fechaDesde, fechaHasta, descuento, precio, entregaInmediata, periodoGracia, nombreArt, nombreProv, perGracia);
+                
+                vigencias.add(temporal);
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return vigencias;
     }
 }

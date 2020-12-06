@@ -1,8 +1,10 @@
 package ServletController;
 
 import JavaBeans.Articulos;
+import JavaBeans.Departamento;
 import JavaBeans.Empleado;
 import JavaBeans.ModeloVigencia;
+import JavaBeans.RequisicionVigenciaCompra;
 import JavaBeans.Vigencia;
 import JavaBeans.SolicitudArt;
 
@@ -39,6 +41,7 @@ public class ControladorVigencia extends HttpServlet {
         }
     }
 
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Leer el parametro enviado
         String inst = request.getParameter("instruccion");
@@ -50,13 +53,18 @@ public class ControladorVigencia extends HttpServlet {
         case "listar":
             obtenerArticulos(request, response);
             break;
+        
         case "insertarBD":
             insertarVigencia(request, response);
             break;
+        
+        case "detalle":
+            obtenerVigencias(request, response);
+            break;
         }
         
-        
     }
+    
     
     private void obtenerArticulos(HttpServletRequest request, HttpServletResponse response){
         //Obtener la lista de Articulos desde el modelo
@@ -84,6 +92,7 @@ public class ControladorVigencia extends HttpServlet {
         }
        
     }
+    
 
     private void insertarVigencia(HttpServletRequest request, HttpServletResponse response) {
         
@@ -122,6 +131,37 @@ public class ControladorVigencia extends HttpServlet {
         
         obtenerArticulos(request, response);
         
+    }
+    
+
+    private void obtenerVigencias(HttpServletRequest request, HttpServletResponse response) {
+        // String departamento = request.getParameter("departamento");
         
+        //Crear un objeto de tipo RequisicionVigenciaCompra
+        Vigencia consultaVigencias = new Vigencia();
+        
+        List<Vigencia> vigencias;
+        List<Articulos> articulos;
+        
+        try{
+            
+            vigencias = modeloVigencia.obtenerVigencias(consultaVigencias);
+            articulos = modeloVigencia.getArticulos();
+            
+            
+            //Agregar la lista de Articulos al Request
+            
+            request.setAttribute("LISTAVIGENCIAS", vigencias);
+            request.setAttribute("LISTAARTICULOS", articulos);
+            
+            //Enviar el Request al JSP
+            
+            RequestDispatcher miDispatcher = request.getRequestDispatcher("/gestionarArticulo.jsp");
+            
+            miDispatcher.forward(request, response);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -152,9 +152,6 @@ public class ModeloCotizarArticulo {
         Statement miStatement = null;
         ResultSet miResultset = null;
         
-        Statement miStatementBusc = null;
-        ResultSet miResultsetBusc = null;
-        
         try{
             //Establecer la conexion
             miConexion = origenDatos.getConexion();
