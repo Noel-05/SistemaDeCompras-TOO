@@ -28,9 +28,21 @@ public class Vigencia {
     private String codDepartamento;
     
     private float precioTotal;
-    
-    private Date fechaPedido;
 
+
+    public Vigencia(String codArticulo,String codProveedor, Date fechaDesde, Date fechaHasta, float descuento, float precio,
+                    int tiempoEspera, int periodoGracia, String nombreEmpresa,String nombreArticulo ) {
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
+        this.descuento = descuento;
+        this.precio = precio;
+        this.tiempoEspera = tiempoEspera;
+        this.periodoGracia = periodoGracia;
+        this.nombreEmpresa = nombreEmpresa;
+        this.nombreArticulo = nombreArticulo;
+    }
 
     public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
                     float precio, int tiempoEspera, int periodoGracia) {
@@ -47,7 +59,7 @@ public class Vigencia {
     public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
                     float precio, int tiempoEspera, int periodoGracia, String nombreArticulo, String unidadMedida,
                     String nombreEmpresa, String depto, String municipio, String telefono, String correo,
-                    String responsble, String perGracia, int cantidad, String codDepartamento, float precioTotal, Date fechaPedido) {
+                    String responsble, String perGracia, int cantidad, String codDepartamento, float precioTotal) {
         this.codArticulo = codArticulo;
         this.codProveedor = codProveedor;
         this.fechaDesde = fechaDesde;
@@ -68,7 +80,6 @@ public class Vigencia {
         this.cantidad = cantidad;
         this.codDepartamento = codDepartamento;
         this.precioTotal = precioTotal;
-        this.fechaPedido = fechaPedido;
     }
     
     
@@ -121,11 +132,16 @@ public class Vigencia {
     }
 
 
+    public Vigencia(String codProveedor){
+        this.codProveedor = codProveedor;
+    }
+    
+    
     public Vigencia(){
         
     }
-
-
+    
+    
     public void setCodArticulo(String codArticulo) {
         this.codArticulo = codArticulo;
     }
@@ -284,14 +300,6 @@ public class Vigencia {
 
     public float getPrecioTotal() {
         return precioTotal;
-    }
-
-    public void setFechaPedido(Date fechaPedido) {
-        this.fechaPedido = fechaPedido;
-    }
-
-    public Date getFechaPedido() {
-        return fechaPedido;
     }
 
 }

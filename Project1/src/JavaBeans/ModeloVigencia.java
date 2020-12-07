@@ -102,10 +102,10 @@ public class ModeloVigencia {
             miConexion = origenDatos.getConexion();
             
             //Recupero el departamento que voy a buscar
-            //String departamentoBusq = consultaOrdenes.getCodigoDepartamento();
+            String proveedorBusq = consultaVigencias.getCodProveedor();
             
             //Crear sentencia SQL y Statement
-            String miSql = "select * from vigencia v inner join proveedor p on v.codigoprov = p.codigoprov inner join articulo a on v.codarticulo = a.codarticulo";
+            String miSql = "select * from vigencia v inner join proveedor p on v.codigoprov = p.codigoprov inner join articulo a on v.codarticulo = a.codarticulo where v.codigoprov = '"+proveedorBusq+"'";
             miStatement = miConexion.createStatement();
             
             //Ejecutar SQL
@@ -142,5 +142,124 @@ public class ModeloVigencia {
         }
         
         return vigencias;
+    }
+
+    public Vigencia getVigencia(String codArticulo, String codProveedor) {
+        
+        Vigencia temporal =  null;
+        
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        ResultSet miResultset = null;
+        
+        
+        String cArticulo = codArticulo;
+        String proveedor = codProveedor;
+        
+        try{
+
+            //Establecer la conexión con la BD
+            
+            miConexion = origenDatos.getConexion();
+            
+            //Crear sql que busque el producto
+            
+            String miSql = "SELECT * FROM VIGENCIA V INNER JOIN PROVEEDOR P ON V.CODIGOPROV = P.CODIGOPROV INNER JOIN ARTICULO A ON V.CODARTICULO = A.CODARTICULO WHERE V.CODARTICULO = ? AND V.CODIGOPROV = ?";        
+            
+            //Crear la consultar preparada
+            
+            miStatement = miConexion.prepareStatement(miSql);
+                
+            //Ejecutar la consulta
+            miStatement.setString(1, cArticulo);
+            miStatement.setString(2, proveedor);
+            miResultset = miStatement.executeQuery();
+            
+            //Obtener datos de respuesta
+                
+            if(miResultset.next()){
+                
+                String codigoArt = miResultset.getString("CODARTICULO");
+                String codigoProv = miResultset.getString("CODIGOPROV");
+                String nombreProv = miResultset.getString("NOMEMPRESA");
+                String nombreArt = miResultset.getString("NOMBREART");
+                float descuento = miResultset.getFloat("DESCUENTO");
+                float precio = miResultset.getFloat("PRECIO");
+                int periodoGracia = miResultset.getInt("PERIODOGRACIA");
+                int entregaInmediata = miResultset.getInt("TIEMPOENTREGA");
+                Date fechaDesde = miResultset.getDate("FECHADESDE");
+                Date fechaHasta = miResultset.getDate("FECHAHASTA");
+                
+                //temporal = new Vigencia(codigoArt, codigoProv, fechaDesde, fechaHasta, descuento, precio, entregaInmediata, periodoGracia, nombreArt, nombreProv);
+                temporal = new Vigencia(codigoArt, codigoProv, fechaDesde, fechaHasta, descuento, precio, entregaInmediata, periodoGracia, nombreProv, nombreArt);
+            
+            }else{
+            
+                throw new Exception("No encontramos la vigencia codigo = "+cArticulo+", +"+proveedor);
+            
+            }
+
+        }catch(Exception e){
+            
+            e.printStackTrace();
+        }
+        
+        return temporal;
+    }
+
+    public void actualizarVigencia(Vigencia VigenciaActualizada) throws Exception {
+        
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        miConexion = origenDatos.getConexion();
+        //Crear Sentencia SQL
+        
+        String miSql = "UPDATE VIGENCIA SET FECHADESDE = ?, FECHAHASTA = ?, DESCUENTO = ?, PRECIO = ?, TIEMPOENTREGA = ?, PERIODOGRACIA = ?  WHERE CODARTICULO = ? AND CODIGOPROV = ?";
+        
+        //Crear la consulta preparada
+            
+        miStatement = miConexion.prepareStatement(miSql);
+        
+        //Establecer los parámetros
+        
+        java.util.Date utilDate = VigenciaActualizada.getFechaDesde();
+        java.sql.Date fechaConvertidaDesde = new java.sql.Date(utilDate.getTime());
+        miStatement.setDate(1, fechaConvertidaDesde);
+        
+        java.util.Date utilDate2 = VigenciaActualizada.getFechaHasta();
+        java.sql.Date fechaConvertidaHasta = new java.sql.Date(utilDate2.getTime());
+        miStatement.setDate(2, fechaConvertidaHasta);
+        
+        miStatement.setFloat(3,VigenciaActualizada.getDescuento());
+        
+        miStatement.setFloat(4,VigenciaActualizada.getPrecio());
+        
+        miStatement.setInt(5,VigenciaActualizada.getTiempoEspera());
+        
+        miStatement.setFloat(6,VigenciaActualizada.getPeriodoGracia());
+        
+        miStatement.setString(7,VigenciaActualizada.getCodArticulo());
+        
+        miStatement.setString(8,VigenciaActualizada.getCodProveedor());
+        
+        //Ejecutar la instruccion sql
+        miStatement.execute();
+        
+    }
+
+    public void borrarVigencia(String codArticulo) throws Exception{
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        miConexion = origenDatos.getConexion();
+        
+        String miSql="DELETE FROM VIGENCIA WHERE CODARTICULO = ? ";
+        
+        miStatement = miConexion.prepareStatement(miSql);
+        
+        miStatement.setString(1, codArticulo);  
+        
+        miStatement.execute();
     }
 }

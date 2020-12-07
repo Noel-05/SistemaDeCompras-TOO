@@ -82,7 +82,7 @@ public class ModeloCotizarProveedorArticulo {
                 float precioSinDesc = (cantidad * precio);
                 float precioTotal = (precioSinDesc) - (precioSinDesc * (descuento / 100));
                 
-                Vigencia temporal = new Vigencia(codArticulo, codProveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEspera, periodoGracia, nombreArticulo, unidadMedida, nombreEmpresa, depto, municipio, telefono, correo, responsble, perGracia, cantidad, departamento, precioTotal, fechaConvertida);
+                Vigencia temporal = new Vigencia(codArticulo, codProveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEspera, periodoGracia, nombreArticulo, unidadMedida, nombreEmpresa, depto, municipio, telefono, correo, responsble, perGracia, cantidad, departamento, precioTotal);
                 vigencias.add(temporal);
             }
             
