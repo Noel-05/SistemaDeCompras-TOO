@@ -251,6 +251,20 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="vig" items="${LISTAVIGENCIAS}">
+                                        
+                                         <!-- Link para Actualizar Vigencia -->
+                                        <c:url var="linkActualizar" value="controladorvigencia">
+                                            <c:param name="instruccion" value="recuperar"></c:param>
+                                            <c:param name="codArticulo" value="${vig.codArticulo}"></c:param>
+                                        </c:url>
+                                        
+                                        <!-- Link para Eliminar Vigencia -->
+                                        <c:url var="linkEliminar" value="controladorvigencia">
+                                            <c:param name="instruccion" value="eliminar"></c:param>
+                                            <c:param name="codArticulo" value="${vig.codArticulo}"></c:param>
+                                        </c:url>
+                                        
+                                        
                                             <tr>
                                                 <td>${vig.codProveedor}</td>
                                                 <td>${vig.nombreEmpresa}</td>
@@ -262,8 +276,8 @@
                                                 <td>${vig.perGracia}</td>
                                                 <td>${vig.fechaDesde}</td>
                                                 <td>${vig.fechaHasta}</td>
-                                                <td><a href="" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                                <td><a href="" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+                                                <td><a href="${linkActualizar}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+                                                <td><a href="${linkEliminar}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
                                             </tr>
                                             </c:forEach>
                                     </tbody>

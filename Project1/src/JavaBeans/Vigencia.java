@@ -30,6 +30,20 @@ public class Vigencia {
     private float precioTotal;
 
 
+    public Vigencia(String codArticulo,String codProveedor, Date fechaDesde, Date fechaHasta, float descuento, float precio,
+                    int tiempoEspera, int periodoGracia, String nombreEmpresa,String nombreArticulo ) {
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
+        this.descuento = descuento;
+        this.precio = precio;
+        this.tiempoEspera = tiempoEspera;
+        this.periodoGracia = periodoGracia;
+        this.nombreEmpresa = nombreEmpresa;
+        this.nombreArticulo = nombreArticulo;
+    }
+
     public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
                     float precio, int tiempoEspera, int periodoGracia) {
         this.codArticulo = codArticulo;

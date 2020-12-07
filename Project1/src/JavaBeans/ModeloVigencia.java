@@ -143,4 +143,114 @@ public class ModeloVigencia {
         
         return vigencias;
     }
+
+    public Vigencia getVigencia(String codArticulo) {
+        
+        Vigencia temporal =  null;
+        
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        ResultSet miResultset = null;
+        
+        
+        String cArticulo = codArticulo;
+        
+        try{
+
+        //Establecer la conexión con la BD
+        
+        miConexion = origenDatos.getConexion();
+        
+        //Crear sql que busque el producto
+        
+        String miSql = "SELECT * FROM VIGENCIA WHERE CODARTICULO = ? ";        
+        
+        //Crear la consultar preparada
+        
+        miStatement = miConexion.prepareStatement(miSql);
+        miStatement.setString(1, cArticulo);    
+            
+        //Ejecutar la consulta
+        
+        miResultset = miStatement.executeQuery();
+        
+        //Obtener datos de respuesta
+            
+        if(miResultset.next()){
+            
+            String codigoArt = miResultset.getString("CODARTICULO");
+            String codigoProv = miResultset.getString("CODIGOPROV");
+            String nombreProv = miResultset.getString("NOMEMPRESA");
+            String nombreArt = miResultset.getString("NOMBREART");
+            float descuento = miResultset.getFloat("DESCUENTO");
+            float precio = miResultset.getFloat("PRECIO");
+            int periodoGracia = miResultset.getInt("PERIODOGRACIA");
+            int entregaInmediata = miResultset.getInt("TIEMPOENTREGA");
+            Date fechaDesde = miResultset.getDate("FECHADESDE");
+            Date fechaHasta = miResultset.getDate("FECHAHASTA");
+            
+            temporal = new Vigencia(codigoArt, codigoProv, fechaDesde, fechaHasta, descuento, precio, entregaInmediata, periodoGracia, nombreArt, nombreProv);
+        
+            }else{
+            throw new Exception("No encontramos la vigencia codigo = "+cArticulo);
+        }
+
+        }catch(Exception e){
+            
+            e.printStackTrace();
+        }
+        
+        return temporal;
+    }
+
+    public void actualizarVigencia(Vigencia VigenciaActualizada) throws Exception {
+        
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        miConexion = origenDatos.getConexion();
+        //Crear Sentencia SQL
+        
+        String miSql = "UPDATE VIGENCIA SET CODIGOPROV = ?, FECHADESDE = ?, FECHAHASTA = ?, DESCUENTO = ?, PRECIO = ?, TIEMPOENTREGA = ?, PERIODOGRACIA = ?,  WHERE CODARTICULO = ?";
+        
+        //Crear la consulta preparada
+            
+        miStatement = miConexion.prepareStatement(miSql);
+        
+        //Establecer los parámetros
+        
+        miStatement.setString(1,VigenciaActualizada.getCodProveedor());
+        
+        java.util.Date utilDate = VigenciaActualizada.getFechaDesde();
+        java.sql.Date fechaConvertidaDesde = new java.sql.Date(utilDate.getTime());
+        miStatement.setDate(2, fechaConvertidaDesde);
+        
+        java.util.Date utilDate2 = VigenciaActualizada.getFechaHasta();
+        java.sql.Date fechaConvertidaHasta = new java.sql.Date(utilDate2.getTime());
+        miStatement.setDate(3, fechaConvertidaHasta);
+        
+        miStatement.setFloat(4,VigenciaActualizada.getDescuento());
+        miStatement.setFloat(5,VigenciaActualizada.getPrecio());
+        miStatement.setInt(6,VigenciaActualizada.getTiempoEspera());
+        miStatement.setFloat(7,VigenciaActualizada.getPeriodoGracia());
+        
+        //Ejecutar la instruccion sql
+        miStatement.execute();
+        
+    }
+
+    public void borrarVigencia(String codArticulo) throws Exception{
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        miConexion = origenDatos.getConexion();
+        
+        String miSql="DELETE FROM VIGENCIA WHERE CODARTICULO = ? ";
+        
+        miStatement = miConexion.prepareStatement(miSql);
+        
+        miStatement.setString(1, codArticulo);  
+        
+        miStatement.execute();
+    }
 }

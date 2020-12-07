@@ -61,6 +61,29 @@ public class ControladorVigencia extends HttpServlet {
         case "detalle":
             obtenerVigencias(request, response);
             break;
+        case "recuperar":
+                try {
+                    cargarVigencia(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            break;
+        
+        case "actualizarBD":
+                try {
+                    actualizarVigencia(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            break;
+        case "eliminar":
+                try {
+                    eliminarVigencia(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        
         }
         
     }
@@ -163,5 +186,64 @@ public class ControladorVigencia extends HttpServlet {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void cargarVigencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        
+        //Leer el Código del articulo
+        String codArticulo = request.getParameter("codArticulo");
+        //Enviar Código al modelo
+        Vigencia vigencia = modeloVigencia.getVigencia(codArticulo);
+        //Colocar el atributo correspondiente al Código Articulo
+        request.setAttribute("VIGENCIAACTUALIZAR", vigencia);
+        
+        RequestDispatcher miDispatcher = request.getRequestDispatcher("/actualizarVigencia.jsp");
+        miDispatcher.forward(request, response);
+    }
+
+    private void actualizarVigencia(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        
+        //Leer los datos que vienen del formulario
+        
+        String proveedor = request.getParameter("proveedor");
+        String articulo = request.getParameter("articulo");
+        
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDesde = null;
+        Date fechaHasta = null;
+        try {
+            fechaDesde = formatoFecha.parse(request.getParameter("fechaDesde"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            fechaHasta = formatoFecha.parse(request.getParameter("fechaHasta"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        float precio = Float.parseFloat(request.getParameter("precio"));
+        float descuento = Float.parseFloat(request.getParameter("descuento"));
+        
+        int tiempoEntrega = Integer.parseInt(request.getParameter("tiempoEntrega"));
+        int periodoGracia = Integer.parseInt(request.getParameter("periodoGracia"));
+        
+        //Crear un objeto de tipo Vigencia
+        
+        Vigencia VigenciaActualizada = new Vigencia(articulo, proveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEntrega, periodoGracia); 
+        
+        //Actualizar la BD
+        modeloVigencia.actualizarVigencia(VigenciaActualizada);
+        obtenerArticulos(request, response);
+        
+    }
+
+    private void eliminarVigencia(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String codArticulo = request.getParameter("codArticulo");
+        modeloVigencia.borrarVigencia(codArticulo);
+        obtenerArticulos(request, response);
+        
+        
     }
 }
