@@ -30,6 +30,7 @@ public class EmailUtility {
                     }
                 };
          
+         //
                 Session session = Session.getInstance(properties, auth);
          
                 // creates a new e-mail message
