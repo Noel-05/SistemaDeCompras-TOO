@@ -66,6 +66,7 @@ public class ControladorProveedorArticulo extends HttpServlet {
         case "seleccionar":
             seleccionarProveedorOrden(request, response);
             break;
+        
         case "enviar":
             enviarOrden(request,response);
             break;
@@ -144,8 +145,17 @@ public class ControladorProveedorArticulo extends HttpServlet {
         String departamento = request.getParameter("departamento");
         float precioTotal = Float.parseFloat(request.getParameter("precioTotal"));
         
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = null;
+        
+        try {
+            fecha = formatoFecha.parse(request.getParameter("fechaPedido"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
         //Crear un objeto de tipo REQUISICION_VIGENCIA_COMPRA
-        RequisicionVigenciaCompra nuevaCompra = new RequisicionVigenciaCompra(departamento, articulo, proveedor, cantidad, precioTotal);
+        RequisicionVigenciaCompra nuevaCompra = new RequisicionVigenciaCompra(departamento, articulo, proveedor, cantidad, precioTotal, fecha);
             
         //Enviar el objeto al Modelo y despues insertar el objeto en la BD
         modeloCotizarProveedorArticulo.agregarNuevaCompra(nuevaCompra);
@@ -154,6 +164,8 @@ public class ControladorProveedorArticulo extends HttpServlet {
         obtenerProveedoresArticuloSinParametros(request, response);
         
     }
+    
+    
     private void Listar(HttpServletRequest request, HttpServletResponse response) {
         //Obtener la lista de Departamentos desde el modelo
         

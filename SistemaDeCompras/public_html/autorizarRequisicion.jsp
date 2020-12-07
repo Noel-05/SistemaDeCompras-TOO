@@ -75,9 +75,6 @@
                         <li>
                             <a href="controladorcotizararticulo"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
                         </li>
-                        <li>
-                            <a href="generarOrdenCompra.jsp"><i class="zmdi zmdi-file-plus zmdi-hc-fw"></i> Comprar</a>
-                        </li>
                     </ul>
                 </li>
                 <li>

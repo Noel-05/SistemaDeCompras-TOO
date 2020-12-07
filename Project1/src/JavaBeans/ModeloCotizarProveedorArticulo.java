@@ -82,7 +82,7 @@ public class ModeloCotizarProveedorArticulo {
                 float precioSinDesc = (cantidad * precio);
                 float precioTotal = (precioSinDesc) - (precioSinDesc * (descuento / 100));
                 
-                Vigencia temporal = new Vigencia(codArticulo, codProveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEspera, periodoGracia, nombreArticulo, unidadMedida, nombreEmpresa, depto, municipio, telefono, correo, responsble, perGracia, cantidad, departamento, precioTotal);
+                Vigencia temporal = new Vigencia(codArticulo, codProveedor, fechaDesde, fechaHasta, descuento, precio, tiempoEspera, periodoGracia, nombreArticulo, unidadMedida, nombreEmpresa, depto, municipio, telefono, correo, responsble, perGracia, cantidad, departamento, precioTotal, fechaConvertida);
                 vigencias.add(temporal);
             }
             
@@ -146,7 +146,7 @@ public class ModeloCotizarProveedorArticulo {
             miConexion = origenDatos.getConexion();
         
             //Crear sentencia sql que inserte
-            String misql = "INSERT INTO REQUISICION_VIGENCIA_COMPRA(CODIGODEPARTAMENTO, CODARTICULO, CODIGOPROV, CANTART, PRECIOTOTAL) VALUES (?, ?, ?, ?, ?)";
+            String misql = "INSERT INTO REQUISICION_VIGENCIA_COMPRA(CODIGODEPARTAMENTO, CODARTICULO, CODIGOPROV, CANTART, PRECIOTOTAL, FECHAPEDIDOREQ) VALUES (?, ?, ?, ?, ?, ?)";
             miStatement = miConexion.prepareStatement(misql);
             
             //Establecer los parametros para insertar el producto
@@ -159,6 +159,10 @@ public class ModeloCotizarProveedorArticulo {
             miStatement.setInt(4, nuevaCompra.getCantArt());
             
             miStatement.setFloat(5, nuevaCompra.getPrecioTotal());
+            
+            java.util.Date utilDate = nuevaCompra.getFechaPedidoReq();
+            java.sql.Date fechaConvertida = new java.sql.Date(utilDate.getTime());
+            miStatement.setDate(6, fechaConvertida);
             
             //Ejecutar la instruccion sql
             miStatement.execute();

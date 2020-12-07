@@ -76,9 +76,6 @@
                         <li>
                             <a href="controladorcotizararticulo"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
                         </li>
-                        <li>
-                            <a href="generarOrdenCompra.jsp"><i class="zmdi zmdi-file-plus zmdi-hc-fw"></i> Comprar</a>
-                        </li>
                     </ul>
                 </li>
                 <li>
@@ -170,6 +167,7 @@
                                                                             <input type="hidden" name="departamento" value="${vig.codDepartamento}">
                                                                             <input type="hidden" name="cantidad" value="${vig.cantidad}">
                                                                             <input type="hidden" name="precioTotal" value="${vig.precioTotal}">
+                                                                            <input type="hidden" name="fechaPedido" value="${vig.fechaPedido}">
                                                                             <button href="controladorproveedorarticulo" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></button>
                                                                         </p>
                                                                     </form>

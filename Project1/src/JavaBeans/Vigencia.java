@@ -28,6 +28,8 @@ public class Vigencia {
     private String codDepartamento;
     
     private float precioTotal;
+    
+    private Date fechaPedido;
 
 
     public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
@@ -45,7 +47,7 @@ public class Vigencia {
     public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
                     float precio, int tiempoEspera, int periodoGracia, String nombreArticulo, String unidadMedida,
                     String nombreEmpresa, String depto, String municipio, String telefono, String correo,
-                    String responsble, String perGracia, int cantidad, String codDepartamento, float precioTotal) {
+                    String responsble, String perGracia, int cantidad, String codDepartamento, float precioTotal, Date fechaPedido) {
         this.codArticulo = codArticulo;
         this.codProveedor = codProveedor;
         this.fechaDesde = fechaDesde;
@@ -66,6 +68,7 @@ public class Vigencia {
         this.cantidad = cantidad;
         this.codDepartamento = codDepartamento;
         this.precioTotal = precioTotal;
+        this.fechaPedido = fechaPedido;
     }
     
     
@@ -281,6 +284,14 @@ public class Vigencia {
 
     public float getPrecioTotal() {
         return precioTotal;
+    }
+
+    public void setFechaPedido(Date fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
+
+    public Date getFechaPedido() {
+        return fechaPedido;
     }
 
 }

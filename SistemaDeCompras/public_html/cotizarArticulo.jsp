@@ -76,9 +76,6 @@
                         <li>
                             <a href="controladorcotizararticulo"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
                         </li>
-                        <li>
-                            <a href="generarOrdenCompra.jsp"><i class="zmdi zmdi-file-plus zmdi-hc-fw"></i> Comprar</a>
-                        </li>
                     </ul>
                 </li>
                 <li>
@@ -290,6 +287,10 @@
                                 </table>
                             </div>
                         </div>
+                        
+                        
+                        
+                        
                         <div class="tab-pane fade" id="list1">
                             <div class="table-responsive">
                                 
@@ -340,30 +341,29 @@
                                     <tbody>
                                     
                                         <c:forEach var="ord2" items="${LISTAORDENES2}">
-                                                            <tr>
-                                                                <td>${ord2.codArticulo}</td>
-                                                                <td>${ord2.nombreArt}</td>
-                                                                <td>${ord2.cantArt}</td>
-                                                                <td>${ord2.nombreProv}</td>
-                                                                <td>$ ${ord2.precioTotal}</td>
-                                                                
-                                                    
-                                                                <td>
-                                                                    <form method="post" action="EmailSendingServlet" >
-                                                                        <p class="text-center">
-                                                                            <input type="hidden" name="recipient" value="chavez98victor@gmail.com"/>
-                                                                            <input type="hidden" name="subject" value="Orden de Compra"/>
-                                                                            <input type="hidden" name="codarticulo" value="${ord2.codArticulo}">
-                                                                            <input type="hidden" name="nomarticulo" value="${ord2.nombreArt}">
-                                                                            <input type="hidden" name="cantidad" value="${ord2.cantArt}">
-                                                                            <input type="hidden" name="preciototal" value="${ord2.precioTotal}">
-                                                                            <input type="submit" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-assignment-o" ></i></button>
-                                                                        </p>
-                                                                    </form>
-                                                                </td>
-                                                            
-                                                            </tr>
-                                                            </c:forEach>
+                                            <tr>
+                                                <td>${ord2.codArticulo}</td>
+                                                <td>${ord2.nombreArt}</td>
+                                                <td>${ord2.cantArt}</td>
+                                                <td>${ord2.nombreProv}</td>
+                                                <td>$ ${ord2.precioTotal}</td>
+                                                
+                                                <td>
+                                                    <form method="post" action="EmailSendingServlet" >
+                                                        <p class="text-center">
+                                                            <input type="hidden" name="recipient" value="chavez98victor@gmail.com"/>
+                                                            <input type="hidden" name="subject" value="Orden de Compra"/>
+                                                            <input type="hidden" name="codarticulo" value="${ord2.codArticulo}">
+                                                            <input type="hidden" name="nomarticulo" value="${ord2.nombreArt}">
+                                                            <input type="hidden" name="cantidad" value="${ord2.cantArt}">
+                                                            <input type="hidden" name="preciototal" value="${ord2.precioTotal}">
+                                                            <input type="submit" class="btn btn-success btn-raised btn-xs">
+                                                        </p>
+                                                    </form>
+                                                </td>
+                                            
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                     </table>
                             </div>

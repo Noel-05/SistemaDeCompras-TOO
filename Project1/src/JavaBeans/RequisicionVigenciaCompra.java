@@ -23,6 +23,8 @@ public class RequisicionVigenciaCompra {
     public RequisicionVigenciaCompra(){
         
     }
+    
+    
     public RequisicionVigenciaCompra(String codigoDepartamento, String codArticulo, String codProveedor, int cantArt,
                                      float precioTotal) {
         this.codigoDepartamento = codigoDepartamento;
@@ -30,6 +32,17 @@ public class RequisicionVigenciaCompra {
         this.codProveedor = codProveedor;
         this.cantArt = cantArt;
         this.precioTotal = precioTotal;
+    }
+    
+    
+    public RequisicionVigenciaCompra(String codigoDepartamento, String codArticulo, String codProveedor, int cantArt,
+                                     float precioTotal, Date fechaPedidoReq) {
+        this.codigoDepartamento = codigoDepartamento;
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.cantArt = cantArt;
+        this.precioTotal = precioTotal;
+        this.fechaPedidoReq = fechaPedidoReq;
     }
 
 
@@ -197,5 +210,13 @@ public class RequisicionVigenciaCompra {
 
     public String getCorreo() {
         return Correo;
+    }
+
+    public void setFechaPedidoReq(Date fechaPedidoReq) {
+        this.fechaPedidoReq = fechaPedidoReq;
+    }
+
+    public Date getFechaPedidoReq() {
+        return fechaPedidoReq;
     }
 }
