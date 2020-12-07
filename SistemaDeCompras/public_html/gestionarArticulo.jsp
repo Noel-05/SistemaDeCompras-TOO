@@ -133,7 +133,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
                                     
-                                        <form method="get" action="controladorsolicitudarticulo" >
+                                        <form method="get" action="controladorvigencia" >
                                             <input type="hidden" name="instruccion" value="insertarBD">
                                             
                                             <div class="form-group label-floating">
@@ -145,12 +145,15 @@
                                                 <label class="control-label">Articulo</label>
                                                 <select class="form-control" name="articulo" required="required">
                                                 
-                                                    <option>Seleccione el Articulo a Ingresar...</option>
-                                                    <option>BOR0001 - Borrador de Goma</option>
-                                                    <option>SAC0001 - Sacapunta de Metal</option>
+                                                    <option>Seleccione el Articulo a Solicitar...</option>
+                                                    
+                                                    <c:forEach var="art" items="${LISTAARTICULOS}">
+                                                        <option value="${art.codArticulo}">${art.codArticulo} - ${art.nombreArticulo}</option>
+                                                    </c:forEach>
                                                     
                                                 </select>
                                             </div>
+                
                                             
                                             
                                             <div class="form-group">
@@ -166,7 +169,7 @@
                                             
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Precio</label>
-                                                <input class="form-control" type="number" name="precio" required="required">
+                                                <input class="form-control"  type="number" step="0.01" name="precio" required="required">
                                             </div>
                                             
                                             <div class="form-group label-floating">
@@ -207,8 +210,8 @@
                         <div class="tab-pane fade" id="list">
                             <div class="table-responsive">
                             
-                            <form method="get" action="controladorsolicitudarticulo" >
-                                <input type="hidden" name="instruccion" value="consultarEmpeado">
+                            <form method="get" action="controladorvigencia" >
+                                <input type="hidden" name="instruccion" value="detalle">
                                 
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
@@ -220,10 +223,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <p class="text-center">
-                                    <button href="#list" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
+                                    <button href="controladorvigencia" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
                                 </p>
                             </form>
+                            
+                            </br></br>
                                 
                                 </br></br>
                                 <table class="table table-hover text-center">
@@ -244,21 +250,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <c:forEach var="vig" items="${LISTAVIGENCIAS}">
                                             <tr>
-                                                <td>SCRIBE</td>
-                                                <td>SCRIBE EL Salvador S.A. de C.V.</td>
-                                                <td>BOR0001</td>
-                                                <td>Borrador de Goma</td>
-                                                <td>15 %</td>
-                                                <td>$ 5,50</td>
-                                                <td>15 d&iacute;as</td>
-                                                <td>SI</td>
-                                                <td>11/11/20</td>
-                                                <td>01/12/20</td>
-                                                <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                                <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+                                                <td>${vig.codProveedor}</td>
+                                                <td>${vig.nombreEmpresa}</td>
+                                                <td>${vig.codArticulo}</td>
+                                                <td>${vig.nombreArticulo}</td>
+                                                <td>${vig.descuento}</td>
+                                                <td>${vig.precio}</td>
+                                                <td>${vig.tiempoEspera}</td>
+                                                <td>${vig.perGracia}</td>
+                                                <td>${vig.fechaDesde}</td>
+                                                <td>${vig.fechaHasta}</td>
+                                                <td><a href="" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+                                                <td><a href="" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
                                             </tr>
+                                            </c:forEach>
                                     </tbody>
+                                    
                                 </table>
                             </div>
                         </div>

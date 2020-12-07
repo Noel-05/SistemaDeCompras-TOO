@@ -31,6 +31,18 @@ public class Vigencia {
 
 
     public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
+                    float precio, int tiempoEspera, int periodoGracia) {
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
+        this.descuento = descuento;
+        this.precio = precio;
+        this.tiempoEspera = tiempoEspera;
+        this.periodoGracia = periodoGracia;
+    }
+
+    public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
                     float precio, int tiempoEspera, int periodoGracia, String nombreArticulo, String unidadMedida,
                     String nombreEmpresa, String depto, String municipio, String telefono, String correo,
                     String responsble, String perGracia, int cantidad, String codDepartamento, float precioTotal) {
@@ -86,6 +98,28 @@ public class Vigencia {
         this.fechaDesde = fechaDesde;
         this.cantidad = cantidad;
         this.codDepartamento = codDepartamento;
+    }
+
+
+    public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
+                    float precio, int tiempoEspera, int periodoGracia, String nombreArticulo, String nombreEmpresa,
+                    String perGracia) {
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
+        this.descuento = descuento;
+        this.precio = precio;
+        this.tiempoEspera = tiempoEspera;
+        this.periodoGracia = periodoGracia;
+        this.nombreArticulo = nombreArticulo;
+        this.nombreEmpresa = nombreEmpresa;
+        this.perGracia = perGracia;
+    }
+
+
+    public Vigencia(){
+        
     }
 
 

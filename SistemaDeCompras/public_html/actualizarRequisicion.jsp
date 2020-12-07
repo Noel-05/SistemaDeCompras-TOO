@@ -87,7 +87,7 @@
                     </a>
                     <ul class="list-unstyled full-box">
                         <li>
-                            <a href="gestionarArticulo.jsp"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Ingresar Vigencia</a>
+                            <a href="controladorvigencia"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Ingresar Vigencia</a>
                         </li>
                     </ul>
                 </li>

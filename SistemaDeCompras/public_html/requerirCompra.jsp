@@ -4,7 +4,7 @@
 
 <html lang="es">
 <head>
-    <title>Requisiciones Art&iacute;los</title>
+    <title>Requisiciones Art&iacute;culos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
@@ -304,7 +304,7 @@
                                             <th class="text-center">Descripcion</th>                                                
                                             <th class="text-center">Cantidad</th>    
                                             <th class="text-center">Actualizar</th>
-                                            <th class="text-center">Delete</th>
+                                            <th class="text-center">Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -317,6 +317,11 @@
                                             <c:param name="numReq" value="${req.numReq}"></c:param>
                                         </c:url>
 
+                                        <!-- Link para Eliminar Solicitud -->
+                                        <c:url var="linkEliminar" value="controladorrequisicion">
+                                            <c:param name="instruccion" value="eliminar"></c:param>
+                                            <c:param name="numReq" value="${req.numReq}"></c:param>
+                                        </c:url>
                                         <tr>                                        
                                             <td>${req.nombreDepartamento}</td>                                 
                                             <td>${req.codArticulo}</td>
@@ -324,7 +329,7 @@
                                             <td>${req.unidadMedida}</td>                                            
                                             <td>${req.cantArt}</td>                                            
                                             <td><a href="${linkActualizar}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-                                            <td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+                                            <td><a href="${linkEliminar}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
                                         </tr>
                                         </c:forEach>
                                         

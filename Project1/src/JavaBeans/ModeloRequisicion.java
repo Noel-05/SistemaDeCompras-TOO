@@ -584,4 +584,23 @@ public List<Departamento> getDepartamentos()  throws Exception{
         
       
     }
+
+    public void eliminarRequisicion(int numReq) throws Exception{
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        //Establecer la conexion
+        miConexion = origenDatos.getConexion();
+        
+        //Crear sentencia sql
+        String miSql = "DELETE FROM REQUISICION WHERE NUMREQ = ?";
+        
+        miStatement = miConexion.prepareStatement(miSql);
+        
+        miStatement.setInt(1, numReq);   
+        
+        // Ejecutar la instruccion sql
+        miStatement.execute();
+
+    }
 }
