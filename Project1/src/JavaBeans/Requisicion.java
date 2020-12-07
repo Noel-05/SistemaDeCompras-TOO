@@ -16,6 +16,8 @@ public class Requisicion {
     private String codigoDepartamento;
     private String unidadMedida;
     private String nombreDepartamento;
+    private String nombreEmpleado;
+    private String apellidoEmpleado;
 
     public Requisicion(){
         
@@ -30,6 +32,27 @@ public class Requisicion {
         this.cantArt = cantArt;
         this.codArticulo = codArticulo;
         this.CarnetEmpleado = CarnetEmpleado;
+    }
+    
+    public Requisicion(int numRequisicion, Date fechaPedidoReq, Date fechaEntregaReq, String CarnetEmpleado, String nombreEmpleado, String apellidoEmpleado, String nombreDepartamento) {
+        this.numReq = numRequisicion;
+        this.fechaPedidoReq = fechaPedidoReq;
+        this.fechaEntregaReq = fechaEntregaReq;       
+        this.CarnetEmpleado = CarnetEmpleado;
+        this.nombreEmpleado = nombreEmpleado;
+        this.apellidoEmpleado = apellidoEmpleado;
+        this.nombreDepartamento = nombreDepartamento;
+    }
+        
+    public Requisicion(int numRequisicion, Date fechaPedidoReq, Date fechaEntregaReq, int autorizado, String CarnetEmpleado, String nombreEmpleado, String apellidoEmpleado, String nombreDepartamento) {
+        this.numReq = numRequisicion;
+        this.fechaPedidoReq = fechaPedidoReq;
+        this.fechaEntregaReq = fechaEntregaReq;
+        this.autorizado = autorizado;
+        this.CarnetEmpleado = CarnetEmpleado;
+        this.nombreEmpleado = nombreEmpleado;
+        this.apellidoEmpleado = apellidoEmpleado;
+        this.nombreDepartamento = nombreDepartamento;
     }
 
     public Requisicion(Date fechaPedidoReq, Date fechaEntregaReq, int autorizado, int entregado, int cantArt,
@@ -199,4 +222,20 @@ public class Requisicion {
     public String getCarnetEmpleado() {
         return CarnetEmpleado;
     }
+    
+    public void setNombreEmpleado(String NombreEmpleado) {
+            this.nombreEmpleado = NombreEmpleado;
+        }
+
+        public String getNombreEmpleado() {
+            return nombreEmpleado;
+        }
+        
+        public void setApellidoEmpleado(String ApellidoEmpleado) {
+            this.apellidoEmpleado = ApellidoEmpleado;
+        }
+
+        public String getApellidoEmpleado() {
+            return apellidoEmpleado;
+        }
 }

@@ -15,7 +15,7 @@ import java.sql.DriverManager;
 
 public class ConexionBaseDatos {  
     
-    final static String DB_URL="jdbc:oracle:thin:@dbsiscompras_high?TNS_ADMIN=/Users/chave/OneDrive/Documentos/wallet_DBSISCOMPRAS";
+    final static String DB_URL="jdbc:oracle:thin:@dbsiscompras_high?TNS_ADMIN=/Users/NeoProject/Desktop/WalletPrueba";
     final static String DB_USER = "ADMIN";
     final static String DB_PASSWORD = "Proyecto_TOO115";
   

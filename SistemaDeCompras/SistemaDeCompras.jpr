@@ -164,7 +164,7 @@
             </hash>
             <hash>
                <list n="classPath">
-                  <url path="../../../../Users/chave/Downloads/javax.mail.jar" jar-entry=""/>
+                  <url path="../../../../Users/NeoProject/Desktop/javax.mail.jar" jar-entry=""/>
                </list>
                <value n="deployedByDefault" v="true"/>
                <value n="description" v="Javax.mail.jar"/>
