@@ -59,7 +59,7 @@
                     </a>
                     <ul class="list-unstyled full-box">
                         <li>
-                            <a href="controladorrequisicion"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
+                            <a href="requerirCompra.jsp"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
                         </li>
                         <li>
                             <a href="autorizarRequisicion.jsp"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
@@ -80,16 +80,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#!" class="btn-sideBar-SubMenu">
-                        <i class="zmdi zmdi zmdi-spellcheck zmdi-hc-fw"></i> Gestionar Art&iacute;culo <i class="zmdi zmdi-caret-down pull-right"></i>
+                    <a href="EmailForm.jsp">
+                        <i class="zmdi zmdi-home zmdi-hc-fw"></i> Enviar Correo
                     </a>
-                    <ul class="list-unstyled full-box">
-                        <li>
-                            <a href="gestionarArticulo.jsp"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Ingresar Vigencia</a>
-                        </li>
-                    </ul>
                 </li>
-                 
             </ul>
         </div>
     </section>
@@ -111,7 +105,26 @@
               <h1 class="text-titles"><strong>Sistema de Compras.</strong></h1>
             </div>
             <div class="full-box text-center" style="padding: 30px 10px;">
-                    </br></br><img src="static/assets/img/NEOPROJECT_LOGO.png" alt="Logo Grupo 14" width="35%" height="35%"> 
+                <form action="EmailSendingServlet" method="POST">
+                     <table border="0" width="35%" align="center">
+            <caption><h2>Enviar Correo</h2></caption>
+            <tr>
+                <td width="50%">Destinatario: </td>
+                <td><input type="text" name="recipient" size="50"/></td>
+            </tr>
+            <tr>
+                <td>Asunto: </td>
+                <td><input type="text" name="subject" size="50"/></td>
+            </tr>
+            <tr>
+                <td>Mensaje: </td>
+                <td><textarea rows="10" cols="39" name="content"></textarea> </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Send"/></td>
+            </tr>
+        </table>
+                </form>
             </div>
         </div>
         

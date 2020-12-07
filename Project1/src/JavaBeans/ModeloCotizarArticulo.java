@@ -5,6 +5,7 @@ import Utils.ConexionBaseDatos;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 import java.time.Year;
 
@@ -202,5 +203,57 @@ public class ModeloCotizarArticulo {
         
         return ordenesCompraProveedor;
     }
+    public List<RequisicionVigenciaCompra> obtenerOrdenes2(RequisicionVigenciaCompra consultaOrdenes, String fecha) {
+        List<RequisicionVigenciaCompra> ordenesCompraProveedor2 = new ArrayList<>();
+        
+        Connection miConexion = null;
+        Statement miStatement = null;
+        ResultSet miResultset = null;
+        
+        Statement miStatementBusc = null;
+        ResultSet miResultsetBusc = null;
+        
+        try{
+            //Establecer la conexion
+            miConexion = origenDatos.getConexion();
+            //Recupero el departamento que voy a buscar
+            String departamentoBusq = consultaOrdenes.getCodigoDepartamento();
+            // SELECT * FROM REQUISICION_VIGENCIA_COMPRA RVC INNER JOIN VIGENCIA V ON RVC.CODARTICULO = V.CODARTICULO AND RVC.CODIGOPROV = V.CODIGOPROV INNER JOIN PROVEEDOR P ON P.CODIGOPROV = RVC.CODIGOPROV INNER JOIN ARTICULO A ON A.CODARTICULO = RVC.CODARTICULO WHERE CODIGODEPARTAMENTO = 'INF001'
+            
+            //Crear sentencia SQL y Statement
+            
+            String miSql = "SELECT RVC.CODARTICULO, A.NOMBREART, RVC.CANTART, RVC.PRECIOTOTAL, P.NOMEMPRESA, P.CORREO FROM REQUISICION_VIGENCIA_COMPRA RVC  INNER JOIN PROVEEDOR P ON P.CODIGOPROV = RVC.CODIGOPROV INNER JOIN ARTICULO A ON A.CODARTICULO = RVC.CODARTICULO  WHERE CODIGODEPARTAMENTO = '"+departamentoBusq+"' AND rvc.fechapedidoreq = '"+fecha+"' ORDER BY P.NOMEMPRESA";
+            miStatement = miConexion.createStatement();
+            
+            //Ejecutar SQL
+            miResultset = miStatement.executeQuery(miSql);
+            
+            while(miResultset.next()){
+                
+                String codArticulo = miResultset.getString("CODARTICULO");
+                String nombreArt = miResultset.getString("NOMBREART");
+                int cantidad = miResultset.getInt("CANTART");
+                String nombreProv = miResultset.getString("NOMEMPRESA");
+                float precio = miResultset.getFloat("PRECIOTOTAL");
+                String correo = miResultset.getString("CORREO");
+                
+                RequisicionVigenciaCompra temporal =new RequisicionVigenciaCompra();
+                temporal.setCodArticulo(codArticulo);
+                temporal.setNombreArt(nombreArt);
+                temporal.setCantArt(cantidad);
+                temporal.setNombreProv(nombreProv);
+                temporal.setPrecioTotal(precio);
+                temporal.setCorreo(correo);
+
+                ordenesCompraProveedor2.add(temporal);
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return ordenesCompraProveedor2;
+    }
+
 
 }

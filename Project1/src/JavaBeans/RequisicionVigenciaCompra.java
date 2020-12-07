@@ -1,11 +1,14 @@
 package JavaBeans;
 
+import java.util.Date;
+
 public class RequisicionVigenciaCompra {
     String codigoDepartamento;
     String codArticulo;
     String codProveedor;
     int cantArt;
     float precioTotal;
+    Date fechaPedidoReq;
     
     String nombreProv;
     String nombreArt;
@@ -13,10 +16,13 @@ public class RequisicionVigenciaCompra {
     float precio;
     int periodoGracia;
     int entregaInmediata;
-    
+    String Correo;
     String perGra;
     
 
+    public RequisicionVigenciaCompra(){
+        
+    }
     public RequisicionVigenciaCompra(String codigoDepartamento, String codArticulo, String codProveedor, int cantArt,
                                      float precioTotal) {
         this.codigoDepartamento = codigoDepartamento;
@@ -66,6 +72,23 @@ public class RequisicionVigenciaCompra {
         this.entregaInmediata = entregaInmediata;
         this.perGra = perGra;
         this.precioTotal = precioTotal;
+    }
+    public RequisicionVigenciaCompra(String codigoDepartamento, String codArticulo, String codProveedor, int cantArt,
+                                     String nombreProv, String nombreArt, float descuento,
+                                     float precio, int periodoGracia, int entregaInmediata, String perGra, float precioTotal, Date fecha) {
+        this.codigoDepartamento = codigoDepartamento;
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.cantArt = cantArt;
+        this.nombreProv = nombreProv;
+        this.nombreArt = nombreArt;
+        this.descuento = descuento;
+        this.precio = precio;
+        this.periodoGracia = periodoGracia;
+        this.entregaInmediata = entregaInmediata;
+        this.perGra = perGra;
+        this.precioTotal = precioTotal;
+        this.fechaPedidoReq = fecha;
     }
 
     public RequisicionVigenciaCompra(String codigoDepartamento) {
@@ -168,5 +191,11 @@ public class RequisicionVigenciaCompra {
     public String getPerGra() {
         return perGra;
     }
+    public void setCorreo(String Correo) {
+        this.Correo = Correo;
+    }
 
+    public String getCorreo() {
+        return Correo;
+    }
 }

@@ -59,7 +59,7 @@
                     </a>
                     <ul class="list-unstyled full-box">
                         <li>
-                            <a href="controladorrequisicion"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
+                            <a href="requerirCompra.jsp"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
                         </li>
                         <li>
                             <a href="autorizarRequisicion.jsp"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
@@ -79,17 +79,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#!" class="btn-sideBar-SubMenu">
-                        <i class="zmdi zmdi zmdi-spellcheck zmdi-hc-fw"></i> Gestionar Art&iacute;culo <i class="zmdi zmdi-caret-down pull-right"></i>
-                    </a>
-                    <ul class="list-unstyled full-box">
-                        <li>
-                            <a href="gestionarArticulo.jsp"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Ingresar Vigencia</a>
-                        </li>
-                    </ul>
-                </li>
-                 
+                
             </ul>
         </div>
     </section>
@@ -108,10 +98,10 @@
         <!-- Content page -->
         <div class="container-fluid">
             <div class="page-header">
-              <h1 class="text-titles"><strong>Sistema de Compras.</strong></h1>
+              <h1 class="text-titles"><strong>Resultado</strong></h1>
             </div>
             <div class="full-box text-center" style="padding: 30px 10px;">
-                    </br></br><img src="static/assets/img/NEOPROJECT_LOGO.png" alt="Logo Grupo 14" width="35%" height="35%"> 
+                    <h3><%= request.getAttribute("Message")%></h3>
             </div>
         </div>
         

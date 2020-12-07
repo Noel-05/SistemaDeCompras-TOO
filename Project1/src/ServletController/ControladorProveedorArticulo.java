@@ -66,7 +66,9 @@ public class ControladorProveedorArticulo extends HttpServlet {
         case "seleccionar":
             seleccionarProveedorOrden(request, response);
             break;
-        
+        case "enviar":
+            enviarOrden(request,response);
+            break;
         }
     }
 
@@ -147,6 +149,50 @@ public class ControladorProveedorArticulo extends HttpServlet {
             
         //Enviar el objeto al Modelo y despues insertar el objeto en la BD
         modeloCotizarProveedorArticulo.agregarNuevaCompra(nuevaCompra);
+        
+        //Listar las Solicitudes
+        obtenerProveedoresArticuloSinParametros(request, response);
+        
+    }
+    private void Listar(HttpServletRequest request, HttpServletResponse response) {
+        //Obtener la lista de Departamentos desde el modelo
+        
+        List<Departamento> departamentos;
+        
+        try{
+            
+            departamentos = modeloCotizarArticulo.getDepartamentos();
+            
+            //Agregar la lista de Articulos al Request
+            
+            request.setAttribute("LISTADEPARTAMENTOS", departamentos);
+            
+            //Enviar el Request al JSP
+            
+            RequestDispatcher miDispatcher = request.getRequestDispatcher("/cotizarArticulo.jsp");
+            
+            miDispatcher.forward(request, response);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+
+    private void enviarOrden(HttpServletRequest request, HttpServletResponse response) {
+        //Obtener la lista de Vigencias desde el modelo
+        int cantidadReg = Integer.parseInt(request.getParameter("cantReg"));
+        String articulo = request.getParameter("codart1");
+        String proveedor = request.getParameter("proveedor");
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        String departamento = request.getParameter("departamento");
+        float precioTotal = Float.parseFloat(request.getParameter("precioTotal"));
+        System.out.print(cantidadReg);
+        System.out.print("\n"+articulo);
+        //Crear un objeto de tipo REQUISICION_VIGENCIA_COMPRA
+        RequisicionVigenciaCompra nuevaCompra = new RequisicionVigenciaCompra(departamento, articulo, proveedor, cantidad, precioTotal);
+            
+        //Enviar el objeto al Modelo y despues insertar el objeto en la BD
+        //modeloCotizarProveedorArticulo.agregarNuevaCompra(nuevaCompra);
         
         //Listar las Solicitudes
         obtenerProveedoresArticuloSinParametros(request, response);
