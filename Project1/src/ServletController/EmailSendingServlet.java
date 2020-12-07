@@ -31,8 +31,9 @@ public class EmailSendingServlet extends HttpServlet {
                float precio = Float.parseFloat(request.getParameter("preciototal"));
         
                 String content = codarticulo+"\t"+nomarticulo+"\t"+String.valueOf(cantidad)+"\t"+"$"+String.valueOf(precio);
-        
-               String resultMessage = "";
+                
+                
+                String resultMessage = "";
         
                try {
                    EmailUtility.sendEmail(host, port, user, pass, recipient, subject,
