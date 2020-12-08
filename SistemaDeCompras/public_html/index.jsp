@@ -104,7 +104,10 @@
                         </li> 
                         <li>
                             <a href="controladorreporteordenesprov"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Ordenes por Proveedor</a>
-                        </li>                                               
+                        </li> 
+                        <li>
+                            <a href="controladorexistencias"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Stock Inventario</a>
+                        </li>                         
                     </ul>
                 </li>  
                                  
