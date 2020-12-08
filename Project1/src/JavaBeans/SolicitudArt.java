@@ -9,8 +9,10 @@ public class SolicitudArt {
     private Date fechaSol;
     
     private String nombreArticulo;
+    private String unidadMedida;
     private String nombreEmpleado;
-    
+    private String codDepto;
+    private int sumaArticulos;       
     private int idSol;
 
     public SolicitudArt(String carnetEmpleado, String codArticulo, int cantArticulo, Date fechaSol) {
@@ -60,6 +62,42 @@ public class SolicitudArt {
         this.fechaSol = fechaSol;
     }
 
+    public SolicitudArt(Date fechaSol, String codDepto) {
+        this.codDepto = codDepto;
+        this.fechaSol = fechaSol;
+    }
+
+    public SolicitudArt(String codArticulo, String nombreArticulo, String unidadMedida, int sumaArticulos) {
+        this.codArticulo = codArticulo;
+        this.nombreArticulo = nombreArticulo;
+        this.unidadMedida = unidadMedida;
+        this.sumaArticulos = sumaArticulos;
+    }
+
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
+    }
+
+    public String getUnidadMedida() {
+        return unidadMedida;
+    }
+
+    public void setSumaArticulos(int sumaArticulos) {
+        this.sumaArticulos = sumaArticulos;
+    }
+
+    public int getSumaArticulos() {
+        return sumaArticulos;
+    }
+
+    public void setCodDepto(String codDepto) {
+        this.codDepto = codDepto;
+    }
+
+    public String getCodDepto() {
+        return codDepto;
+    }
+    
     public void setNombreEmpleado(String nombreEmpleado) {
         this.nombreEmpleado = nombreEmpleado;
     }
