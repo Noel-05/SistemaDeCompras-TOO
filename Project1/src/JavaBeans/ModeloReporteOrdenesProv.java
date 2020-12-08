@@ -49,18 +49,16 @@ public class ModeloReporteOrdenesProv {
             int sumaOrdenes = miResultset.getInt("COUNT(R.CODIGOPROV)");
             double montoTotal = miResultset.getDouble("SUM(R.PRECIOTOTAL)");
 
-            // //Recuperar el nombre del articulo, y la unidad de medida segun el codigo de articulo que se esta recuperando
-            // String buscar = "SELECT * FROM ARTICULO WHERE CODARTICULO = '"+codigoArticulo+"'";
-            // miStatementBusc = miConexion.createStatement();
-            // miResultsetBusc = miStatementBusc.executeQuery(buscar);
-            // String nombreArticulo = null;
-            // String unidadMedida = null;
-            // while(miResultsetBusc.next()){
-            //     nombreArticulo = miResultsetBusc.getString("NOMBREART");
-            //     unidadMedida = miResultsetBusc.getString("UNIDADMEDIDA");
-            // }                      
+            //Recuperar el nombre del Proveedor
+            String buscar = "SELECT * FROM PROVEEDOR WHERE CODIGOPROV = '"+codigoProv+"'";
+            miStatementBusc = miConexion.createStatement();
+            miResultsetBusc = miStatementBusc.executeQuery(buscar);
+            String nombreProveedor = null;
+            while(miResultsetBusc.next()){
+                nombreProveedor = miResultsetBusc.getString("NOMEMPRESA");
+            }                      
             
-            Ordenes temporal = new Ordenes(codigoProv, montoTotal, sumaOrdenes);
+            Ordenes temporal = new Ordenes(codigoProv, montoTotal, sumaOrdenes, nombreProveedor);
             
             ordenes.add(temporal);
         }

@@ -106,7 +106,7 @@
         <!-- Content page -->
         <div class="container-fluid">
             <div class="page-header">
-              <h1 class="text-titles"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> <strong>Reporte de Precios Vigentes de Articulos por Proveedor</strong></h1>
+              <h1 class="text-titles"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> <strong>Reporte Cantidad de Ordenes de Compra por Proveedor</strong></h1>
             </div>
         </div>
         
@@ -162,7 +162,7 @@
                                                         <c:forEach var="ord" items="${LISTAORDENES}">
                                                         <tr>
                                                             <td>${ord.codProveedor}</td>
-                                                            <td>${ord.codProveedor}</td>
+                                                            <td>${ord.nomProveedor}</td>
                                                             <td>${ord.cantOrdenes}</td>
                                                             <td>${ord.sumaPrecio}</td>
                                                         </tr>

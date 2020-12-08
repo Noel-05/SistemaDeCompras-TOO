@@ -10,6 +10,7 @@ public class Ordenes {
     private Date fecha;
     private double sumaPrecio;
     private int cantOrdenes;
+    private String nomProveedor;
 
     public Ordenes() {
     }
@@ -24,10 +25,19 @@ public class Ordenes {
         this.precioTotal = precioTotal;
     }
 
-    public Ordenes(String codProveedor, double sumaPrecio, int cantOrdenes) {
+    public Ordenes(String codProveedor, double sumaPrecio, int cantOrdenes, String nomProveedor) {
         this.codProveedor = codProveedor;
         this.sumaPrecio = sumaPrecio;
         this.cantOrdenes = cantOrdenes;
+        this.nomProveedor = nomProveedor;
+    }
+
+    public void setNomProveedor(String nomProveedor) {
+        this.nomProveedor = nomProveedor;
+    }
+
+    public String getNomProveedor() {
+        return nomProveedor;
     }
 
     public void setCantOrdenes(int cantOrdenes) {
