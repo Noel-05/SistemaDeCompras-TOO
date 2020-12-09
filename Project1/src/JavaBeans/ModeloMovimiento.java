@@ -83,7 +83,6 @@ public class ModeloMovimiento {
         	//**************************INSERTAR**********************************
 	        //Operaciones con Variables
 	        Double valTotal = (nuevoMov.getCantMov()) * (nuevoMov.getValUnidad());
-
 	        //Obtener la conexion            
             miConexion = origenDatos.getConexion();
        
@@ -91,6 +90,8 @@ public class ModeloMovimiento {
             String misql = "INSERT INTO MOVIMIENTO(IDINVENTARIO, CARNETEMPLEADO, TIPO, CANTMOV, VALUNIDAD, VALTOTAL, FECMOV) VALUES (?, ?, ?, ?, ?, ?, ?)";
             miStatement = miConexion.prepareStatement(misql);
             
+
+
             //Establecer los parametros para insertar el producto
             miStatement.setInt(1,nuevoMov.getIdInv());
             
@@ -127,7 +128,7 @@ public class ModeloMovimiento {
 
 
                 int nuevoValor=0;
-                if (nuevoMov.getTipo() == "compra") {
+                if("compra".equals(nuevoMov.getTipo())) {
 				    nuevoValor = stock + nuevoMov.getCantMov();
 				}else{
 					nuevoValor = stock - nuevoMov.getCantMov();
