@@ -29,6 +29,21 @@ public class Vigencia {
     
     private float precioTotal;
 
+    private Date fechaPedido;
+
+    public Vigencia(String codArticulo,String codProveedor, Date fechaDesde, Date fechaHasta, float descuento, float precio,
+                    int tiempoEspera, int periodoGracia, String nombreEmpresa,String nombreArticulo ) {
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
+        this.descuento = descuento;
+        this.precio = precio;
+        this.tiempoEspera = tiempoEspera;
+        this.periodoGracia = periodoGracia;
+        this.nombreEmpresa = nombreEmpresa;
+        this.nombreArticulo = nombreArticulo;
+    }
 
     public Vigencia(String codArticulo, String codProveedor, Date fechaDesde, Date fechaHasta, float descuento,
                     float precio, int tiempoEspera, int periodoGracia) {
@@ -117,12 +132,31 @@ public class Vigencia {
         this.perGracia = perGracia;
     }
 
+    public Vigencia(Date fechaDesde, String codArticulo, String codProveedor, Date fechaHasta, float descuento,
+                    float precio, int tiempoEspera, int periodoGracia, String perGracia, String nombreArticulo) {
+        this.codArticulo = codArticulo;
+        this.codProveedor = codProveedor;
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
+        this.descuento = descuento;
+        this.precio = precio;
+        this.tiempoEspera = tiempoEspera;
+        this.periodoGracia = periodoGracia;
+        this.perGracia = perGracia;
+        this.nombreArticulo = nombreArticulo;
 
+    }
+
+    public Vigencia(String codProveedor){
+        this.codProveedor = codProveedor;
+    }
+    
+    
     public Vigencia(){
         
     }
-
-
+    
+    
     public void setCodArticulo(String codArticulo) {
         this.codArticulo = codArticulo;
     }
@@ -281,6 +315,14 @@ public class Vigencia {
 
     public float getPrecioTotal() {
         return precioTotal;
+    }
+
+    public void setFechaPedido(Date fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
+
+    public Date getFechaPedido() {
+        return fechaPedido;
     }
 
 }

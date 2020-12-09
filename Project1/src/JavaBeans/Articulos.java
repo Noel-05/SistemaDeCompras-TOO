@@ -17,6 +17,9 @@ public class Articulos {
         this.codCarnet = codCarnet;
     }
 
+    public Articulos() {
+    }
+
     public void setCodCarnet(String codCarnet) {
         this.codCarnet = codCarnet;
     }

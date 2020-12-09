@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=windows-1252"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="es">
 <head>
     <title>Requisiciones Art&iacute;culos</title>
@@ -62,7 +63,7 @@
                             <a href="controladorrequisicion"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
                         </li>
                         <li>
-                            <a href="autorizarRequisicion.jsp"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
+                            <a href="controladorautorizarrequisicion"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
                         </li>
                     </ul>
                 </li>
@@ -73,9 +74,6 @@
                     <ul class="list-unstyled full-box">
                         <li>
                             <a href="controladorcotizararticulo"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
-                        </li>
-                        <li>
-                            <a href="generarOrdenCompra.jsp"><i class="zmdi zmdi-file-plus zmdi-hc-fw"></i> Comprar</a>
                         </li>
                     </ul>
                 </li>
@@ -130,19 +128,27 @@
                                         
                                         <div class="row">
                                             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                                <form action="">
+                                                
+                                                <form action="controladorautorizarrequisicion">
+                                                
+                                                    <input type="hidden" name="instruccion" value="filtrar">
+                                                    
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Carnet</label>
-                                                        <input class="form-control" type="text">
+                                                        <input class="form-control" type="text" name="carnet" required="required">
                                                     </div>
+                                                    
                                                     <div class="form-group">
                                                         <label class="control-label">Fecha de Filtro</label>
-                                                        <input class="form-control" type="date">
+                                                        <input class="form-control" type="date" name="fecha" required="required">
                                                     </div>
+                                                    
                                                     <p class="text-center">
                                                         <button href="#!" class="btn btn-info btn-raised btn-lg">Comenzar</button>
                                                     </p>
+                                                    
                                                 </form>
+                                                
                                             </div>
                                         </div>
 
@@ -162,31 +168,17 @@
                                                                 <th class="text-center">Opci&oacute;n</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>AG17023</td>
-                                                                <td>Jose Daniel Amaya Guzman</td>
-                                                                <td>Departamento de Ventas</td>
-                                                                <td>10/12/2020</td>
-                                                                <td>10/01/2021</td>
-                                                                <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>MM14030</td>
-                                                                <td>Crsitian Vladimir Melendez Melendez</td>
-                                                                <td>Departamento de Finanzas</td>
-                                                                <td>15/12/2020</td>
-                                                                <td>10/01/2021</td>
-                                                                <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>RM17039</td>
-                                                                <td>Noel Alexander Renderos Martinez</td>
-                                                                <td>Departamento de Informatica</td>
-                                                                <td>12/12/2020</td>
-                                                                <td>10/01/2021</td>
-                                                                <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
-                                                            </tr>
+                                                        <tbody>                                                            
+                                                            <c:forEach var="aut" items="${LISTAREQUISICIONESNOAUTORIZADAS}">
+                                                                <tr>
+                                                                    <td>${aut.carnetEmpleado}</td>
+                                                                    <td>${aut.nombreEmpleado}&nbsp;${aut.apellidoEmpleado}</td>
+                                                                    <td>${aut.nombreDepartamento}</td>
+                                                                    <td>${aut.fechaPedidoReq}</td>
+                                                                    <td>${aut.fechaEntregaReq}</td>
+                                                                    <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
+                                                                </tr>
+                                                            </c:forEach>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -204,21 +196,29 @@
 
                         <div class="tab-pane fade" id="list">
                             <div class="table-responsive">
+
+                            <form method="get" action="controladorautorizarrequisicion" >
+                                <input type="hidden" name="instruccion" value="filtrarDepto">
+
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <label class="control-label"><strong>Departamento</strong></label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="departamento" required="required">
                                                 <option>Seleccione el Departamento a Consultar...</option>
-                                                <option>Departamento de Ventas</option>
-                                                <option>Departamento de Produccion</option>
+
+                                                <c:forEach var="dep" items="${LISTADEPARTAMENTOS}">
+                                                    <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
+                                                </c:forEach>
+                                                
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <p class="text-center">
-                                    <button href="#!" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
+                                    <button href="#list" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
                                 </p>
+                            </form>
                                 
                                 </br></br>
                                 <table class="table table-hover text-center">
@@ -233,30 +233,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>AG17023</td>
-                                            <td>Jose Daniel Amaya Guzman</td>
-                                            <td>Departamento de Ventas</td>
-                                            <td>10/12/2020</td>
-                                            <td>10/01/2021</td>
-                                            <td>Autorizado</td>
-                                        </tr>
-                                        <tr>
-                                            <td>MM14030</td>
-                                            <td>Crsitian Vladimir Melendez Melendez</td>
-                                            <td>Departamento de Finanzas</td>
-                                            <td>15/12/2020</td>
-                                            <td>10/01/2021</td>
-                                            <td>Autorizado</td>
-                                        </tr>
-                                        <tr>
-                                            <td>RM17039</td>
-                                            <td>Noel Alexander Renderos Martinez</td>
-                                            <td>Departamento de Informatica</td>
-                                            <td>12/12/2020</td>
-                                            <td>10/01/2021</td>
-                                            <td>Autorizado</td>
-                                        </tr>
+                                        <c:forEach var="aut" items="${LISTAREQUISICIONESAUTORIZADAS}">
+                                            <tr>
+                                                <td>${aut.carnetEmpleado}</td>
+                                                <td>${aut.nombreEmpleado}&nbsp;${aut.apellidoEmpleado}</td>
+                                                <td>${aut.nombreDepartamento}</td>
+                                                <td>${aut.fechaPedidoReq}</td>
+                                                <td>${aut.fechaEntregaReq}</td>                                               
+                                                <c:choose>
+                                                    <c:when test="${aut.autorizado==0}">
+                                                        <td>Autorizado</td>
+                                                    </c:when>
+                                                    <c:when test="${aut.autorizado==1}">
+                                                        <td>Sin Autorizar</td>
+                                                    </c:when>
+                                                </c:choose>
+                                            </tr>
+                                        </c:forEach>                                        
                                     </tbody>
                                 </table>
                             </div>

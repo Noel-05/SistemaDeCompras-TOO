@@ -111,6 +111,15 @@
          </list>
       </hash>
    </hash>
+   <hash n="oracle.jdeveloper.runner.RunConfigurations">
+      <hash n="runConfigurationDefinitions">
+         <hash n="Default">
+            <value n="custom" v="false"/>
+            <value n="name" v="Default"/>
+            <url n="targetURL" path="public_html/index.jsp"/>
+         </hash>
+      </hash>
+   </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
@@ -137,6 +146,18 @@
             <value n="id" v="JSTL 1.2 Tags"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="Javax.mail.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Javax.mail.jar1"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Javax.mail.jar2"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
       <hash n="internalDefinitions">
          <list n="libraryDefinitions">
@@ -147,6 +168,33 @@
                <value n="deployedByDefault" v="true"/>
                <value n="description" v="Ojdbc8.jar"/>
                <value n="id" v="Ojdbc8.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../Users/NeoProject/Desktop/javax.mail.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Javax.mail.jar"/>
+               <value n="id" v="Javax.mail.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../Downloads/javax.mail.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Javax.mail.jar1"/>
+               <value n="id" v="Javax.mail.jar1"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../../Desktop/WalletPrueba/javax.mail.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Javax.mail.jar2"/>
+               <value n="id" v="Javax.mail.jar2"/>
                <value n="locked" v="true"/>
             </hash>
          </list>
@@ -174,6 +222,18 @@
          </hash>
          <hash>
             <value n="id" v="JSTL 1.2 Tags"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Javax.mail.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Javax.mail.jar1"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Javax.mail.jar2"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

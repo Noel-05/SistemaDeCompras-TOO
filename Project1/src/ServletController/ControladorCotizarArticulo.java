@@ -20,8 +20,8 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Date;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -69,7 +69,9 @@ public class ControladorCotizarArticulo extends HttpServlet {
         case "detalle":
             obtenerOrdenes(request, response);
             break;
-        
+        case "enviar":
+            obtenerOrdenesFecha(request, response);
+            break;
         }
     }
     
@@ -101,7 +103,7 @@ public class ControladorCotizarArticulo extends HttpServlet {
     private void filtrarRequisiciones(HttpServletRequest request, HttpServletResponse response) {
         String departamento = request.getParameter("departamento");
         
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yy");
         Date fecha = null;
         
         try {
@@ -155,6 +157,43 @@ public class ControladorCotizarArticulo extends HttpServlet {
             //Agregar la lista de Articulos al Request
             
             request.setAttribute("LISTAORDENES", ordenes);
+            request.setAttribute("LISTADEPARTAMENTOS", departamentos);
+            
+            //Enviar el Request al JSP
+            
+            RequestDispatcher miDispatcher = request.getRequestDispatcher("/cotizarArticulo.jsp");
+            
+            miDispatcher.forward(request, response);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    private void obtenerOrdenesFecha(HttpServletRequest request, HttpServletResponse response) {
+        String departamento = request.getParameter("departamento");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yy-MM-dd");
+        //Date fecha = null;
+        
+        
+        
+        //Crear un objeto de tipo RequisicionVigenciaCompra
+        RequisicionVigenciaCompra consultaOrdenes = new RequisicionVigenciaCompra(departamento);
+        
+        List<RequisicionVigenciaCompra> ordenes;
+        List<Departamento> departamentos;
+        
+        try{
+            String fecha = request.getParameter("fecha2");
+            String[] fecha2 = fecha.split("-");
+            String fecha3 = fecha2[2]+"/"+fecha2[1]+"/"+fecha2[0].substring(2);
+            //fecha = formatoFecha.parse(request.getParameter("fecha2"));
+            System.out.print(fecha3);
+            ordenes = modeloCotizarArticulo.obtenerOrdenes2(consultaOrdenes, fecha3);            
+            departamentos = modeloCotizarArticulo.getDepartamentos();
+            
+            //Agregar la lista de Articulos al Request
+            
+            request.setAttribute("LISTAORDENES2", ordenes);
             request.setAttribute("LISTADEPARTAMENTOS", departamentos);
             
             //Enviar el Request al JSP

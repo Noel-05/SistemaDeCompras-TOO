@@ -62,7 +62,7 @@
                             <a href="controladorrequisicion"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
                         </li>
                         <li>
-                            <a href="autorizarRequisicion.jsp"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
+                            <a href="controladorautorizarrequisicion"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
                         </li>
                     </ul>
                 </li>
@@ -73,9 +73,6 @@
                     <ul class="list-unstyled full-box">
                         <li>
                             <a href="controladorcotizararticulo"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
-                        </li>
-                        <li>
-                            <a href="generarOrdenCompra.jsp"><i class="zmdi zmdi-file-plus zmdi-hc-fw"></i> Comprar</a>
                         </li>
                     </ul>
                 </li>
@@ -89,6 +86,31 @@
                         </li>
                     </ul>
                 </li>
+
+
+                <li>
+                    <a href="#!" class="btn-sideBar-SubMenu">
+                        <i class="zmdi zmdi zmdi-receipt zmdi-hc-fw"></i> Reportes <i class="zmdi zmdi-caret-down pull-right"></i>
+                    </a>
+                    <ul class="list-unstyled full-box">
+                        <li>
+                            <a href="controladorreportedepto"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Articulos por Departamento</a>
+                        </li>
+                        <li>
+                            <a href="controladorreporteempleado"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Articulos por Empleado</a>
+                        </li>  
+                        <li>
+                            <a href="controladorreportearticulosprov"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Articulos por Proveedor</a>
+                        </li> 
+                        <li>
+                            <a href="controladorreporteordenesprov"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Ordenes por Proveedor</a>
+                        </li> 
+                        <li>
+                            <a href="controladorexistencias"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Stock Inventario</a>
+                        </li>                         
+                    </ul>
+                </li>  
+                                 
             </ul>
         </div>
     </section>

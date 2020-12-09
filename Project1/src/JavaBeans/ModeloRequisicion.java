@@ -603,4 +603,196 @@ public List<Departamento> getDepartamentos()  throws Exception{
         miStatement.execute();
 
     }
+    
+    //-----------------------CODIGO PARA OBTENER REQUISICIONES--------------------------------------
+    public List<Requisicion> getRequisicionesNoAutorizadas() throws Exception{
+        
+        List<Requisicion> requisicion = new ArrayList<>();
+        
+        Connection miConexion = null;
+        Statement miStatement = null;
+        ResultSet miResultset = null;
+        
+        //Establecer la conexion
+        miConexion = origenDatos.getConexion();
+        
+        //Crear sentencia SQL y Statement
+        String miSql = "select r.NUMREQ, r.FECPEDIDOREQ, r.FECENTREGAREQ, r.AUTORIZADO, e.CARNETEMPLEADO, e.NOMBREEMPLEADO, e.APELLIDOEMPLEADO, d.NOMBREDEPARTAMENTO " + 
+        "from requisicion r inner join empleado e on r.carnetempleado =e.carnetempleado " + 
+        "inner join catalagopuesto c on e.codigopuesto =c.codigopuesto " + 
+        "inner join departamento d on c.codigodepartamento = d.codigodepartamento where r.AUTORIZADO = 1";
+        
+        miStatement = miConexion.createStatement();
+        
+        //Ejecutar SQL
+        miResultset = miStatement.executeQuery(miSql);
+        
+        while(miResultset.next()){
+            int numReq = miResultset.getInt("NUMREQ");
+            Date fechaPedido = miResultset.getDate("FECPEDIDOREQ");
+            Date fechaEntrega = miResultset.getDate("FECENTREGAREQ");         
+            String carnetEmpleado = miResultset.getString("CARNETEMPLEADO");
+            String nombreEmpleado = miResultset.getString("NOMBREEMPLEADO");          
+            String apellidoEmpleado = miResultset.getString("APELLIDOEMPLEADO");
+            String nombreDepartamento = miResultset.getString("NOMBREDEPARTAMENTO");       
+                    
+            Requisicion temporal = new Requisicion(numReq, fechaPedido, fechaEntrega, carnetEmpleado, nombreEmpleado, apellidoEmpleado, nombreDepartamento);
+            requisicion.add(temporal);
+        }
+        
+        return requisicion;
+        
+    }
+    
+    
+    public List<Requisicion> getRequisicionesNoAutorizadasFiltradas(String carnet, Date fechafiltro) throws Exception{
+        
+        List<Requisicion> requisicion = new ArrayList<>();
+        
+        Connection miConexion = null;
+        Statement miStatement = null;
+        ResultSet miResultset = null;       
+
+        
+        //Establecer la conexion
+        miConexion = origenDatos.getConexion();
+        
+        
+        //Verificar si existe empleado
+        String sqlEmpleado = "Select CARNETEMPLEADO FROM EMPLEADO WHERE CARNETEMPLEADO = '"+carnet+"'";
+        miStatement = miConexion.createStatement();
+        miResultset = miStatement.executeQuery(sqlEmpleado);
+                
+        if(miResultset.next()){
+            
+            java.util.Date utilDate = fechafiltro;
+            java.sql.Date fechaConvertida = new java.sql.Date(utilDate.getTime());        
+            String empleado = carnet;
+            
+            
+            String sqlDepto = "select d.NOMBREDEPARTAMENTO from departamento d " + 
+            "inner join catalagopuesto c on d.codigodepartamento = c.codigodepartamento " + 
+            "inner join empleado e on c.codigopuesto = e.codigopuesto where e.carnetempleado ='"+carnet+"'";
+            
+            miStatement = miConexion.createStatement();
+            
+            //Ejecutar SQL
+            miResultset = miStatement.executeQuery(sqlDepto);
+            //Crear sentencia SQL y Statement
+            miResultset.next();
+            String nomdepto = miResultset.getString("NOMBREDEPARTAMENTO");
+            
+            String miSQl = "select r.NUMREQ, r.FECPEDIDOREQ, r.FECENTREGAREQ, r.AUTORIZADO, e.CARNETEMPLEADO, e.NOMBREEMPLEADO, e.APELLIDOEMPLEADO, d.NOMBREDEPARTAMENTO " + 
+            "from requisicion r inner join empleado e on r.carnetempleado =e.carnetempleado " + 
+            "inner join catalagopuesto c on e.codigopuesto =c.codigopuesto " + 
+            "inner join departamento d on c.codigodepartamento = d.codigodepartamento " + 
+            "where r.AUTORIZADO = 1 and d.NOMBREDEPARTAMENTO='"+nomdepto+"'  and r.FECPEDIDOREQ >=TO_DATE('"+fechaConvertida+"', 'YYYY/MM/DD HH:MI:SS') order by r.FECPEDIDOREQ";
+            
+            miStatement = miConexion.createStatement();
+            
+            //Ejecutar SQL
+            miResultset = miStatement.executeQuery(miSQl);
+            
+            while(miResultset.next()){
+                int numReq = miResultset.getInt("NUMREQ");
+                Date fechaPedido = miResultset.getDate("FECPEDIDOREQ");
+                Date fechaEntrega = miResultset.getDate("FECENTREGAREQ");         
+                String carnetEmpleado = miResultset.getString("CARNETEMPLEADO");
+                String nombreEmpleado = miResultset.getString("NOMBREEMPLEADO");          
+                String apellidoEmpleado = miResultset.getString("APELLIDOEMPLEADO");
+                String nombreDepartamento = miResultset.getString("NOMBREDEPARTAMENTO");       
+                        
+                Requisicion temporal = new Requisicion(numReq, fechaPedido, fechaEntrega, carnetEmpleado, nombreEmpleado, apellidoEmpleado, nombreDepartamento);
+                requisicion.add(temporal);
+            }
+            
+        }
+
+
+        return requisicion;        
+        
+    }
+    
+    
+    public List<Requisicion> getRequisicionesAutorizadas() throws Exception{
+        
+        List<Requisicion> requisicion = new ArrayList<>();
+        
+        Connection miConexion = null;
+        Statement miStatement = null;
+        ResultSet miResultset = null;
+        
+        //Establecer la conexion
+        miConexion = origenDatos.getConexion();
+        
+        //Crear sentencia SQL y Statement
+        String miSql = "select r.NUMREQ, r.FECPEDIDOREQ, r.FECENTREGAREQ, r.AUTORIZADO, e.CARNETEMPLEADO, e.NOMBREEMPLEADO, e.APELLIDOEMPLEADO, d.NOMBREDEPARTAMENTO " + 
+        "from requisicion r inner join empleado e on r.carnetempleado =e.carnetempleado " + 
+        "inner join catalagopuesto c on e.codigopuesto =c.codigopuesto " + 
+        "inner join departamento d on c.codigodepartamento = d.codigodepartamento where r.AUTORIZADO = 0";
+        
+        miStatement = miConexion.createStatement();
+        
+        //Ejecutar SQL
+        miResultset = miStatement.executeQuery(miSql);
+        
+        while(miResultset.next()){
+            int numReq = miResultset.getInt("NUMREQ");
+            Date fechaPedido = miResultset.getDate("FECPEDIDOREQ");
+            Date fechaEntrega = miResultset.getDate("FECENTREGAREQ");
+            int autorizado = miResultset.getInt("AUTORIZADO");
+            String carnetEmpleado = miResultset.getString("CARNETEMPLEADO");
+            String nombreEmpleado = miResultset.getString("NOMBREEMPLEADO");          
+            String apellidoEmpleado = miResultset.getString("APELLIDOEMPLEADO");
+            String nombreDepartamento = miResultset.getString("NOMBREDEPARTAMENTO");       
+                    
+            Requisicion temporal = new Requisicion(numReq, fechaPedido, fechaEntrega, autorizado, carnetEmpleado, nombreEmpleado, apellidoEmpleado, nombreDepartamento);
+            requisicion.add(temporal);
+        }
+        
+        return requisicion;
+        
+    }
+    
+    
+    public List<Requisicion> getRequisicionesAutorizadasFiltradas(String codigoDepto) throws Exception{
+        
+        List<Requisicion> requisicion = new ArrayList<>();
+        
+        Connection miConexion = null;
+        Statement miStatement = null;
+        ResultSet miResultset = null;
+        
+        //Establecer la conexion
+        miConexion = origenDatos.getConexion();
+        
+        //Crear sentencia SQL y Statement
+        String miSql = "select r.NUMREQ, r.FECPEDIDOREQ, r.FECENTREGAREQ, r.AUTORIZADO, e.CARNETEMPLEADO, e.NOMBREEMPLEADO, e.APELLIDOEMPLEADO, d.NOMBREDEPARTAMENTO " + 
+        "from requisicion r inner join empleado e on r.carnetempleado =e.carnetempleado " + 
+        "inner join catalagopuesto c on e.codigopuesto =c.codigopuesto " + 
+        "inner join departamento d on c.codigodepartamento = d.codigodepartamento where r.AUTORIZADO = 0 and d.codigodepartamento='"+codigoDepto+"'";
+        
+        miStatement = miConexion.createStatement();
+        
+        //Ejecutar SQL
+        miResultset = miStatement.executeQuery(miSql);
+        
+        while(miResultset.next()){
+            int numReq = miResultset.getInt("NUMREQ");
+            Date fechaPedido = miResultset.getDate("FECPEDIDOREQ");
+            Date fechaEntrega = miResultset.getDate("FECENTREGAREQ");
+            int autorizado = miResultset.getInt("AUTORIZADO");
+            String carnetEmpleado = miResultset.getString("CARNETEMPLEADO");
+            String nombreEmpleado = miResultset.getString("NOMBREEMPLEADO");          
+            String apellidoEmpleado = miResultset.getString("APELLIDOEMPLEADO");
+            String nombreDepartamento = miResultset.getString("NOMBREDEPARTAMENTO");       
+                    
+            Requisicion temporal = new Requisicion(numReq, fechaPedido, fechaEntrega, autorizado, carnetEmpleado, nombreEmpleado, apellidoEmpleado, nombreDepartamento);
+            requisicion.add(temporal);
+        }
+        
+        return requisicion;
+        
+    }
+    
 }

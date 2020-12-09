@@ -64,7 +64,7 @@
                             <a href="controladorrequisicion"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
                         </li>
                         <li>
-                            <a href="autorizarRequisicion.jsp"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
+                            <a href="controladorautorizarrequisicion"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
                         </li>
                     </ul>
                 </li>
@@ -75,9 +75,6 @@
                     <ul class="list-unstyled full-box">
                         <li>
                             <a href="controladorcotizararticulo"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
-                        </li>
-                        <li>
-                            <a href="generarOrdenCompra.jsp"><i class="zmdi zmdi-file-plus zmdi-hc-fw"></i> Comprar</a>
                         </li>
                     </ul>
                 </li>
@@ -121,6 +118,7 @@
                     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
                         <li class="active"><a href="#new" data-toggle="tab">Cotizar Art&iacute;culo</a></li>
                         <li><a href="#list" data-toggle="tab">Detalle Cotizaci&oacute;n</a></li>
+                        <li><a href="#list1" data-toggle="tab">Enviar orden</a></li>
                     </ul>
                     
                     <div id="myTabContent" class="tab-content">
@@ -236,12 +234,13 @@
                                                 <select class="form-control" name="departamento" required="required">
                                                 
                                                     <option>Seleccione el Departamento a Consultar...</option>
-                                                    
+                                                
                                                     <c:forEach var="dep" items="${LISTADEPARTAMENTOS}">
                                                         <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
                                                     </c:forEach>
                                                     
                                                 </select>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +287,88 @@
                                 </table>
                             </div>
                         </div>
+                        
+                        
+                        
+                        
+                        <div class="tab-pane fade" id="list1">
+                            <div class="table-responsive">
+                                
+                                <form method="get" action="controladorcotizararticulo" >
+                                    <input type="hidden" name="instruccion" value="enviar">
+                                
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-10 col-md-offset-1">
+                                            <div class="form-group">
+                                            
+                                            
+                                                <label class="control-label">Departamento</label>
+                                                <select class="form-control" name="departamento" required="required">
+                                                
+                                                    <option>Seleccione el Departamento a Consultar...</option>
+                                                
+                                                    <c:forEach var="dep" items="${LISTADEPARTAMENTOS}">
+                                                        <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
+                                                    </c:forEach>
+                                                    
+                                                </select>
+                                                        <label class="control-label">Fecha de Filtro</label>
+                                                        <input class="form-control" name="fecha2" type="date" required="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <p class="text-center">
+                                        <button href="controladorcotizararticulo" class="btn btn-info btn-raised btn-lg"><i class="zmdi zmdi-save"></i>  Consultar</button>
+                                    </p>
+                                    
+                                </form>
+                                
+                                </br></br>
 
+                                <table class="table table-hover text-center">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th class="text-center">C&oacute;digo Art&iacute;culo</th>
+                                            <th class="text-center">Nombre Art&iacute;culo</th>
+                                            <th class="text-center">Cantidad</th>
+                                            <th class="text-center">Nombre Proveedor</th>
+                                            <th class="text-center">Precio Total</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                        <c:forEach var="ord2" items="${LISTAORDENES2}">
+                                            <tr>
+                                                <td>${ord2.codArticulo}</td>
+                                                <td>${ord2.nombreArt}</td>
+                                                <td>${ord2.cantArt}</td>
+                                                <td>${ord2.nombreProv}</td>
+                                                <td>$ ${ord2.precioTotal}</td>
+                                                
+                                                <td>
+                                                    <form method="post" action="EmailSendingServlet" >
+                                                        <p class="text-center">
+                                                            <input type="hidden" name="recipient" value="chavez98victor@gmail.com"/>
+                                                            <input type="hidden" name="subject" value="Orden de Compra"/>
+                                                            <input type="hidden" name="codarticulo" value="${ord2.codArticulo}">
+                                                            <input type="hidden" name="nomarticulo" value="${ord2.nombreArt}">
+                                                            <input type="hidden" name="cantidad" value="${ord2.cantArt}">
+                                                            <input type="hidden" name="preciototal" value="${ord2.precioTotal}">
+                                                            <input type="submit" class="btn btn-success btn-raised btn-xs">
+                                                        </p>
+                                                    </form>
+                                                </td>
+                                            
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                    </table>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
