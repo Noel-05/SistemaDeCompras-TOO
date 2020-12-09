@@ -192,26 +192,29 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-md-10 col-md-offset-1">
                                                 <div class="form-group">
-                                                    <table class="table table-hover text-center">
+                                                    <table name="tabla" class="table table-hover text-center">
                                                         <thead>
                                                             <tr>
+                                                                <th class="text-center">-</th>
                                                                 <th class="text-center">Carnet</th>
                                                                 <th class="text-center">Nombre</th>
                                                                 <th class="text-center">Departamento</th>
                                                                 <th class="text-center">Fecha Pedido</th>
                                                                 <th class="text-center">Fecha Entrega</th>
-                                                                <th class="text-center">Opci&oacute;n</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>                                                            
                                                             <c:forEach var="aut" items="${LISTAREQUISICIONESNOAUTORIZADAS}">
                                                                 <tr>
+<!--                                                                     <td style="visibility:hidden;">${aut.numReq}</td>
+ -->                                                                    
+                                                                    <td name="numeroReq">${aut.numReq}</td>
                                                                     <td>${aut.carnetEmpleado}</td>
                                                                     <td>${aut.nombreEmpleado}&nbsp;${aut.apellidoEmpleado}</td>
                                                                     <td>${aut.nombreDepartamento}</td>
                                                                     <td>${aut.fechaPedidoReq}</td>
                                                                     <td>${aut.fechaEntregaReq}</td>
-                                                                    <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td>
+<!--                                                                     <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td> -->
                                                                 </tr>
                                                             </c:forEach>
                                                         </tbody>
@@ -219,6 +222,42 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <form action="controladorautorizarrequisicion">
+                                        
+                                            <input type="hidden" name="instruccion" value="autorizar">                                        
+
+                                            <div class="form-group">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Carnet del Jefe de Departamento</label>
+                                       
+                                                    <select class="form-control" name="carnetJ" required="required">
+                                                        <c:forEach var="emp" items="${LISTAEMPLEADOS}">
+                                                            <option value="${emp.carnetEmpleado}">${emp.carnetEmpleado}</option>
+                                                        </c:forEach>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>  
+
+                                            <div class="form-group">
+                                                <label class="control-label">Introduzca desde que fecha de Pedido desea hacer la requisicion</label>
+                                                <input class="form-control" type="date" name="fecha1" required="required">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label">Estado</label>
+                                                <select class="form-control" name="estadoReq" required="required">
+                                                    <option>Seleccione el Estado de la Requisicion...</option>
+                                                    <option value="denegado">Denegado</option>
+                                                    <option value="aceptado">Aceptado</option>
+                                                </select>
+                                            </div>
+                                            <p class="text-center">
+                                                <button href="#!" class="btn btn-info btn-raised btn-lg">Guardar</button>
+                                            </p>
+                                            
+                                        </form>
                                         
                                     </div>
                                 </div>

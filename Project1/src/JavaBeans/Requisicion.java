@@ -18,6 +18,9 @@ public class Requisicion {
     private String nombreDepartamento;
     private String nombreEmpleado;
     private String apellidoEmpleado;
+    private String estadoAut;
+    private Date fechaNueva;
+
 
     public Requisicion(){
         
@@ -116,7 +119,15 @@ public class Requisicion {
         this.numReq = numReq;
     }
 
-//Constructor para crear la Requisicion sin autorizacion y entregado
+
+    public Requisicion(int numReq, String estadoAut) {
+        this.numReq = numReq;
+        this.estadoAut = estadoAut;
+    }
+    
+    
+
+    //Constructor para crear la Requisicion sin autorizacion y entregado
     public Requisicion(int numReq, Date fechaPedidoReq, Date fechaEntregaReq, int cantArt, String codArticulo,
                        String CarnetEmpleado) {
         this.numReq = numReq;
@@ -125,6 +136,29 @@ public class Requisicion {
         this.cantArt = cantArt;
         this.codArticulo = codArticulo;
         this.CarnetEmpleado = CarnetEmpleado;
+    }
+
+
+    public Requisicion(String CarnetEmpleado, String estadoAut, Date fechaNueva) {
+        this.CarnetEmpleado = CarnetEmpleado;
+        this.estadoAut = estadoAut;
+        this.fechaNueva = fechaNueva;
+    }
+
+    public void setFechaNueva(Date fechaNueva) {
+        this.fechaNueva = fechaNueva;
+    }
+
+    public Date getFechaNueva() {
+        return fechaNueva;
+    }
+
+    public void setEstadoAut(String estadoAut) {
+        this.estadoAut = estadoAut;
+    }
+
+    public String getEstadoAut() {
+        return estadoAut;
     }
 
     public void setNumReq(int numReq) {
