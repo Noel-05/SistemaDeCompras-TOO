@@ -187,6 +187,7 @@
                                                             <th class="text-center">Stock Minimo</th>
                                                             <th class="text-center">Stock Maximo</th>
                                                             <th class="text-center">Stock Actual</th>
+                                                            <th class="text-center">Estado</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -198,6 +199,15 @@
                                                             <td>${inv.minArt}</td>
                                                             <td>${inv.maxArt}</td>
                                                             <td>${inv.stock}</td>
+                                                            <c:if test = "${inv.mensaje == 'DEBE REQUERIR MAS ARTICULOS'}">
+                                                                <td style="color:#ff0000">${inv.mensaje}</td>
+                                                            </c:if>
+                                                            <c:if test = "${inv.mensaje == 'ESTA DENTRO DE LOS PARAMETROS'}">
+                                                                <td>${inv.mensaje}</td>
+                                                            </c:if>
+                                                            <c:if test = "${inv.mensaje == 'EXCESO DE PRODUCTOS'}">
+                                                                <td style="color:#00FF00">${inv.mensaje}</td>
+                                                            </c:if>
                                                         </tr>
                                                         </c:forEach>
                                                     </tbody>

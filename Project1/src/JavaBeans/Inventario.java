@@ -2,6 +2,7 @@ package JavaBeans;
 
 public class Inventario {   
 
+    String idInv;
     String codArticulo;
     int minArt;
     int maxArt;
@@ -9,6 +10,7 @@ public class Inventario {
     
     String nomArticulo;
     String unidadMedida;
+    String mensaje;
     
 
 
@@ -16,13 +18,38 @@ public class Inventario {
     }
 
 
-    public Inventario(String codArticulo, int minArt, int maxArt, int stock, String nomArticulo, String unidadMedida) {
+    public Inventario(String codArticulo, int minArt, int maxArt, int stock, String nomArticulo, String unidadMedida,
+                      String mensaje) {
         this.codArticulo = codArticulo;
         this.minArt = minArt;
         this.maxArt = maxArt;
         this.stock = stock;
         this.nomArticulo = nomArticulo;
         this.unidadMedida = unidadMedida;
+        this.mensaje = mensaje;
+    }
+
+
+    public Inventario(String idInv, String codArticulo, String nomArticulo) {
+        this.idInv = idInv;
+        this.codArticulo = codArticulo;
+        this.nomArticulo = nomArticulo;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setIdInv(String idInv) {
+        this.idInv = idInv;
+    }
+
+    public String getIdInv() {
+        return idInv;
     }
 
     public void setNomArticulo(String nomArticulo) {

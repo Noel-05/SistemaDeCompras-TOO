@@ -44,6 +44,15 @@ public class ModeloExistencias {
             int max = miResultset.getInt("MAXART");
             int stock = miResultset.getInt("STOCK");
 
+            //Enviar Mensaje
+            String mensaje = "";
+            if(stock < min){
+                mensaje = "DEBE REQUERIR MAS ARTICULOS";}
+            if(stock >= min && stock <= max){
+                mensaje = "ESTA DENTRO DE LOS PARAMETROS";}
+            if(stock > max){
+                mensaje = "EXCESO DE PRODUCTOS";}
+
             //Recuperar el nombre del articulo, y la unidad de medida segun el codigo de articulo que se esta recuperando
             String buscar = "SELECT * FROM ARTICULO WHERE CODARTICULO = '"+codArticulo+"'";
             miStatementBusc = miConexion.createStatement();
@@ -55,7 +64,7 @@ public class ModeloExistencias {
                 unidadMedida = miResultsetBusc.getString("UNIDADMEDIDA");
             }      
             
-            Inventario temporal = new Inventario(codArticulo, min, max, stock, nombreArticulo, unidadMedida);
+            Inventario temporal = new Inventario(codArticulo, min, max, stock, nombreArticulo, unidadMedida, mensaje);
             
             inventario.add(temporal);
         }
