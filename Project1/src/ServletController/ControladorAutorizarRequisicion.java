@@ -67,6 +67,10 @@ public class ControladorAutorizarRequisicion extends HttpServlet {
             case "filtrarDepto":
                 filtrarRequisicionesAutorizadas(request, response);
                 break;
+
+            case "autorizar":
+                autorizarRequisicion(request, response);
+                break;                
             
         }
         
@@ -118,23 +122,28 @@ public class ControladorAutorizarRequisicion extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        Empleado emp = new Empleado(carnet);
         
         
         List<Requisicion> requisicion;
         List<Requisicion> requisicionA;
         List<Departamento> departamentos;
+        List<Empleado> empleados;
         
         try{
             
             requisicion = modeloRequisicion.getRequisicionesNoAutorizadasFiltradas(carnet, fecha);
             requisicionA = modeloRequisicion.getRequisicionesAutorizadas();
             departamentos = modeloRequisicion.getDepartamentos();
+            empleados = modeloRequisicion.getEmpleados(emp);
             
             //Agregar la lista de Requsiciones sin autorizaciion al Request
             
             request.setAttribute("LISTAREQUISICIONESNOAUTORIZADAS", requisicion);
             request.setAttribute("LISTADEPARTAMENTOS", departamentos);
             request.setAttribute("LISTAREQUISICIONESAUTORIZADAS", requisicionA);
+            request.setAttribute("LISTAEMPLEADOS", empleados);
             
             //Enviar el Request al JSP
             
@@ -181,12 +190,35 @@ public class ControladorAutorizarRequisicion extends HttpServlet {
         }
         
     }
-    
-    
-    
-    
-    
-    
+
+
+    private void autorizarRequisicion(HttpServletRequest request, HttpServletResponse response) {
+        //Valor del id del jsp
+        //*********************CONSULTA***************
+        String carnet = request.getParameter("carnetJ");   
+        String estado = request.getParameter("estadoReq");   
+
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = null;
+
+        List<Requisicion> requisicion;
         
-        
+        try {
+            fecha = formatoFecha.parse(request.getParameter("fecha1"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Requisicion req = new Requisicion(carnet, estado, fecha);
+
+        try{
+            modeloRequisicion.actualizarFiltrarEstadoRequisicion(req);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        obtenerRequisiciones(request, response);
+
+
+    }
 }

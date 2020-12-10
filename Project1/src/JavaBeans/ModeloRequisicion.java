@@ -794,5 +794,129 @@ public List<Departamento> getDepartamentos()  throws Exception{
         return requisicion;
         
     }
-    
+
+    public void actualizarEstadoRequisicion(Requisicion req) throws Exception{
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+        
+        //Obtener la conexion
+            
+        miConexion = origenDatos.getConexion();
+   
+        //Crear sentencia sql que inserte la requisicion a la base
+        //String miSql = "UPDATE SOLICITUDART SET CARNETEMPLEADO = ?, CODARTICULO = ?, CANTARTSOL = ?, FECSOL = ? WHERE IDSOL = ?";
+
+        String misql = "UPDATE requisicion SET autorizado = ? WHERE numreq = ? ";
+        
+        miStatement = miConexion.prepareStatement(misql);
+        
+        //Establecer los parametros para insertar la requisicion
+        
+        if("aceptado".equals(req.getEstadoAut())) {
+            miStatement.setInt(1, 0);
+        }else{
+            miStatement.setInt(1, 1);
+        } 
+
+        miStatement.setInt(2, req.getNumReq());
+
+                                      
+
+        //Ejecutar la instruccion sql
+        miStatement.execute();
+
+    }
+
+    public void actualizarFiltrarEstadoRequisicion(Requisicion req) throws Exception{
+        //************************FILTRAR************************
+        //Obtener valores para la consulta
+        String carnet = req.getCarnetEmpleado();
+
+        java.util.Date utilDate = req.getFechaNueva();
+        java.sql.Date fechaConvertida = new java.sql.Date(utilDate.getTime());        
+
+        List<Requisicion> requisicion = new ArrayList<>();
+        
+        Connection miConexion = null;
+        Statement miStatement = null;
+        ResultSet miResultset = null;       
+
+        
+        //Establecer la conexion
+        miConexion = origenDatos.getConexion();
+        
+        
+        //Verificar si existe empleado
+        String sqlEmpleado = "Select CARNETEMPLEADO FROM EMPLEADO WHERE CARNETEMPLEADO = '"+carnet+"'";
+        miStatement = miConexion.createStatement();
+        miResultset = miStatement.executeQuery(sqlEmpleado);
+                
+        if(miResultset.next()){
+                  
+            String empleado = carnet;
+            
+            
+            String sqlDepto = "select d.NOMBREDEPARTAMENTO from departamento d " + 
+            "inner join catalagopuesto c on d.codigodepartamento = c.codigodepartamento " + 
+            "inner join empleado e on c.codigopuesto = e.codigopuesto where e.carnetempleado ='"+carnet+"'";
+            
+            miStatement = miConexion.createStatement();
+            
+            //Ejecutar SQL
+            miResultset = miStatement.executeQuery(sqlDepto);
+            //Crear sentencia SQL y Statement
+            miResultset.next();
+            String nomdepto = miResultset.getString("NOMBREDEPARTAMENTO");
+            
+            String miSQl = "select r.NUMREQ, r.FECPEDIDOREQ, r.FECENTREGAREQ, r.AUTORIZADO, e.CARNETEMPLEADO, e.NOMBREEMPLEADO, e.APELLIDOEMPLEADO, d.NOMBREDEPARTAMENTO " + 
+            "from requisicion r inner join empleado e on r.carnetempleado =e.carnetempleado " + 
+            "inner join catalagopuesto c on e.codigopuesto =c.codigopuesto " + 
+            "inner join departamento d on c.codigodepartamento = d.codigodepartamento " + 
+            "where r.AUTORIZADO = 1 and d.NOMBREDEPARTAMENTO='"+nomdepto+"'  and r.FECPEDIDOREQ >=TO_DATE('"+fechaConvertida+"', 'YYYY/MM/DD HH:MI:SS') order by r.FECPEDIDOREQ";
+            
+            miStatement = miConexion.createStatement();
+            
+            //Ejecutar SQL
+            miResultset = miStatement.executeQuery(miSQl);
+            
+            while(miResultset.next()){
+                int numReq = miResultset.getInt("NUMREQ");
+                Date fechaPedido = miResultset.getDate("FECPEDIDOREQ");
+                Date fechaEntrega = miResultset.getDate("FECENTREGAREQ");         
+                String carnetEmpleado = miResultset.getString("CARNETEMPLEADO");
+                String nombreEmpleado = miResultset.getString("NOMBREEMPLEADO");          
+                String apellidoEmpleado = miResultset.getString("APELLIDOEMPLEADO");
+                String nombreDepartamento = miResultset.getString("NOMBREDEPARTAMENTO"); 
+
+                //*************************ACTUALIZAR**************************
+                Connection miConexion1 = null;
+                PreparedStatement miStatement1 = null;
+                
+                //Obtener la conexion
+                    
+                miConexion1 = origenDatos.getConexion();
+           
+                //Crear sentencia sql que inserte la requisicion a la base
+                String misql = "UPDATE requisicion SET autorizado = ? WHERE numreq = ?";
+                
+                miStatement1 = miConexion1.prepareStatement(misql);
+                
+                //Establecer los parametros para insertar la requisicion                
+                if("aceptado".equals(req.getEstadoAut())) {
+                    miStatement1.setInt(1, 0);
+                }else{
+                    miStatement1.setInt(1, 1);
+                }                
+
+                miStatement1.setInt(2, numReq);//se obtendra dentro del while
+                
+                //Ejecutar la instruccion sql
+                miStatement1.execute();                        
+                //Requisicion temporal = new Requisicion(numReq, fechaPedido, fechaEntrega, carnetEmpleado, nombreEmpleado, apellidoEmpleado, nombreDepartamento);
+                //requisicion.add(temporal);
+            }
+            
+        }
+        //return requisicion;        
+    }
 }
