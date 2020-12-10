@@ -161,53 +161,9 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
                                         
-<!--                                         <div class="row">
-                                            <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                                
-                                                <form method="get" action="controladorreportedepto">
-
-                                                    <input type="hidden" name="instruccion" value="consulta">
-
-                                                    <div class="form-group">
-                                                        <div class="form-group label-floating">
-                                                            <label class="control-label">Seleccione el Departamento</label>
-                                               
-                                                            <select class="form-control" name="departamento" required="required">
-                                                                <option>Seleccione el Departamento a Consultar...</option>
-                                                                <c:forEach var="dep" items="${LISTADEPARTAMENTOS1}">
-                                                                    <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
-                                                                </c:forEach>
-                                                                
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="form-group">
-                                                        <label class="control-label">Fecha de Filtro</label>
-                                                        <input class="form-control" name="fecha" type="date" required="required">
-                                                    </div>
-                                                    
-                                                    <p class="text-center">
-                                                        <button href="#!" class="btn btn-info btn-raised btn-lg">Comenzar</button>
-                                                    </p>
-                                                </form>
-                                            </div>
-                                        </div> -->
 
                                         <div class="row">
                                             <div class="col-xs-12 col-md-10 col-md-offset-1">
-<!--                                                 <div class="form-group">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Nombre del Departamento</label>
-                                           
-                                                        <select class="form-control" name="departamento" required="required" disabled>
-                                                            <c:forEach var="dep" items="${LISTADEPARTAMENTOS}">
-                                                                <option value="${dep.codigoDepartamento}">${dep.nombreDepartamento}</option>
-                                                            </c:forEach>
-                                                            
-                                                        </select>
-                                                    </div>
-                                                </div> -->
 
                                                 </br>
 

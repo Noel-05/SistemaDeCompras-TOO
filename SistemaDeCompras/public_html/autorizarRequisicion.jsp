@@ -195,7 +195,6 @@
                                                     <table name="tabla" class="table table-hover text-center">
                                                         <thead>
                                                             <tr>
-                                                                <th class="text-center">-</th>
                                                                 <th class="text-center">Carnet</th>
                                                                 <th class="text-center">Nombre</th>
                                                                 <th class="text-center">Departamento</th>
@@ -203,18 +202,14 @@
                                                                 <th class="text-center">Fecha Entrega</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>                                                            
+                                                        <tbody>                                                                                                                
                                                             <c:forEach var="aut" items="${LISTAREQUISICIONESNOAUTORIZADAS}">
-                                                                <tr>
-<!--                                                                     <td style="visibility:hidden;">${aut.numReq}</td>
- -->                                                                    
-                                                                    <td name="numeroReq">${aut.numReq}</td>
+                                                                <tr>                                                                   
                                                                     <td>${aut.carnetEmpleado}</td>
                                                                     <td>${aut.nombreEmpleado}&nbsp;${aut.apellidoEmpleado}</td>
                                                                     <td>${aut.nombreDepartamento}</td>
                                                                     <td>${aut.fechaPedidoReq}</td>
                                                                     <td>${aut.fechaEntregaReq}</td>
-<!--                                                                     <td><a href="autorizarEstadoRequisicion.jsp" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></a></td> -->
                                                                 </tr>
                                                             </c:forEach>
                                                         </tbody>
