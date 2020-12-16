@@ -13,6 +13,9 @@ public class Movimiento {
     double valTotal;
     Date fecMov;
     
+    Date fecha;
+    String articulo;
+    
     public Movimiento() {
     }
 
@@ -24,6 +27,47 @@ public class Movimiento {
         this.cantMov = cantMov;
         this.valUnidad = valUnidad;
         this.fecMov = fecMov;
+    }
+
+
+    public Movimiento(String carnetEmpleado, String tipo, int cantMov, double valUnidad, double valTotal, Date fecMov) {
+        this.carnetEmpleado = carnetEmpleado;
+        this.tipo = tipo;
+        this.cantMov = cantMov;
+        this.valUnidad = valUnidad;
+        this.valTotal = valTotal;
+        this.fecMov = fecMov;
+    }
+
+
+    public Movimiento(Date fecha, String articulo) {
+        this.fecha = fecha;
+        this.articulo = articulo;
+    }
+
+
+    public void setIdMov(int idMov) {
+        this.idMov = idMov;
+    }
+
+    public int getIdMov() {
+        return idMov;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setArticulo(String articulo) {
+        this.articulo = articulo;
+    }
+
+    public String getArticulo() {
+        return articulo;
     }
 
     public void setIdInv(int idInv) {

@@ -9,9 +9,49 @@ public class CostoPromedio {
     double valorUnidadCP;
     double valorTotalCP;
 
+    String codArticulo;                        
+    String nomArticulo;                        
+    String unidadArticulo;  
+
     public CostoPromedio() {
     }
 
+
+    public CostoPromedio(int idInventario, int cantidadCP, double valorUnidadCP, double valorTotalCP,
+                         String codArticulo, String nomArticulo, String unidadArticulo) {
+        this.idInventario = idInventario;
+        this.cantidadCP = cantidadCP;
+        this.valorUnidadCP = valorUnidadCP;
+        this.valorTotalCP = valorTotalCP;
+        this.codArticulo = codArticulo;
+        this.nomArticulo = nomArticulo;
+        this.unidadArticulo = unidadArticulo;
+    }
+
+
+    public void setCodArticulo(String codArticulo) {
+        this.codArticulo = codArticulo;
+    }
+
+    public String getCodArticulo() {
+        return codArticulo;
+    }
+
+    public void setNomArticulo(String nomArticulo) {
+        this.nomArticulo = nomArticulo;
+    }
+
+    public String getNomArticulo() {
+        return nomArticulo;
+    }
+
+    public void setUnidadArticulo(String unidadArticulo) {
+        this.unidadArticulo = unidadArticulo;
+    }
+
+    public String getUnidadArticulo() {
+        return unidadArticulo;
+    }
 
     public void setIdCostoPromedio(int idCostoPromedio) {
         this.idCostoPromedio = idCostoPromedio;

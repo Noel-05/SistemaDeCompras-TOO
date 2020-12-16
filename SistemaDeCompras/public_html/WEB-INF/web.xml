@@ -21,4 +21,12 @@
         <param-name>pass</param-name>
         <param-value>TareaTOO115</param-value>
     </context-param>
-         </web-app>
+    <servlet>
+        <servlet-name>ControladorAcceso</servlet-name>
+        <servlet-class>ServletController.ControladorAcceso</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ControladorAcceso</servlet-name>
+        <url-pattern>/controladoracceso</url-pattern>
+    </servlet-mapping>
+</web-app>
