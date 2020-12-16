@@ -103,7 +103,7 @@ public class ControladorCotizarArticulo extends HttpServlet {
     private void filtrarRequisiciones(HttpServletRequest request, HttpServletResponse response) {
         String departamento = request.getParameter("departamento");
         
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yy");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yy-MM-dd");
         Date fecha = null;
         
         try {
