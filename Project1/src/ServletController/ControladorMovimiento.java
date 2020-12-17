@@ -98,7 +98,7 @@ public class ControladorMovimiento extends HttpServlet {
         int articulo = Integer.parseInt(request.getParameter("articulo"));//idInventario(codArticulo)
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
         String tipo = request.getParameter("movimiento");
-        int valorUnidad = Integer.parseInt(request.getParameter("valor"));
+        double valorUnidad = Double.parseDouble(request.getParameter("valor"));
 
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha = null;

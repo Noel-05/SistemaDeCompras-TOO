@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=windows-1252"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="true" %>
+
+<%
+//Verificar el acceso de los uausarios
+HttpSession sesion = request.getSession();
+
+    if(sesion.getAttribute("nivel") == null){
+        response.sendRedirect("indexLogin.jsp");
+    }else{
+        String nivel = sesion.getAttribute("nivel").toString();
+        if(nivel.equals("1") || nivel.equals("6")){
+            
+        }else{
+            response.sendRedirect("index.jsp");
+        }
+    }
+
+%>
 
 <html lang="es">
 <head>
@@ -23,15 +41,15 @@
                     Sistema de Compras <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
             </div>
             
-             <!-- SideBar User info -->
+            <!-- SideBar User info -->
             <div class="full-box dashboard-sideBar-UserInfo">
                 <figure class="full-box">
                     <img src="./static/assets/img/usuario.png" alt="UserIcon">
-                    <figcaption class="text-center text-titles">Usuario</figcaption>
+                    <figcaption class="text-center text-titles"><%= sesion.getAttribute("nombre") %></figcaption>
                 </figure>
                 <ul class="full-box list-unstyled text-center">
                     <li>
-                        <a href="#!" class="btn-exit-system">
+                        <a href="indexLogin.jsp?cerrar=true" class="btn-exit-system">
                             <i class="zmdi zmdi-power"></i>
                         </a>
                     </li>
@@ -45,6 +63,9 @@
                         <i class="zmdi zmdi-home zmdi-hc-fw"></i> Inicio
                     </a>
                 </li>
+                
+                <%  String nivel = sesion.getAttribute("nivel").toString();
+                if (!nivel.equals("6")){ %>                
                 <li>
                     <a href="#!" class="btn-sideBar-SubMenu">
                         <i class="zmdi zmdi-shopping-cart zmdi-hc-fw"></i> Solicitud <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -55,19 +76,27 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#!" class="btn-sideBar-SubMenu">
-                        <i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> Requisici&oacute;n <i class="zmdi zmdi-caret-down pull-right"></i>
-                    </a>
-                    <ul class="list-unstyled full-box">
-                        <li>
-                            <a href="controladorrequisicion"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
-                        </li>
-                        <li>
-                            <a href="autorizarRequisicion.jsp"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
-                        </li>
-                    </ul>
-                </li>
+                <% } %>
+
+                <% if (nivel.equals("1") || nivel.equals("2") || nivel.equals("3") || nivel.equals("7")){ %>
+                    <li>
+                        <a href="#!" class="btn-sideBar-SubMenu">
+                            <i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> Requisici&oacute;n <i class="zmdi zmdi-caret-down pull-right"></i>
+                        </a>
+                        <ul class="list-unstyled full-box">
+                            <li>
+                                <a href="controladorrequisicion"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Requerir Compra</a>
+                            </li>
+                    <% if (nivel.equals("1") || nivel.equals("2")){ %>
+                            <li>
+                                <a href="controladorautorizarrequisicion"><i class="zmdi zmdi-spellcheck zmdi-hc-fw"></i> Autorizar Requisici&oacute;n</a>
+                            </li>
+                    <% } %>
+                        </ul>
+                    </li>
+                <% } %>
+
+                <% if (nivel.equals("1") || nivel.equals("7")){ %>              
                 <li>
                     <a href="#!" class="btn-sideBar-SubMenu">
                         <i class="zmdi zmdi-card zmdi-hc-fw"></i> Art&iacute;culo <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -76,11 +105,11 @@
                         <li>
                             <a href="controladorcotizararticulo"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Cotizar</a>
                         </li>
-                        <li>
-                            <a href="generarOrdenCompra.jsp"><i class="zmdi zmdi-file-plus zmdi-hc-fw"></i> Comprar</a>
-                        </li>
                     </ul>
                 </li>
+                <% } %>
+
+                <% if (nivel.equals("1") || nivel.equals("6")){ %>              
                 <li>
                     <a href="#!" class="btn-sideBar-SubMenu">
                         <i class="zmdi zmdi zmdi-spellcheck zmdi-hc-fw"></i> Gestionar Art&iacute;culo <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -91,7 +120,9 @@
                         </li>
                     </ul>
                 </li>
+                <% } %>
 
+                <% if (nivel.equals("1") || nivel.equals("5")){ %>              
                 <li>
                     <a href="#!" class="btn-sideBar-SubMenu">
                         <i class="zmdi zmdi zmdi-collection-plus zmdi-hc-fw"></i> Inventario <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -102,7 +133,9 @@
                         </li>
                     </ul>
                 </li>
+                <% } %>
 
+                <% if (nivel.equals("1") || nivel.equals("2") || nivel.equals("3") || nivel.equals("7")){ %>              
                 <li>
                     <a href="#!" class="btn-sideBar-SubMenu">
                         <i class="zmdi zmdi zmdi-receipt zmdi-hc-fw"></i> Reportes <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -122,10 +155,17 @@
                         </li> 
                         <li>
                             <a href="controladorexistencias"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Stock Inventario</a>
-                        </li>                         
+                        </li>    
+                        <li>
+                            <a href="controladorstockprecios"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Stock Precios Inventario</a>
+                        </li>   
+                        <li>
+                            <a href="controladorreporteinventario"><i class="zmdi zmdi-collection-item zmdi-hc-fw"></i> Inventario</a>
+                        </li>                                                                       
                     </ul>
                 </li>  
-
+                <% } %>
+                                 
             </ul>
         </div>
     </section>

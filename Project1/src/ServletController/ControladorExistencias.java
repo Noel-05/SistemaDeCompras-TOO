@@ -50,7 +50,6 @@ public class ControladorExistencias extends HttpServlet {
 }
 
     private void obtener(HttpServletRequest request, HttpServletResponse response) {
-    
         //Obtener la lista de Articulos desde el modelo
         
         List<Inventario> inventario;

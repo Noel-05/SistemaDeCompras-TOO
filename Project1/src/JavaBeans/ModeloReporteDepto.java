@@ -21,7 +21,7 @@ public class ModeloReporteDepto {
     }
 
     public List<SolicitudArt> getSolicitudesArt(SolicitudArt soliArt) throws Exception{
-	List<SolicitudArt> solicitudes = new ArrayList<>();
+	   List<SolicitudArt> solicitudes = new ArrayList<>();
         
         Connection miConexion = null;
         Statement miStatement = null;
