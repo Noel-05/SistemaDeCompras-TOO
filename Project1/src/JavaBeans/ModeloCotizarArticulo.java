@@ -131,7 +131,7 @@ public class ModeloCotizarArticulo {
                 }else{
                 }*/
                 
-                if(autorizado == 1){
+                if(autorizado == 0){
                     Requisicion temporal = new Requisicion(fechaPedido, fechaEntrega, autorizado, entregado, cantidad, codArticulo, carnetEmpleado, nombreArticulo, codigoDepartamento, nombreDepartamento);
                     requisiciones.add(temporal);
                 }

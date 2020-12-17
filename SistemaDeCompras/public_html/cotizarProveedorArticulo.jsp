@@ -245,7 +245,7 @@ HttpSession sesion = request.getSession();
                                                                             <input type="hidden" name="departamento" value="${vig.codDepartamento}">
                                                                             <input type="hidden" name="cantidad" value="${vig.cantidad}">
                                                                             <input type="hidden" name="precioTotal" value="${vig.precioTotal}">
-                                                                            <input type="hidden" name="fechaPedido" value="${vig.fechaPedido}">
+                                                                            <input type="hidden" name="fechaPedido" value="${vig.fechaDesde}">
                                                                             <button href="controladorproveedorarticulo" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-spellcheck"></i></button>
                                                                         </p>
                                                                     </form>
