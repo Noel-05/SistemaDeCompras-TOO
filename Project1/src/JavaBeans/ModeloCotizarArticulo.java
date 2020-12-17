@@ -81,6 +81,7 @@ public class ModeloCotizarArticulo {
             // SELECT * FROM REQUISICION R INNER JOIN EMPLEADO E ON R.CARNETEMPLEADO = E.CARNETEMPLEADO INNER JOIN CATALAGOPUESTO C ON E.CODIGOPUESTO = C.CODIGOPUESTO WHERE CODIGODEPARTAMENTO = 'INF001' AND FECPEDIDOREQ >= '21/11/20';
             
             //Crear sentencia SQL y Statement
+            System.out.println(fechaConvertida);
             String miSql = "SELECT * FROM REQUISICION R INNER JOIN EMPLEADO E ON R.CARNETEMPLEADO = E.CARNETEMPLEADO INNER JOIN CATALAGOPUESTO C ON E.CODIGOPUESTO = C.CODIGOPUESTO WHERE CODIGODEPARTAMENTO = '"+departamento+"' AND FECPEDIDOREQ >= TO_DATE('"+fechaConvertida+"', 'YYYY/MM/DD HH:MI:SS')";
             miStatement = miConexion.createStatement();
             
